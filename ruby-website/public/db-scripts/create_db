@@ -1,0 +1,92 @@
+# Argument 1: name of new schema file to create
+
+#=== Create new schema ===
+
+schema=$1
+bash run_psql "CREATE SCHEMA ${schema} AUTHORIZATION postgres;"
+bash run_psql "GRANT ALL ON SCHEMA ${schema} TO postgres;"
+bash run_psql "GRANT ALL ON SCHEMA ${schema} TO public;"
+bash run_psql "grant all privileges on schema ${schema} to tahanotapp"
+bash run_psql "grant all privileges on all tables in schema ${schema} to tahanotapp"
+
+
+#=== Create database ===
+
+gtfsdb-load --database_url postgresql://postgres:Kashcadaria@localhost /var/lib/tahanot/${schema}.zip --schema ${schema}
+
+
+#=== Create Services table and its keys and indexes ===
+
+bash run_psql_on_schema $schema "DROP TABLE IF EXISTS services CASCADE;"
+
+bash run_psql_on_schema $schema "
+create table services as 
+      select t.service_id, 
+      	  min(t.trip_id) some_trip_id,
+          a.agency_id,
+          a.agency_name,
+          a.agency_url,
+          a.agency_timezone,
+          a.agency_lang,
+          a.agency_phone,
+          a.agency_fare_url,
+          r.route_id,
+          r.route_short_name,
+          r.route_long_name,
+          r.route_desc,
+          r.route_type,
+          r.route_url,
+          r.route_color,
+          r.route_text_color,
+          c.start_date,
+          c.end_date,
+          count(case when sunday then 1 else null end) +
+          count(case when monday then 1 else null end) +
+          count(case when tuesday then 1 else null end) +
+          count(case when wednesday then 1 else null end) +
+          count(case when thursday then 1 else null end) +
+          count(case when friday then 1 else null end) +
+          count(case when saturday then 1 else null end) weekly_trips
+      from trips t
+          join routes r using (route_id)
+          join agency a using (agency_id)
+          join calendar c using (service_id)
+      group by t.service_id, a.agency_id, a.id, r.route_id, a.*, r.*, c.start_date, c.end_date;"
+
+bash run_psql_on_schema $schema "
+alter table services
+      add CONSTRAINT services_pkey PRIMARY KEY (service_id );"
+
+bash run_psql_on_schema $schema "
+alter table services
+      add CONSTRAINT service_route_id_fkey FOREIGN KEY (route_id)
+          REFERENCES routes (route_id) MATCH SIMPLE
+          ON UPDATE NO ACTION ON DELETE NO ACTION;"
+
+bash run_psql_on_schema $schema "
+alter table services
+      add CONSTRAINT service_some_trip_id_fkey FOREIGN KEY (some_trip_id)
+          REFERENCES stop_times (trip_id) MATCH SIMPLE
+          ON UPDATE NO ACTION ON DELETE NO ACTION;"
+
+bash run_psql_on_schema $schema "
+alter table trips 
+      add constraint trip_service_id_fkey FOREIGN KEY (service_id)
+          REFERENCES services (service_id) MATCH SIMPLE
+          ON UPDATE NO ACTION ON DELETE NO ACTION;"
+
+bash run_psql_on_schema $schema "GRANT ALL ON TABLE services TO postgres;"
+
+bash run_psql_on_schema $schema "GRANT ALL ON TABLE services TO tahanotapp;"
+
+bash run_psql_on_schema $schema "create index on trips (service_id);"
+
+
+
+#=== Create other indexes to improve query performance ===
+
+bash run_psql_on_schema $schema "
+CREATE INDEX ix_stop_times_trip_id
+  ON stop_times
+  USING btree
+  (trip_id COLLATE pg_catalog.default );"

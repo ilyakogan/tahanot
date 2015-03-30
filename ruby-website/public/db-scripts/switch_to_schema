@@ -1,0 +1,10 @@
+# Argument 1: name of new schema to be renamed into motbuslatest
+
+#=== Rename new schema to "latest" and "latest" to its date ===
+
+schema_new=$1
+schema_previous=`bash run_psql "SET search_path to motbuslatest; select * from gtfsdate;"`
+echo schema_previous: $schema_previous
+bash run_psql "SET search_path to ${schema_new}; select '${schema_new}' into gtfsdate;"
+bash run_psql "ALTER SCHEMA motbuslatest RENAME TO ${schema_previous}previous"
+bash run_psql "ALTER SCHEMA ${schema_new} RENAME TO motbuslatest"

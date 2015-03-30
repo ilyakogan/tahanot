@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AE80E468-4AA3-4B1E-8BE2-4EA870717386}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SiriClientConsole3</RootNamespace>
+    <AssemblyName>SiriClientConsole3</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WebReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebReference\accessibility.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\accessibility0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\acsb_all.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\DATEXIISchema_1_0_1_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\ifopt_administration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\ifopt_allStopPlace.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\ifopt_checkpoint.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\ifopt_countries.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\ifopt_equipment.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\ifopt_location.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\ifopt_modes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\ifopt_modification.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\ifopt_path.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\ifopt_stop.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\ifopt_time.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\ifopt_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\passengerMobility.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\WebReference\ServiceDeliveryStructure.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\WebReference\siri.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_classifiers.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_connectionMonitoring_service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_connectionTimetable_service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_discovery.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_estimatedTimetable_service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_facilities.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_facility.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_FacilityMonitoring_service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_feature.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_generalMessage_service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_journey.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_location.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_modes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_operator.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_participant.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_permissions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_productionTimetable_service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_reasons.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_reference.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_requests.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_requests0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_situation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_situationActions.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_situationAffects.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_SituationExchange_service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_situationIdentity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_situationServiceType.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_stopMonitoring_service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_stopTimetable_service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_time.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_types.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_vehicleMonitoring_service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\WebReference\siri_wsProducer - Israel.wsdl" />
+    <None Include="Web References\WebReference\xml.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="D:\Ilya\HaTahanaHaBaa\SIRI - ISRAEL - modified for VS\siri_wsProducer - Israel.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WebReference\</RelPath>
+      <UpdateFromURL>D:\Ilya\HaTahanaHaBaa\SIRI - ISRAEL - modified for VS\siri_wsProducer - Israel.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SiriClientConsole3_WebReference_SiriServices</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GtfsService\GtfsService.csproj">
+      <Project>{7BB6689D-DC26-4BE3-8C50-FF599EE0170C}</Project>
+      <Name>GtfsService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,11 @@
+.timetable
+- @stop_times_per_day.each do |day_times|
+  .day
+    .title= day_times[:day]
+    .day_table
+      - day_times[:times].each do |time|
+        .time_row
+          - agency_logo = "/assets/transport-logos/" + time.route.agency.agency_name.gsub(/ /,'%20') + ".png"
+          .agency{style: "background-image: url(#{agency_logo})"}
+          .route= time.route.route_short_name
+          .time= time.departure_time[0..4]

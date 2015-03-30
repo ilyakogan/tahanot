@@ -1,0 +1,35 @@
+listcontains() {  
+  for item in "${@:2}"
+  do
+    echo $1 = $item ?
+    if [ "$1" == "$item" ]; then
+      return 0; # TRUE
+    fi
+  done
+  return 1; # FALSE
+}
+
+echo Argument list: $@
+
+export schema=motbus`date +"%Y%m%d"`
+
+if listcontains no-download "$@"; then
+  echo == Skipping download == 
+else
+  echo == Downloading ==
+  bash download_gtfs $schema
+fi
+
+if listcontains no-create "$@"; then
+  echo == Skipping schema creation ==
+else
+  echo == Creating schema ==
+  bash create_db $schema
+fi
+
+if listcontains no-switch "$@"; then
+  echo == Skipping switch to new schema ==
+else
+  echo == Switching to new schema ==
+  bash switch_to_schema $schema
+fi

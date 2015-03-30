@@ -1,0 +1,125 @@
+body {
+  font-family: Arial;
+  background-color: #f2eee0; }
+
+.container_12 {
+  padding-top: 30px;
+  background-image: url("../../Images/widget-main/bg.jpg");
+  border-left: 2px solid #e8e4e0;
+  border-right: 2px solid #e8e4e0; }
+
+h1 {
+  color: #665544;
+  text-align: center;
+  font-family: Arial;
+  font-weight: normal;
+  margin: 0;
+  font-size: 5.5em;
+  line-height: 95%; }
+
+h2 {
+  color: #665544;
+  text-align: center;
+  font-family: Arial;
+  font-weight: normal;
+  margin: 0;
+  font-size: 2.8em; }
+
+p {
+  margin-bottom: 0; }
+
+a {
+  color: #34c;
+  text-decoration: underline;
+  cursor: pointer; }
+  a:hover {
+    color: #37e; }
+
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  padding-bottom: 7px; }
+
+.asterisk {
+  text-decoration: none;
+  color: #349;
+  font-family: "Times New Roman"; }
+
+.screenshots {
+  max-width: 100%;
+  padding: 15px;
+  margin-top: 25px;
+  margin-bottom: 40px;
+  margin-left: 15px;
+  background-color: rgba(255, 200, 88, 0.5);
+  /* orange */
+  border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  text-align: center; }
+  .screenshots .screenshot {
+    max-width: 45%;
+    margin: -10px; }
+  .screenshots .arrow {
+    width: 13%; }
+
+.google-play {
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 20px; }
+
+.social {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center; }
+
+.stats {
+  font-size: 1.5em; }
+  .stats p {
+    line-height: 140%;
+    margin-bottom: 10px;
+    padding-left: 10px; }
+  .stats strong {
+    font-size: 1.2em; }
+
+.left-side {
+  margin-top: 60px; }
+  .left-side img {
+    max-width: 100%;
+    height: auto;
+    padding: 1px;
+    border: 2px solid #999;
+    background-color: #ddd;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px; }
+
+.dictionary_def {
+  font-size: 1.2em;
+  padding-top: 35px; }
+  .dictionary_def div {
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 20px;
+    padding-top: 15px;
+    background-color: rgba(102, 218, 245, 0.3);
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px; }
+    .dictionary_def div p {
+      margin-bottom: 10px;
+      color: #321;
+      text-align: justify; }
+      .dictionary_def div p .head {
+        font-family: "Frank Ruehl", "Times New Roman";
+        font-size: 1.6em;
+        font-weight: bold; }
+      .dictionary_def div p .props {
+        font-style: italic; }
+      .dictionary_def div p .main-def {
+        font-weight: bold; }
+
+.back-to-top {
+  padding-right: 15px;
+  font-size: 1.3em; }
+

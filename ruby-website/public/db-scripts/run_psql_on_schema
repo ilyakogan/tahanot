@@ -1,0 +1,1 @@
+bash run_psql "SET search_path to $1; $2"

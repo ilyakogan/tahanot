@@ -1,0 +1,40 @@
+
+%title תחנות - #{@stop.town} - תחנת #{@stop.stop_name}
+
+.main
+  .sign
+    .stop_header
+      .stop_name תחנת #{@stop.stop_name} ב#{@stop.town}
+
+      .address
+        .content כתובת: #{@stop_address}
+        - unless @stop.floor.blank?
+          .title קומה:
+          .content= @stop.floor
+        - unless @stop.platform.blank?
+          .title רציף:
+          .content= @stop.platform
+
+      .stop_code= @stop.stop_code
+
+    #services{data: {stopcode: @stop.stop_code}}
+      .loader
+      
+  .maps
+    %h2 מפת תחנות קרובות
+    .google-map-container
+      #google-map{data: {stopcode: @stop.stop_code, lat: @stop.stop_lat, lon: @stop.stop_lon}}
+        .loader
+    - if not @external_maps.empty?
+      .external-maps
+        %h2 מפות קווים של איזור #{@stop.town}
+        - @external_maps.each do |map|
+          .external-map
+            .link= link_to(map.label, map.link, target: "_blank")
+            .preview= link_to(image_tag("/assets/previews/#{map.image}"), map.link, target: "_blank")
+
+.timetable_container
+  .timetable_title
+    %h2 לוח זמנים בתחנה זו
+  #times{data: {stopcode: @stop.stop_code}}
+    .loader

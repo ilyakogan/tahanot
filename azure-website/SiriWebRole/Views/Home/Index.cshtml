@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "וידג'ט זמני אמת לאנדרואיד";
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var animateLink = function (from, to) {
+            from.click(function () {
+                $('html, body').animate({
+                    scrollTop: to.offset().top
+                }, 1000);
+            });
+        };
+
+        $("document").ready(function () {
+            animateLink($('#link-widget'), $("#def-widget"));
+            animateLink($('#link-real-time'), $("#def-real-time"));
+            animateLink($('.back-to-top'), $("body"));
+        });
+    </script>
+    <script type="text/javascript">
+        gapi.plusone.go("plus1");
+    </script>
+}
+<div class="container_12">
+    <div class="grid_9">
+        <h1>
+            תחנות
+        </h1>
+        <h2>
+            וידג'ט<a class="asterisk" id="link-widget">*</a> זמן האמת<a class="asterisk" id="link-real-time">**</a>
+            הראשון לאנדרואיד
+        </h2>
+        <div class="screenshots">
+            <img class="screenshot" src="@Url.Content("~/Images/widget-main/home-no-widget.png")" />
+            <img class="arrow" src="@Url.Content("~/Images/widget-main/arrow1.png")" />
+            <a href="https://play.google.com/store/apps/details?id=com.tahanot" target="blank">
+                <img class="screenshot" src="@Url.Content("~/Images/widget-main/home-haifa-widget.png")" /></a>
+        </div>
+        <div class="grid_3 alpha installation-and-social">
+            <div class="google-play">
+                <a href="https://play.google.com/store/apps/details?id=com.tahanot">להתקנה</a>
+                <br />
+                <a href="https://play.google.com/store/apps/details?id=com.tahanot">
+                    <img alt="להתקנת וידג'ט תחנות" src="https://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
+                </a>
+            </div>
+        </div>
+        <div class="grid_6 omega stats">
+            @*<p>
+                עד היום נוצרו <strong>812</strong> וידג'טים ועודכנו <strong>69522</strong> פעמים.
+            </p>
+            <p>
+                בדקה זו מתעדכנים <strong>18</strong> וידג'טים על <strong>7</strong> מכשירי אנדרואיד.
+            </p>*@
+            <p>
+                במדינת ישראל <strong>2068</strong> קווי אוטובוס המופעלים ע"י <strong>19</strong>
+                חברות. הקווים נושאים <strong>752</strong> מספרים שונים, ומבצעים <strong>663,178</strong>
+                נסיעות בשבוע ב-<strong>8979</strong> מסלולים וחלופות.
+            </p>
+            <p>
+                במדינת ישראל <strong>32,988</strong> תחנות אוטובוס. אוטובוסים בקווי שירות עוצרים
+                בתחנות כ-<strong>4,309,000</strong> פעמים ביום.
+            </p>
+        </div>
+    </div>
+    <div class="grid_3 left-side">
+        <img class="screenshot" src="@Url.Content("~/Images/widget-main/bus-stop-1.jpg")" />
+    </div>
+    <div class="clear">
+    </div>
+    <div class="prefix_2 grid_4 social">
+        <fb:like href="https://www.facebook.com/pages/%D7%AA%D7%97%D7%A0%D7%95%D7%AA/577587045619009"
+            send="true" width="285" show_faces="true"></fb:like>
+            <p><a href="https://www.facebook.com/pages/%D7%AA%D7%97%D7%A0%D7%95%D7%AA/577587045619009">עקבו אחרי "תחנות" בפייסבוק</a></p>
+    </div>
+    <div class="grid_3 suffix_3 social">
+        <div class="g-plusone" data-href="https://market.android.com/details?id=com.tahanot">
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+    <div class="grid_6 dictionary_def" id="def-real-time">
+        <div>
+            <p>
+                <span class="head">נְתוּנֵי זְמַן-אֱמֶת</span> <span class="props">(ש"ע, ז"ר)</span>
+                עבור תחנת אוטובוס הם <span class="main-def">מידע מבוסס-GPS על זמן הגעת האוטובוס הבא
+                    לתחנה.</span></p>
+            <p>
+                בכל האוטובוסים בארץ מותקנות מערכות העוקבות אחר מיקום האוטובוס בכל רגע על פי GPS.
+                הנתונים משמשים לכריזה בתוך האוטובוס, וכן משודרים למערכת מרכזית של משרד התחבורה.
+                מתוך נתונים אלה מחושבת הערכה של זמן הגעת האוטובוס לתחנות הבאות, והערכה זו מוצגת
+                על גבי צגים בחלק מהתחנות.</p>
+            <p>
+                בשנת 2012 <a href="http://he.mot.gov.il/index.php?option=com_content&view=article&id=2243:pub-trn-memchakim&catid=167:pub-trn-dev-info&Itemid=304"
+                    target="blank">פתח משרד התחבורה</a> את נתוני זמן האמת למפתחי אפליקציות בפורמט
+                <a href="http://en.wikipedia.org/wiki/Service_Interface_for_Real_Time_Information"
+                    target="blank">SIRI</a> חלקי באמצעות חברות עדליא ו-ISR. כעת ניתן ללא קושי לקבל
+                את הערכת זמן הגעת האוטובוס לכל אחת מהתחנות בדרכו בטווח של חצי שעה. קיימות מספר אפליקציות
+                פרטיות המציגות הערכות זמן אלה.
+            </p>
+            <p>
+                <span class="head">תַּחֲנוֹת</span> <span class="props">(ש"ע, נ')</span> היא <span
+                    class="main-def">אפליקציית זמן האמת הראשונה הייעודית לאנדרואיד.</span> היא מיועדת
+                למשתמשים קבועים בתחבורה ציבורית ומציגה את זמני האמת בצורת וידג'ט.</p>
+        </div>
+    </div>
+    <div class="grid_6 dictionary_def" id="def-widget">
+        <div>
+            <p>
+                <span class="head">וִידְגֶ'ט</span> <span class="props">(ש"ע, ז') (widget)</span>
+                הוא <span class="main-def">רכיב מרכזי בחוויית השימוש באנדרואיד; ריבוע או מלבן על מסך
+                    הבית המאפשר לראות בבת אחת את הנתונים העיקריים שמספקת אפליקציה מסוימת או לשלוט בה.</span>
+                המשתמש יכול להזיז וידג'טים על גבי מסך הבית או בין מסכים שונים, ואף לשנות את גודלם
+                על מנת להתאים את כמות המידע שברצונו לראות.</p>
+            <p>
+                וידג'טים נפוצים מציגים את השעה, את מזג האוויר, את מצב הסוללה, פתקים, רשימות קניות
+                ועוד. כמו כן קיימים וידג'טים המאפשרים לשלוט על ניגון המוזיקה, על בהירות המסך ועל
+                תכונות כגון WiFi ו-GPS.</p>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+    <div class="grid_12">
+        <a class="back-to-top">חזרה למעלה</a>
+    </div>
+    <div class="grid_12 footer">
+        <div class="prefix_3 grid_2 alpha">
+            <a href="mailto:support@tahanot.com">תמיכה</a>
+        </div>
+        <div class="grid_2 alpha">
+            <a href="mailto:info@tahanot.com">צור קשר</a>
+        </div>
+        <div class="grid_2 suffix_3 omega">
+            &copy; @DateTime.Now.Year - איליה קוגן</p>
+        </div>
+    </div>
+</div>

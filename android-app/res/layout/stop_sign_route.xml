@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:_="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://www.gueei.com/android-binding/"
+    _:layout_width="wrap_content"
+    _:layout_height="45dp"
+    _:background="#ffc000" >
+
+    <RelativeLayout
+        _:id="@+id/companyLogoContainer"
+        _:layout_width="48dp"
+        _:layout_height="match_parent"
+        _:layout_alignParentRight="true" >
+
+        <TextView
+            _:id="@+id/textInsteadOfCompanyLogo"
+            _:layout_width="wrap_content"
+            _:layout_height="wrap_content"
+            _:layout_centerHorizontal="true"
+            _:layout_centerVertical="true"
+            _:textAppearance="?android:attr/textAppearanceLarge"
+            _:textStyle="bold" />
+    </RelativeLayout>
+
+    <View
+        _:id="@+id/borderToLeftOfCompanies"
+        _:layout_width="1dp"
+        _:layout_height="match_parent"
+        _:layout_toLeftOf="@+id/companyLogoContainer"
+        _:background="#000000" />
+
+    <View
+        _:id="@+id/borderBelowRoute"
+        _:layout_width="match_parent"
+        _:layout_height="1dp"
+        _:layout_alignParentBottom="true"
+        _:layout_alignParentRight="true"
+        _:layout_toLeftOf="@+id/borderToLeftOfCompanies"
+        _:background="#000000" />
+
+    <TextView
+        _:id="@+id/routeNumber"
+        _:layout_width="wrap_content"
+        _:layout_height="wrap_content"
+        _:layout_alignParentLeft="true"
+        _:layout_centerVertical="true"
+        _:layout_marginLeft="3dp"
+        _:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        _:id="@+id/routeTextLine1"
+        _:layout_width="wrap_content"
+        _:layout_height="wrap_content"
+        _:layout_alignParentTop="true"
+        _:layout_marginLeft="10dp"
+        _:layout_marginRight="5dp"
+        _:layout_toLeftOf="@+id/borderToLeftOfCompanies"
+        _:layout_toRightOf="@+id/routeNumber"
+        _:ellipsize="end"
+        _:scrollHorizontally="true"
+        _:singleLine="true"
+        _:textAppearance="?android:attr/textAppearanceMedium"
+         />
+
+    <TextView
+        _:id="@+id/routeTextLine2"
+        _:layout_width="wrap_content"
+        _:layout_height="wrap_content"
+        _:layout_below="@+id/routeTextLine1"
+        _:layout_marginLeft="10dp"
+        _:layout_marginRight="5dp"
+        _:layout_toLeftOf="@+id/borderToLeftOfCompanies"
+        _:layout_toRightOf="@+id/routeNumber"
+        _:ellipsize="end"
+        _:singleLine="true"
+        _:textAppearance="?android:attr/textAppearanceSmall"
+        _:textColor="#000000"
+         />
+
+</RelativeLayout>

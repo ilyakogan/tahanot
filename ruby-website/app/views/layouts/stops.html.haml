@@ -1,0 +1,12 @@
+= stylesheet_link_tag "application"
+
+= javascript_include_tag 'jquery'
+= javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false'
+= javascript_include_tag 'application'
+
+.search_form
+  = form_tag stops_path, method: :get
+  = text_field_tag :search, nil, placeholder: 'שם, כתובת או מספר תחנה'
+  = submit_tag "חיפוש", name: nil
+
+%div= yield

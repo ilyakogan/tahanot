@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns="http://www.ifopt.org.uk/ifopt" xmlns:acsb="http://www.ifopt.org.uk/acsb" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.ifopt.org.uk/ifopt" version="0.3" id="ifopt_allStopPlace" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import schemaLocation="../acsb/acsb_all-v0.3.xsd" namespace="http://www.ifopt.org.uk/acsb" />
+  <xsd:include schemaLocation="ifopt_administration-v0.3.xsd" />
+  <xsd:include schemaLocation="ifopt_countries-v0.2.xsd" />
+  <xsd:include schemaLocation="ifopt_location-v0.3.xsd" />
+  <xsd:include schemaLocation="ifopt_modification-v0.3.xsd" />
+  <xsd:include schemaLocation="ifopt_path-v0.2.xsd" />
+  <xsd:include schemaLocation="ifopt_equipment-v0.3.xsd" />
+  <xsd:include schemaLocation="ifopt_stop-v0.3.xsd" />
+  <xsd:include schemaLocation="ifopt_time-v0.2.xsd" />
+  <xsd:include schemaLocation="ifopt_types-v0.2.xsd" />
+  <xsd:include schemaLocation="ifopt_checkpoint-v0.3.xsd" />
+  <xsd:include schemaLocation="ifopt_modes-v0.2.xsd" />
+</xsd:schema>

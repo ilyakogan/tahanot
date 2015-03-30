@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:_="http://schemas.android.com/apk/res/android"
+    _:layout_width="match_parent"
+    _:layout_height="wrap_content"
+    _:background="#ffc000"
+    _:orientation="vertical" >
+
+    <View
+        _:id="@+id/borderLeft"
+        _:layout_width="2dp"
+        _:layout_height="match_parent"
+        _:layout_alignBottom="@+id/borderBottom"
+        _:layout_alignParentLeft="true"
+        _:layout_alignParentTop="true"
+        _:background="#000000" />
+
+    <View
+        _:id="@+id/borderTop"
+        _:layout_width="match_parent"
+        _:layout_height="2dp"
+        _:layout_alignParentTop="true"
+        _:background="#000000" />
+
+    <View
+        _:id="@+id/whiteBackground"
+        _:layout_width="wrap_content"
+        _:layout_height="79dp"
+        _:layout_alignBottom="@+id/busIconBackground"
+        _:layout_alignTop="@+id/busIconBackground"
+        _:layout_toRightOf="@id/borderLeft"
+        _:background="#ffffff" />
+
+    <FrameLayout
+        _:id="@+id/busIconBackground"
+        _:layout_width="wrap_content"
+        _:layout_height="wrap_content"
+        _:layout_below="@+id/borderTop"
+        _:layout_toRightOf="@+id/borderLeft"
+        _:background="#0000ff" >
+
+        <ImageView
+            _:id="@+id/busIcon"
+            _:layout_width="55dp"
+            _:layout_height="55dp"
+            _:layout_margin="4dp"
+            _:src="@drawable/bus_stop_sign_icon_75" />
+    </FrameLayout>
+
+    <View
+        _:id="@+id/borderBelowTitle"
+        _:layout_width="match_parent"
+        _:layout_height="1dp"
+        _:layout_below="@+id/whiteBackground"
+        _:background="#000000" />
+
+    <TextView
+        _:id="@+id/stopName"
+        _:layout_width="wrap_content"
+        _:layout_height="wrap_content"
+        _:layout_below="@+id/borderTop"
+        _:layout_marginLeft="6dp"
+        _:layout_marginRight="6dp"
+        _:layout_toLeftOf="@+id/borderRight"
+        _:layout_toRightOf="@+id/busIconBackground"
+        _:ellipsize="none"
+        _:maxLines="3"
+        _:scrollHorizontally="false"
+        _:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        _:id="@+id/stopCode"
+        _:layout_width="wrap_content"
+        _:layout_height="wrap_content"
+        _:layout_above="@+id/borderBelowTitle"
+        _:layout_marginLeft="10dp"
+        _:layout_toRightOf="@+id/busIconBackground"
+        _:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RelativeLayout
+        _:id="@+id/lines"
+        _:layout_width="match_parent"
+        _:layout_height="wrap_content"
+        _:layout_below="@+id/borderBelowTitle"
+        _:layout_toLeftOf="@+id/borderRight"
+        _:layout_toRightOf="@+id/borderLeft"
+        _:orientation="vertical" >
+
+        <TextView
+            _:id="@+id/routeTextLine1"
+            _:layout_width="match_parent"
+            _:layout_height="wrap_content"
+            _:layout_alignParentLeft="true"
+            _:layout_alignParentRight="true"
+            _:layout_alignParentTop="true"
+            _:layout_marginLeft="5dp"
+            _:layout_marginRight="5dp"
+            _:ellipsize="end"
+            _:maxLines="2"
+            _:singleLine="false"
+            _:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            _:id="@+id/routeTextLine2"
+            _:layout_width="match_parent"
+            _:layout_height="wrap_content"
+            _:layout_alignParentLeft="true"
+            _:layout_alignParentRight="true"
+            _:layout_below="@+id/routeTextLine1"
+            _:layout_marginBottom="5dp"
+            _:layout_marginLeft="5dp"
+            _:layout_marginRight="5dp"
+            _:ellipsize="end"
+            _:maxLines="3"
+            _:singleLine="false"
+            _:textAppearance="?android:attr/textAppearanceSmall"
+            _:textColor="#000000" />
+    </RelativeLayout>
+
+    <View
+        _:id="@+id/borderBottom"
+        _:layout_width="match_parent"
+        _:layout_height="2dp"
+        _:layout_below="@+id/lines"
+        _:background="#000000" />
+
+    <View
+        _:id="@+id/borderRight"
+        _:layout_width="2dp"
+        _:layout_height="wrap_content"
+        _:layout_alignBottom="@+id/borderBottom"
+        _:layout_alignParentRight="true"
+        _:layout_alignParentTop="true"
+        _:background="#000000" />
+
+</RelativeLayout>

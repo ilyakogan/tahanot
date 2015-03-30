@@ -1,0 +1,20 @@
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
+  %head
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    %title זמנים בתחנת #{@stop_name}
+    = stylesheet_link_tag 'tailpiece/default'
+    = stylesheet_link_tag 'tailpiece/fonts'
+  %body
+    %table
+      %tbody
+        %tr
+          - @stop_times_per_day.each do |day_times|
+            %td
+              = day_times[:day]
+              %table
+                %tbody
+                  - day_times[:times].each do |time|
+                    %tr
+                      %td= time[:route]
+                      %td= time[:agency]
+                      %td= time[:time]

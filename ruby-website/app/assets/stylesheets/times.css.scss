@@ -1,0 +1,41 @@
+@import 'imports';
+
+.timetable {
+	width: 960px;
+  	display: table;
+}
+
+.day {
+	vertical-align: top;
+	width: 14.6%;
+	display: table-cell;
+	
+	.title {
+		text-align: center;
+		font-size: 1.4em;
+		padding-bottom: 20px;
+	}
+
+	.day_table {
+		display: table;
+
+		.time_row {
+			display: table-row;
+			height: 24px;
+
+			.agency {
+				display: table-cell;
+				width: 24px;
+				background-size: 24px;
+				background-repeat: no-repeat; 
+				background-position: center center;
+			}
+
+			.route, .time {
+				display: table-cell;
+				padding-left: 8px;
+				padding-right: 8px;
+			}
+		}
+	}
+}

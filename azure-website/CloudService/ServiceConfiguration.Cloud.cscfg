@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="CloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="2" osVersion="*" schemaVersion="2012-10.1.8">
+  <Role name="SiriWebRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=siri;AccountKey=/1Kpb2TaPlTesEMdyfOn5Ox5z2nnyd1ETc/3NFpQcexf/vv2tUPI+BlH2gVdc0/W6HHnqFv3eohORMuyJB6kdg==" />
+      <Setting name="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=hatahanahabaa;AccountKey=6QTer41kJ13RJXrz/ohDIE1gMf33J58OIHgYDpDdKwMr4JMK2MhUZ5KntYMxo5axh8yySMJ+gj2eMDvUs9EkAg==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="hatahanahabaa" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBlQYJKoZIhvcNAQcDoIIBhjCCAYICAQAxggFGMIIBQgIBADAqMBYxFDASBgNVBAMTC2hhdGFoYW5hcmRwAhCRtzhY9hTAp0EDgSkail2fMA0GCSqGSIb3DQEBAQUABIIBAJEEv0yWH7Js1fkF0BHjrrL7NO0BLhv7mnUdj5Ucd+ig6VOHZXAR76LJ0q8850RSH1Xw2vjsfgEODxJ+xfnZe6IPxRdNQc5Ewg4JrjWnDiZ+qb1q+saO8FjpyzAySBlv+YWeRDbOk6tlDfyAO6TT7LuNCpuH7vaeoliPnZyv1ZtAicNBgewcgGp+/WuTPAfh4vIbzTQ1jGAFduOdpirq8qtnjl0uRjxgYBoeAAuMFZyA3+Q15MFY2CsiLQpa5sX1ENVaUgMDCh+6fEcO2P8Fc7aNySgZV53E2UGI0KHpUxMHUKRKGhJgVNvZNfWaeb3UNWYWD59qD/Ez1Qhy/yXMWEAwMwYJKoZIhvcNAQcBMBQGCCqGSIb3DQMHBAitaiQtnyxuhIAQ/i54Teg0++kEmleb2kG9cQ==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2013-12-16T23:59:59.0000000+02:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="DEA4A88A07C15A402FCE22BF5F7DD4F2BF596C61" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

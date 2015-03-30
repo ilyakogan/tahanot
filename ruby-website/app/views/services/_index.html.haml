@@ -1,0 +1,14 @@
+#stop_code{data: {stopcode: @stop_code}, style: "display: none"}
+.services
+  - @services.each do |service|
+    - route = service.route
+    .service{data: {serviceids: service.service_id}, class: [route.night? ? "night" : "", route.school? ? "school" : ""]}
+      - agency_logo = "/assets/transport-logos/" + service.agency_name.gsub(/ /,'%20') + ".png"
+      .agency{style: "background-image: url(#{agency_logo})"}
+      .dest 
+        .main_text #{service.last_stop.stop_name}, #{service.last_stop.town}
+        #footnotes 
+        / = escape_javascript(render :template => 'footnotes' )
+        / = render "footnotes"
+      .route
+        = service.route_short_name

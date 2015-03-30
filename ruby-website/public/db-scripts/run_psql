@@ -1,0 +1,2 @@
+echo "Running query: $1" >&2
+echo 123456 | sudo -S -u postgres psql --pset=format=unaligned -t -c "$1"

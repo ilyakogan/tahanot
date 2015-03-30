@@ -1,0 +1,7 @@
+%table 
+  - @stops.each do |stop|
+    %tr
+      %td= stop.town
+      %td= stop.stop_name
+      %td= stop.street_addr
+      %td= link_to 'בקר בתחנה', stop

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://isrcorp.co.il/BusStop" xmlns="http://schemas.xmlsoap.org/wsdl/" name="BusStop" targetNamespace="http://isrcorp.co.il/BusStop" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://isrcorp.co.il/BusStop">
+      <xsd:simpleType name="ResponseStatusEnumeration">
+        <xsd:restriction base="xsd:NMTOKEN">
+          <xsd:enumeration value="valid">
+            <xsd:annotation>
+              <xsd:documentation>Valid Response with data</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="invalidRequest">
+            <xsd:annotation>
+              <xsd:documentation>invalid request</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="noneInRadius">
+            <xsd:annotation>
+              <xsd:documentation>No stops for line found in radius</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="noData">
+            <xsd:annotation>
+              <xsd:documentation>No data available</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="noStop">
+            <xsd:annotation>
+              <xsd:documentation>Stop number not found in system for this line</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="StopStatusEnumeration">
+        <xsd:restriction base="xsd:NMTOKEN">
+          <xsd:enumeration value="valid">
+            <xsd:annotation>
+              <xsd:documentation>Valid Response with data</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="endService">
+            <xsd:annotation>
+              <xsd:documentation>Bus service for this line on the stop has finished for today</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="noData">
+            <xsd:annotation>
+              <xsd:documentation>Data not currently available for this stop on this line</xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="StopDescription">
+        <xsd:sequence>
+          <xsd:element name="stopNumber" type="xsd:integer" />
+          <xsd:element minOccurs="0" name="stopName" type="xsd:string" />
+          <xsd:element minOccurs="0" name="stopAddress" type="xsd:string" />
+          <xsd:element minOccurs="0" name="stopCoordinate" type="tns:LatLonCoordinate" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="StopInfoStructure">
+        <xsd:sequence>
+          <xsd:element name="stop" type="tns:StopDescription" />
+          <xsd:element name="operator" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:documentation>Code of operator for this arrival prediction</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="destination" type="tns:StopDescription" />
+          <xsd:element name="stopStatus" type="tns:StopStatusEnumeration" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="eta" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:documentation>Estimated Bus Arrival. Will be returned if valid status.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BusStopRequestStructure">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="user" type="xsd:NMTOKEN" />
+          <xsd:element minOccurs="0" name="requestId" type="xsd:string" />
+          <xsd:element name="lineNumber" type="xsd:NMTOKEN" />
+          <xsd:element minOccurs="0" name="operator" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:documentation>Operator code. If left out, will return for all operators.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:choice>
+            <xsd:element name="stopNumber" type="xsd:integer">
+              <xsd:annotation>
+                <xsd:documentation>Request for a known stop number</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:sequence>
+              <xsd:element name="coordinate" type="tns:LatLonCoordinate">
+                <xsd:annotation>
+                  <xsd:documentation>Search for bus stop nearest to this coordinate</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+              <xsd:element minOccurs="0" name="radius" type="xsd:double">
+                <xsd:annotation>
+                  <xsd:documentation>Maximum distance of stop to be returned. If not present, will use a default value.</xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:choice>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BusStopResponseStructure">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="requestId" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>returns id received with request.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="responseId" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>returns unique ID to be used in retrieving result with BusStopResultRequest</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BusStopResultRequestStructure">
+        <xsd:annotation>
+          <xsd:documentation>request results for BusStopRequest previously sent</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="user" type="xsd:NMTOKEN" />
+          <xsd:element name="responseId" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>unique response id received in BusStopResponse</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BusStopResultResponseStructure">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="responseId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="requestId" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>returns id received with request.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="lineNumber" type="xsd:NMTOKEN">
+            <xsd:annotation>
+              <xsd:documentation>returns lineNumber received with request.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="radius" type="xsd:double">
+            <xsd:annotation>
+              <xsd:documentation>If coordinates were sent in request, returns radius received with request or default value.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="status" type="tns:ResponseStatusEnumeration" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="stopInfo" type="tns:StopInfoStructure">
+            <xsd:annotation>
+              <xsd:documentation>returns stop arrival information. there may be multiple stopInfos returned eg. to cover multiple directions</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="LatLonCoordinate">
+        <xsd:annotation>
+          <xsd:documentation>values in degrees</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="lat" type="xsd:double" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="lon" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="BusStopRequest">
+    <wsdl:part name="request" type="tns:BusStopRequestStructure" />
+  </wsdl:message>
+  <wsdl:message name="BusStopResponse">
+    <wsdl:part name="request" type="tns:BusStopResponseStructure" />
+  </wsdl:message>
+  <wsdl:message name="BusStopResultRequest">
+    <wsdl:part name="request" type="tns:BusStopResultRequestStructure" />
+  </wsdl:message>
+  <wsdl:message name="BusStopResultResponse">
+    <wsdl:part name="request" type="tns:BusStopResultResponseStructure" />
+  </wsdl:message>
+  <wsdl:portType name="BusStopPortType">
+    <wsdl:operation name="BusStopOperation">
+      <wsdl:input name="BusStopOperationRequest" message="tns:BusStopRequest" />
+      <wsdl:output name="BusStopOperationResponse" message="tns:BusStopResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="BusStopResultOperation">
+      <wsdl:input name="BusStopResultOperationRequest" message="tns:BusStopResultRequest" />
+      <wsdl:output name="BusStopResultOperationResponse" message="tns:BusStopResultResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BusStopBinding" type="tns:BusStopPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="BusStopOperation">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://isrcorp.co.il" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://isrcorp.co.il" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BusStopResultOperation">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://isrcorp.co.il" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://isrcorp.co.il" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BusStopService">
+    <wsdl:port name="BusStopPort" binding="tns:BusStopBinding">
+      <xsd:annotation>
+        <xsd:documentation>final address TBD</xsd:documentation>
+      </xsd:annotation>
+      <soap:address location="http://81.218.41.96:8081/SiriServerApp/BusStopService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

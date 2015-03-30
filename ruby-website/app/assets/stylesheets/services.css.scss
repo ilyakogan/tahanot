@@ -1,0 +1,58 @@
+@import 'imports';
+@import 'constants';
+
+.services {
+	display: table;
+	width: 450px;
+	border: $stop-sign-border;
+	border-collapse: collapse;
+
+	.service {
+		display: table-row;
+		background-color: yellow;
+		height: 42px;		
+
+		&.school {
+			display: none;
+		}
+
+		&.night {
+			background-color: white;
+		}
+
+		.agency {
+			display: table-cell;
+			width: 42px;
+			background-size: 42px;
+			background-repeat: no-repeat; 
+			background-position: center center;
+		}
+
+		.dest {
+			display: table-cell;
+			border-top: $stop-sign-border;
+			border-bottom: $stop-sign-border;
+			border-right: $stop-sign-border;
+			padding-right: 2px;
+			vertical-align: top;
+
+			.main_text {
+				font: 1.2em arial,sans-serif;
+			}
+
+			.footnote {
+				font: 1em arial,sans-serif;
+			}
+		}
+
+		.route {
+			display: table-cell;
+			width: 55px;
+			border-top: $stop-sign-border;
+			border-bottom: $stop-sign-border;
+			padding: 2px;
+			padding-top: 6px;
+			font: 1.7em bold arial,sans-serif;
+		}
+	}
+}
