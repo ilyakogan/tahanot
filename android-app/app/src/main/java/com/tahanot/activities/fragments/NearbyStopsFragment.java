@@ -81,7 +81,7 @@ public class NearbyStopsFragment extends Fragment implements SimpleLocationListe
 		{
 			@Override
 			protected ArrayList<IStopInResponse> getStops(int fromStopNumber, int toStopNumber) {
-				NearbyStopSignsResponse stops = new StopSignProvider().getNearbyStopSigns(location, fromStopNumber, toStopNumber, widgetId);
+				NearbyStopSignsResponse stops = new StopSignProvider().getNearbyStopSigns(location, fromStopNumber, toStopNumber, widgetId, getActivity());
 				if (stops == null)
 				{
 					//Toast.makeText(BusStopApplication.getContext(), R.string.error_getting_nearby_stops, Toast.LENGTH_SHORT).show();

@@ -28,7 +28,7 @@ public class BringStopTask extends AsyncTask<Integer, Void, StopSignResult> {
 	}
 	
 	protected StopSignResult doInBackground(Integer... stopCodes) {
-		return new StopSignProvider().getStopSignByCode(stopCodes[0], mWidgetId);
+		return new StopSignProvider().getStopSignByCode(stopCodes[0], mWidgetId, mActivity);
 	}
 
 	protected void onPostExecute(StopSignResult result) {

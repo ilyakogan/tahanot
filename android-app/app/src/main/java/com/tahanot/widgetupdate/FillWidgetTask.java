@@ -1,18 +1,24 @@
 package com.tahanot.widgetupdate;
 
-import java.util.*;
+import android.appwidget.AppWidgetManager;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.widget.RemoteViews;
 
-import android.appwidget.*;
-import android.content.*;
-import android.os.*;
-import android.widget.*;
+import com.tahanot.BusStopApplication;
+import com.tahanot.FillWidgetResult;
+import com.tahanot.WidgetContentCreator;
+import com.tahanot.entities.MultipleStopMonitoringExtendedInfo;
+import com.tahanot.entities.StopMonitoringExtendedInfo;
+import com.tahanot.persistence.WidgetPersistence;
+import com.tahanot.utils.CancellationFunction;
+import com.tahanot.utils.ExpirationToken;
+import com.tahanot.utils.Logging;
+import com.tahanot.web.StopMonitoringProvider;
 
-import com.tahanot.*;
-import com.tahanot.entities.*;
-import com.tahanot.persistence.*;
-import com.tahanot.utils.*;
-import com.tahanot.web.*;
-import com.tahanot.widgetupdate.WidgetUpdateService.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 class FillWidgetTask extends AsyncTask<Integer, Void, FillWidgetResult> {
 	private final AppWidgetManager appWidgetManager;
@@ -44,7 +50,7 @@ class FillWidgetTask extends AsyncTask<Integer, Void, FillWidgetResult> {
 				stopCodes.add(stopCode);
 			}
 
-			MultipleStopMonitoringExtendedInfo multipleStopMonitoring = new StopMonitoringProvider().getMultipleStopMonitoring(stopCodes);
+			MultipleStopMonitoringExtendedInfo multipleStopMonitoring = new StopMonitoringProvider().getMultipleStopMonitoring(stopCodes, context);
 
 			if (cancellationFunction.isCancelled()) {
 				Logging.e(context, "Error filling widgets: task was cancelled");

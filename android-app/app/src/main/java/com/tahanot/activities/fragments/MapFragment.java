@@ -162,7 +162,7 @@ public class MapFragment extends Fragment implements SimpleLocationListener {
 		{
 			@Override
 			protected ArrayList<IStopInResponse> getStops(int fromStopNumber, int toStopNumber) {
-				ArrayList<StopWithDistance> stops = new StopSignProvider().getNearbyStops(location, toStopNumber, widgetId);
+				ArrayList<StopWithDistance> stops = new StopSignProvider().getNearbyStops(location, toStopNumber, widgetId, getActivity());
 				if (stops == null)
 				{
 					//Toast.makeText(BusStopApplication.getContext(), R.string.error_getting_nearby_stops, Toast.LENGTH_SHORT).show();
