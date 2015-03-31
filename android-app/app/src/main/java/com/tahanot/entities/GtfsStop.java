@@ -26,11 +26,11 @@ public class GtfsStop {
 	public String Town;
 	
 	public GtfsStop(JSONObject jsonObject) throws JSONException {
-		Code = ((Long) jsonObject.get("Code")).intValue();
-		Latitude = (Double) jsonObject.get("Latitude");
-		Longitude = (Double) jsonObject.get("Longitude");
-		Address = (String)jsonObject.get("Address");
-		Name = (String)jsonObject.get("Name");
+		Code = jsonObject.getInt("Code");
+		Latitude = jsonObject.getDouble("Latitude");
+		Longitude = jsonObject.getDouble("Longitude");
+		Address = jsonObject.getString("Address");
+		Name = jsonObject.getString("Name");
 	}
 	
 	public GtfsStop() {	

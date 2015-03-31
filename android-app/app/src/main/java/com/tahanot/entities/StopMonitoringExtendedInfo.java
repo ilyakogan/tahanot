@@ -1,8 +1,5 @@
 package com.tahanot.entities;
 
-import com.tahanot.BusStopApplication;
-import com.tahanot.utils.Logging;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,26 +12,18 @@ public class StopMonitoringExtendedInfo {
 	public ArrayList<StopVisit> stopVisits = new ArrayList<StopVisit>();
 	public long stopCode;
 
-	public StopMonitoringExtendedInfo(JSONObject root, Date responseTimestamp) throws JSONException {
-		if (root == null)
+	public StopMonitoringExtendedInfo(JSONObject stopObj, Date responseTimestamp) throws JSONException {
+		if (stopObj == null)
 			return;
-        JSONObject stopVisitsObj = root.getJSONObject("StopVisits");
-		if (stopVisitsObj == null)
-			return;
-		JSONArray jsonArray = new JSONArray(stopVisitsObj);
-		int len = jsonArray.length();
+        JSONArray stopVisitsArray = stopObj.getJSONArray("StopVisits");
+		int len = stopVisitsArray.length();
 		for (int i = 0; i < len; i++) {
-            JSONObject stopVisitObj = jsonArray.getJSONObject(i);
+            JSONObject stopVisitObj = stopVisitsArray.getJSONObject(i);
 			stopVisits.add(new StopVisit(stopVisitObj, responseTimestamp));
 		}
-		Object stopCodeObj = root.get("MonitoringRef");
-		Logging.i(BusStopApplication.getContext(), "stopCodeObj (1): " + stopCodeObj);
-		if (stopCodeObj == null) {
-			stopCodeObj = root.get("MotiroringRef");
-			Logging.i(BusStopApplication.getContext(), "stopCodeObj (2): " + stopCodeObj + ", " + stopCodeObj.getClass().getName());
-		}
-		
-		stopCode = (Long)stopCodeObj;
-		error = (String) root.get("Error");
+
+        stopCode = stopObj.optLong("MonitoringRef", stopObj.getLong("MotiroringRef"));
+		error = stopObj.getString("Error");
+        if (error.equals("null")) error = null;
 	}
 }

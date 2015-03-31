@@ -16,21 +16,21 @@ public class MultipleStopMonitoringExtendedInfo {
 	public MultipleStopMonitoringExtendedInfo(JSONObject root) throws JSONException {
 		if (root == null)
 			return;
-        JSONArray stopsObj = root.getJSONArray("Stops");
-		if (stopsObj == null)
+        JSONArray stopsArray = root.getJSONArray("Stops");
+		if (stopsArray == null)
 			return;
 
-		String s = (String) root.getString("ResponseTimestamp");
+		String s = root.getString("ResponseTimestamp");
 		long msecSince1970 = Long.parseLong(s.substring(6, s.length() - 2));
 		responseTimestamp = new Date(msecSince1970);	
 		
-		JSONArray jsonArray = (JSONArray) stopsObj;
-		int len = jsonArray.length();
+		int len = stopsArray.length();
 		for (int i = 0; i < len; i++) {
-			Object stopObj = jsonArray.get(i);
+			Object stopObj = stopsArray.get(i);
 			stops.add(new StopMonitoringExtendedInfo((JSONObject) stopObj, responseTimestamp));
 		}
 		
-		error = (String) root.get("Error");
+		error = root.getString("Error");
+        if (error.equals("null")) error = null;
 	}
 }

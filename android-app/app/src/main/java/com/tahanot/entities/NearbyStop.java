@@ -14,13 +14,13 @@ public class NearbyStop {
 	public Number distanceMeters;
 	
 	public NearbyStop(JSONObject root) throws JSONException {
-		distanceMeters = (Number)root.get("DistanceFromPoiMeters");
-		JSONObject stopObj = (JSONObject)root.get("Stop");
-    	id = (Number)stopObj.get("Id");
-    	code = (Number)stopObj.get("Code");
-    	latitude = (Number)stopObj.get("Latitude");
-    	longitude = (Number)stopObj.get("Longitude");
-    	name = (String)stopObj.get("Name");
-    	address = (String)stopObj.get("Address");
+		distanceMeters = root.getDouble("DistanceFromPoiMeters");
+		JSONObject stopObj = root.getJSONObject("Stop");
+    	id = stopObj.getInt("Id");
+    	code = stopObj.getInt("Code");
+    	latitude = stopObj.getDouble("Latitude");
+    	longitude = stopObj.getDouble("Longitude");
+    	name = stopObj.getString("Name");
+    	address = stopObj.getString("Address");
     }
 }
