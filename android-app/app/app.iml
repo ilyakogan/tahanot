@@ -18,7 +18,7 @@
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res;file://$MODULE_DIR$/src/production/res" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>
@@ -107,22 +107,43 @@
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.0.0" level="project" />
-    <orderEntry type="library" exported="" name="slf4j-api-1.6.1" level="project" />
-    <orderEntry type="library" exported="" name="google-api-client-1.20.0" level="project" />
-    <orderEntry type="library" exported="" name="google-http-client-jackson2-1.20.0" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
-    <orderEntry type="library" exported="" name="jackson-core-2.1.3" level="project" />
+    <orderEntry type="library" exported="" name="play-services-drive-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-maps-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-appindexing-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-cast-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-wearable-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-panorama-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-plus-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="gson-1.7.2" level="project" />
     <orderEntry type="library" exported="" name="google-oauth-client-1.20.0" level="project" />
     <orderEntry type="library" exported="" name="osmdroid-android-4.2" level="project" />
-    <orderEntry type="library" exported="" name="android-binding-v0.6-preview" level="project" />
     <orderEntry type="library" exported="" name="jsr305-1.3.9" level="project" />
+    <orderEntry type="library" exported="" name="play-services-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-ads-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-base-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-location-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-gcm-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-safetynet-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="slf4j-api-1.6.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-nearby-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="google-api-client-1.20.0" level="project" />
+    <orderEntry type="library" exported="" name="google-http-client-jackson2-1.20.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-fitness-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
+    <orderEntry type="library" exported="" name="jackson-core-2.1.3" level="project" />
+    <orderEntry type="library" exported="" name="android-binding-v0.6-preview" level="project" />
+    <orderEntry type="library" exported="" name="multidex-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="google-api-services-analytics-v3-rev114-1.20.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-analytics-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="google-http-client-1.20.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-appstate-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="guava-jdk5-13.0" level="project" />
     <orderEntry type="library" exported="" name="simple-xml-2.7.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-identity-7.0.0" level="project" />
     <orderEntry type="library" exported="" name="slf4j-simple-1.6.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-games-7.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-wallet-7.0.0" level="project" />
   </component>
 </module>
 

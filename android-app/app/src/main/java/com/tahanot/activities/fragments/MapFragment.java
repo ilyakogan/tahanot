@@ -24,6 +24,7 @@ import com.tahanot.activities.interfaces.StopSelectedListener;
 import com.tahanot.adapters.StopMapAdapter;
 import com.tahanot.adapters.mapoverlays.OnMoveOverlay;
 import com.tahanot.adapters.mapoverlays.OnMoveOverlay.OnMapMoveListener;
+import com.tahanot.analytics.UiAnalytics;
 import com.tahanot.entities.IStopInResponse;
 import com.tahanot.entities.StopWithDistance;
 import com.tahanot.interfaces.SimpleLocationListener;
@@ -85,10 +86,7 @@ public class MapFragment extends Fragment implements SimpleLocationListener {
 		});
 		rl.addView(goToMyLocation, lp);
 
-        // TODO: Analytics
-//        EasyTracker.getInstance().setContext(getActivity());
-//		EasyTracker.getTracker().sendView("Map tab");
-		
+        UiAnalytics.trackScreen(getActivity(), "Map tab");
 		return rl;
 	}
 	

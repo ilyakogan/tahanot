@@ -17,6 +17,7 @@ import com.tahanot.StopCollectionPopulator;
 import com.tahanot.activities.WidgetConfigActivity;
 import com.tahanot.activities.interfaces.StopSelectedListener;
 import com.tahanot.adapters.StopListAdapter;
+import com.tahanot.analytics.UiAnalytics;
 import com.tahanot.entities.IStopInResponse;
 import com.tahanot.entities.NearbyStopSignsResponse;
 import com.tahanot.entities.StopSignWithDistance;
@@ -35,9 +36,7 @@ public class NearbyStopsFragment extends Fragment implements SimpleLocationListe
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 
-        // TODO: Analytics
-//        EasyTracker.getInstance().setContext(getActivity());
-//		EasyTracker.getTracker().sendView("Nearby Stops tab");
+        UiAnalytics.trackScreen(getActivity(), "Nearby Stops tab");
 
 		// Inflate the layout for this fragment
 		return inflater.inflate(R.layout.nearby_stops, container, false);

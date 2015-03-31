@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.tahanot.R;
 import com.tahanot.activities.WidgetConfigActivity;
 import com.tahanot.activities.interfaces.StopSelectedListener;
+import com.tahanot.analytics.UiAnalytics;
 import com.tahanot.tasks.BringStopTask;
 
 public class FindStopByCodeFragment extends Fragment {// implements StopSelectedListener {
@@ -48,9 +49,7 @@ public class FindStopByCodeFragment extends Fragment {// implements StopSelected
 
 		getEditText(v).setOnEditorActionListener(textViewEditorActionListener);
 
-        // TODO: Analytics
-//		EasyTracker.getInstance().setContext(getActivity());
-//		EasyTracker.getTracker().sendView("Find Stop By Code tab");
+        UiAnalytics.trackScreen(getActivity(), "Find Stop By Code tab");
 		
 		return v;
 	}

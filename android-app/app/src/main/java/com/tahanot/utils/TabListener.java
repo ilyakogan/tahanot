@@ -42,10 +42,6 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
         } else {
             ft.attach(mFragment);
         }
-
-        // TODO: Analytics
-//        EasyTracker.getInstance().setContext(mActivity);
-//		EasyTracker.getTracker().sendView("Fragment-" + mTag);
     }
 
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {

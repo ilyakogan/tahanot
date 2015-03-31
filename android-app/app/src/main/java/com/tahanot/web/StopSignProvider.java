@@ -28,7 +28,6 @@ public class StopSignProvider {
 	private static int CONNECTION_TIMEOUT_MSEC = 40 * 1000;
 
 	public StopSignResult getStopSignByCode(int stopCode, int widgetId, Context context) {
-        // TODO URL
 
         String uri = getBaseUrl(context) + "/gtfs/StopSignByStopCodeXml?stopCode=" + stopCode + "&ver=1"
 				+ ClientIdentification.getQueryParams(widgetId);

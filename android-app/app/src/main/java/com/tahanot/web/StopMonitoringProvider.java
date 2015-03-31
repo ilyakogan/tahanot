@@ -17,7 +17,6 @@ public class StopMonitoringProvider {
     private static int CONNECTION_TIMEOUT_MSEC = 20 * 1000;
 
     public MultipleStopMonitoringExtendedInfo getMultipleStopMonitoring(Collection<Integer> stopCodes, Context context) throws Exception {
-        // TODO URL
         String home = context.getResources().getString(R.string.stop_monitoring_base_url);
         String concatStopCodes = CollectionUtils.join(",", CollectionUtils.convertToStrings(stopCodes));
 

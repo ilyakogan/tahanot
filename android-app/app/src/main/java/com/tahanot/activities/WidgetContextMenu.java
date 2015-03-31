@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import com.tahanot.R;
 import com.tahanot.ResourceSaver;
+import com.tahanot.analytics.UiAnalytics;
 import com.tahanot.persistence.WidgetPersistence;
 import com.tahanot.widgetupdate.WidgetUpdateService;
 
@@ -30,10 +31,8 @@ public class WidgetContextMenu extends Activity {
 		Intent intent = getIntent();
 		mWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
-        // TODO: Analytics
-//        EasyTracker.getInstance().setContext(mActivity);
-//		EasyTracker.getTracker().sendView("Activity-WidgetContextMenu");
-		
+        UiAnalytics.trackScreen(this, "Activity-WidgetContextMenu");
+
 		showDialog();
 	}
 
@@ -76,9 +75,7 @@ public class WidgetContextMenu extends Activity {
 		@Override
 		public void onClick() {
 			ResourceSaver.userJustDidSomething();
-            // TODO: Analytics
-//            EasyTracker.getInstance().setContext(mActivity);
-//			EasyTracker.getTracker().sendView("WidgetContextMenu-UpdateWidget");
+            UiAnalytics.trackScreen(mActivity, "WidgetContextMenu-UpdateWidget");
 
 			// If for some reason the widget is missing from the list of widgets to update, add it again.
 			new WidgetPersistence().addWidget(mWidgetId);
@@ -96,9 +93,7 @@ public class WidgetContextMenu extends Activity {
 		@Override
 		public void onClick() {
 			ResourceSaver.userJustDidSomething();
-            // TODO: Analytics
-//            EasyTracker.getInstance().setContext(mActivity);
-//			EasyTracker.getTracker().sendView("WidgetContextMenu-ChangeName");
+            UiAnalytics.trackScreen(mActivity, "WidgetContextMenu-ChangeName");
 
 			final WidgetPersistence pers = new WidgetPersistence();
 			int stopCode = pers.getStopCode(mWidgetId);
@@ -166,9 +161,7 @@ public class WidgetContextMenu extends Activity {
 		@Override
 		public void onClick() {
 			ResourceSaver.userJustDidSomething();
-            // TODO: Analytics
-//            EasyTracker.getInstance().setContext(mActivity);
-//			EasyTracker.getTracker().sendView("WidgetContextMenu-ChangeStop");
+            UiAnalytics.trackScreen(mActivity, "WidgetContextMenu-ChangeStop");
 
 			Intent intent = new Intent(mActivity, StopSelection.class);
 			intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mWidgetId);
@@ -182,9 +175,7 @@ public class WidgetContextMenu extends Activity {
 		@Override
 		public void onClick() {
 			ResourceSaver.userJustDidSomething();
-            // TODO: Analytics
-//			EasyTracker.getTracker().sendView("WidgetContextMenu-About");
-//            EasyTracker.getInstance().setContext(mActivity);
+            UiAnalytics.trackScreen(mActivity, "WidgetContextMenu-About");
 
 			Intent intent = new Intent(mActivity, Landing.class);
 			intent.putExtra(Landing.SELECT_TAB_PARAM, Landing.TAB_ABOUT);
@@ -198,9 +189,7 @@ public class WidgetContextMenu extends Activity {
 		@Override
 		public void onClick() {
 			ResourceSaver.userJustDidSomething();
-            // TODO: Analytics
-//			EasyTracker.getTracker().sendView("WidgetContextMenu-Share");
-//            EasyTracker.getInstance().setContext(mActivity);
+            UiAnalytics.trackScreen(mActivity, "WidgetContextMenu-Share");
 
 			Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND);
