@@ -1,66 +1,63 @@
 package com.tahanot.activities;
 
-import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.MailTo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.tahanot.R;
-import com.tahanot.activities.fragments.AboutFragment;
-import com.tahanot.activities.fragments.InstructionsFragment;
-import com.tahanot.utils.TabListener;
-
-import java.util.HashMap;
 
 public class Landing extends Activity {
 
-	public static final String SELECT_TAB_PARAM = "selectTab";
-	public static final int TAB_INSTRUCTIONS = 0;
-	public static final int TAB_ABOUT = 1;
-	public HashMap<Integer, ActionBar.Tab> mTabs = new HashMap<>();
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         // TODO: Analytics
-		//Crashlytics.start(this);
-		setContentView(R.layout.generic);
+        //Crashlytics.start(this);
+        setContentView(R.layout.webview);
 
-		final ActionBar bar = getActionBar();
-		bar.setTitle(R.string.intro_title);
-		bar.setDisplayShowTitleEnabled(true);
-		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        WebView webView = (WebView) findViewById(R.id.webView1);
+        webView.loadUrl("file:///android_asset/hello.html");
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url != null && url.startsWith("market://")) {
+                    view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                    return true;
+                } else if (url.startsWith("mailto:")) {
+                    MailTo mt = MailTo.parse(url);
+                    Intent i = newEmailIntent(Landing.this, mt.getTo(), mt.getSubject(), mt.getBody(), mt.getCc());
+                    startActivity(i);
+                    view.reload();
+                    return true;
+                } else if (url.startsWith("http")) {
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
 
-		ActionBar.Tab about = bar.newTab().setText(getString(R.string.tab_title_about))
-				.setTabListener(new TabListener<AboutFragment>(this, "About", AboutFragment.class));
-		mTabs.put(TAB_ABOUT, about);
+        webView.clearCache(true);
+        webView.clearHistory();
+        webView.getSettings().setJavaScriptEnabled(true);
+    }
 
-		ActionBar.Tab instructions = bar.newTab().setText(getString(R.string.tab_title_instructions))
-				.setTabListener(new TabListener<InstructionsFragment>(this, "Instructions", InstructionsFragment.class));
-		mTabs.put(TAB_INSTRUCTIONS, instructions);
-
-		bar.addTab(about);
-		bar.addTab(instructions);
-
-		if (savedInstanceState != null) {
-			bar.setSelectedNavigationItem(savedInstanceState.getInt("tab", 0));
-		}
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-
-		try {
-			Intent intent = getIntent();
-			int tabNumber = intent.getIntExtra(SELECT_TAB_PARAM, TAB_INSTRUCTIONS);
-			getActionBar().selectTab(mTabs.get(tabNumber));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		// Fix: If for some reason the widget is missing from the list of widgets to update, add it again.
-		// new WidgetPersistence(this).addWidget(widgetId);
-	}
+    public static Intent newEmailIntent(Context context, String address, String subject, String body, String cc) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{address});
+        intent.putExtra(Intent.EXTRA_TEXT, body);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_CC, cc);
+        intent.setType("message/rfc822");
+        return intent;
+    }
 }

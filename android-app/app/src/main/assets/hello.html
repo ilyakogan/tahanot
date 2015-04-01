@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap RTL Theme -->
+    <link rel="stylesheet" href="bootstrap-rtl/css/bootstrap-rtl.css">
+
+	<link rel="stylesheet" href="css/tahanot.css">
+
+	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<h2>תחנות - וידג'ט זמן אמת של אוטובוסים</h2>
+
+<div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                                                  data-toggle="tab">איך משתמשים</a></li>
+        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
+                                   data-toggle="tab">מידע ויצירת קשר</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="home">
+                <h3>ברוכים הבאים!</h3>
+
+                <p>כדי לצפות בזמני אמת של אוטובוסים בתחנה, יש להוסיף
+                    את וידג'ט &quot;תחנות&quot; לדף הבית של המכשיר.</p>
+
+                <p>
+                    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#instructions"
+                       aria-expanded="false" aria-controls="instructions">איך עושים את זה?</button>
+                </p>
+                <div class="collapse" id="instructions">
+                    <div class="panel panel-default">
+					<h3>הוראות</h3>
+						
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">1. לחץ על לחצן הבית.</h4>
+                                <p class="list-group-item-text">כדי להוסיף וידג'ט, יש להתחיל במסך הבית.</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">2. צור וידג'ט חדש.</h4>
+                                <p class="list-group-item-text">תפריט -&gt; הוסף -&gt; וידג'ט</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">3. בחר בוידג'ט &quot;תחנות&quot;.</h4>
+                                <p class="list-group-item-text">בדרך כלל הוא מופיע אחרון ברשימה, כי הוא מתחיל באות ת'.</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">4. בחר תחנה.</h4>
+                                <p class="list-group-item-text">לאחר הוספת הווידג'ט יופיע מסך ובו ניתן לבחור תחנה. לאחר הבחירה, זמני האוטובוסים בתחנה יופיעו קבוע במסך הבית.</p>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <h4 class="list-group-item-heading">5. ניתן ליצור כמה וידג'טים!</h4>
+                                <p class="list-group-item-text">התחנה ליד הבית, התחנה ליד הלימודים, התחנה שבה אני בדרך כלל מחליף אוטובוס...</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="profile">
+			<h4 class="block-title">תמיכה ומשוב</h4>
+			<p><a role="button" class="btn btn-default" href="mailto:support@tahanot.com">support@tahanot.com</a></p>
+			<h4 class="block-title">שיתוף</h4>
+			<p>
+				<a role="button" class="btn btn-primary" href="market://details?id=com.tahanot">דרגו את &quot;תחנות&quot;</a>
+				<a role="button" class="btn btn-primary" href="https://www.facebook.com/pages/%D7%AA%D7%97%D7%A0%D7%95%D7%AA/577587045619009">דף הפייסבוק</a>
+			</p>
+			<p>כל משוב או שיתוף יתקבלו בברכה ובשמחה. עזרו לעוד אנשים לגלות את וידג'ט זמני האוטובוסים הראשון לאנדרואיד!</p>
+			<h4 class="block-title">אודות</h4>
+			<p>יוצר: איליה קוגן.</p>
+			<p>אפליקציית &quot;תחנות&quot; מציגה נתוני זמן אמת המגיעים ממשרד התחבורה.</p>
+			<p>האפליקציה מנסה להציג תמונה אמינה של המציאות, אך ייתכנו טעויות הנובעות מנתונים חסרים או שגויים שמועברים ע&quot;י מפעילי הקווים או ע&quot;י משרד התחבורה. הנתונים הם בגדר המלצה ואין ליוצר האפליקציה אחריות כלשהי לנכונותם או לנזק שעלול להיגרם מהם.</p>
+		</div>
+    </div>
+
+</div>
+
+
+
+<script>
+
+$('#myTab a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+$('#myTab a[href="#home"]').tab('show') // Select tab by name
+$('#myTab a[href="#profile"]').tab('show') // Select tab by name
+
+</script>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+
+
+</body>
+</html>

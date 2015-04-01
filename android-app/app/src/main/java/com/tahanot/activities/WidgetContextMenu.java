@@ -178,7 +178,6 @@ public class WidgetContextMenu extends Activity {
             UiAnalytics.trackScreen(mActivity, "WidgetContextMenu-About");
 
 			Intent intent = new Intent(mActivity, Landing.class);
-			intent.putExtra(Landing.SELECT_TAB_PARAM, Landing.TAB_ABOUT);
 			startActivity(intent);
 			finish();
 		}

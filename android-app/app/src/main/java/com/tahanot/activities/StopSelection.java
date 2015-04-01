@@ -79,7 +79,6 @@ public class StopSelection extends WidgetConfigActivity implements StopSelectedL
 
     @Override
     protected void onPause() {
-        // TODO Auto-generated method stub
         super.onPause();
         mIsActive = false;
     }

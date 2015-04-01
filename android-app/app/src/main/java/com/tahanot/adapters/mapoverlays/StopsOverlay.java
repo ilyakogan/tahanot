@@ -22,7 +22,6 @@ public class StopsOverlay extends ItemizedOverlay<StopOverlayItem> {
 
 	@Override
 	public boolean onSnapToItem(int arg0, int arg1, Point arg2, IMapView arg3) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

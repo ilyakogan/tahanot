@@ -24,20 +24,6 @@
     <string name="is_this_the_right_stop">האם זאת התחנה הנכונה?</string>
     <string name="this_is_the_right_stop">כן</string>
     <string name="no_address">כתובת לא ידועה</string>
-    <string name="aboutHtml">
-        <![CDATA[
-        <p><big><a href="https://www.facebook.com/pages/%D7%AA%D7%97%D7%A0%D7%95%D7%AA/577587045619009">הצטרפו לדף \"תחנות\" בפייסבוק</a></big><br> כדי להישאר מעודכנים וכדי לספר על האפליקציה לחברים!</p>
-		<p><big>תמיכה ומשוב:<br><a href="mailto:support@tahanot.com>support@tahanot.com</a></big></p>
-		<p>כל משוב או שיתוף יתקבלו בברכה ובשמחה. עזרו לעוד אנשים לגלות את וידג'ט זמני האוטובוסים היחיד לאנדרואיד.</p>
-        <p><a href="market://details?id=com.tahanot">דרגו את \"תחנות\"</a> ב-Google Play.</p>
-        <p><a href="http://www.tahanot.com">האתר של \"תחנות\"</a></p>
-        <p>&nbsp;</p>
-        <p>אפליקציית \"תחנות\" מציגה נתוני זמן אמת המגיעים ממשרד התחבורה.</p> 
-        
-        <p>האפליקציה מנסה להציג תמונה אמינה של המציאות, אך ייתכנו טעויות הנובעות מנתונים חסרים או שגויים שמועברים ע\"י מפעילי הקווים או ע\"י משרד התחבורה. הנתונים הם בגדר המלצה ואין ליוצר האפליקציה אחריות כלשהי לנכונותם או לנזק שעלול להיגרם מהם.</p>
-<p>נוצר ע\"י איליה קוגן.</p>
-]]></string>
-    <string name="howToUse">איך מציגים תחנת אוטובוס</string>
     <string name="tab_title_nearby">לפי קרבה</string>
     <string name="tab_title_search_by_code">לפי מספר תחנה</string>
     <string name="tab_title_map">לפי מפה</string>
@@ -56,7 +42,7 @@
     <string name="menu_item_share">ספר על \"תחנות\" לחברים</string>
     <string name="share_text">היי, יש אפליקציה ממש טובה בשם \"תחנות\" שמאפשרת לראות על מסך הבית של האנדרואיד מתי יעבור האוטובוס הבא בתחנות הקבועות שלך. \n
                 
-        הנה קישור לדף שלה ב-Google Play:\n
+        הנה קישור להתקנה:
         
         https://play.google.com/store/apps/details?id=com.tahanot</string>
        <string name="share_title">שתף קישור להורדת \"תחנות\" באמצעות:</string>
