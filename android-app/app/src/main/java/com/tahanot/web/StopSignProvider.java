@@ -29,7 +29,7 @@ public class StopSignProvider {
 
 	public StopSignResult getStopSignByCode(int stopCode, int widgetId, Context context) {
 
-        String uri = getBaseUrl(context) + "/gtfs/StopSignByStopCodeXml?stopCode=" + stopCode + "&ver=1"
+        String uri = getBaseUrl(context) + "/gtfs/StopSignByStopCodeXml?StopCode=" + stopCode + "&ver=1"
 				+ ClientIdentification.getQueryParams(widgetId);
 		return getResponse(uri);
 	}

@@ -1,18 +1,21 @@
 package com.tahanot.web;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
-
-import com.tahanot.*;
-import com.tahanot.utils.*;
-
-import android.content.*;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.pm.*;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.*;
+import android.os.Build;
 import android.provider.Settings.Secure;
+
+import com.tahanot.BusStopApplication;
+import com.tahanot.utils.Logging;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class ClientIdentification {
 
@@ -28,6 +31,21 @@ public class ClientIdentification {
 			return "&installationId=ErrorIdentifyingClient";
 		}
 	}
+
+    public static Map<? extends String,?> getQueryParamsAsMap(Context context, int widgetId) {
+        Map<String, Object> params = new HashMap<>();
+        try {
+            params.put("installationId", getInstallationId(context));
+            params.put("deviceId", getAndroidId(context));
+            params.put("widgetId", widgetId);
+            params.put("deviceName",getDeviceName());
+            params.put("appVersion", getAppVersion(context));
+        } catch (Exception ex) {
+            Logging.e(context, ex.getMessage());
+            params.put("installationId", "ErrorIdentifyingClient");
+        }
+        return params;
+    }
 
 	private static String urlEncode(String value) {
 		try {
@@ -95,5 +113,4 @@ public class ClientIdentification {
 			return Character.toUpperCase(first) + s.substring(1);
 		}
 	}
-
 }

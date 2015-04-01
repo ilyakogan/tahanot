@@ -89,7 +89,7 @@ public class FindStopByCodeFragment extends Fragment {// implements StopSelected
 		if (editText.getText().length() == 0) return;
 		int stopCode = Integer.parseInt(editText.getText().toString());
 		((StopSelectedListener) getActivity()).onStopCodeSelected(stopCode);
-//		Integer params[] = new Integer[] { stopCode };
+//		Integer params[] = new Integer[] { StopCode };
 //		mBringStopTask = new BringStopTask(mWidgetId, getActivity(), this);
 //		mBringStopTask.execute(params);
 	}

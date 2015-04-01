@@ -1,7 +1,5 @@
 package com.tahanot;
 
-import java.util.Date;
-
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.*;
@@ -15,6 +13,8 @@ import com.tahanot.persistence.*;
 import com.tahanot.utils.*;
 import com.tahanot.web.*;
 import com.tahanot.widgetupdate.*;
+
+import java.util.Date;
 
 public class WidgetContentCreator {
 	private static final String LOG = "com.tahanot";
@@ -70,10 +70,10 @@ public class WidgetContentCreator {
 	}
 
 	public RemoteViews fillWidgetWithData(int widgetId, WidgetPersistence persistence, int stopCode, String stopDisplayName,
-			StopMonitoringExtendedInfo stopMonitoring) throws Exception {
+                                          StopMonitoringExtendedInfo stopMonitoring, Date responseTimestamp) throws Exception {
 		
 			RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-			updateDataInWidget(remoteViews, stopMonitoring, stopDisplayName);
+			updateDataInWidget(remoteViews, stopMonitoring, stopDisplayName, responseTimestamp);
 			Logging.i(context, "fillWidgetWithData: " + widgetId + " - " + stopDisplayName);
 
 			remoteViews.setViewVisibility(R.id.waiting_for_data, View.INVISIBLE);
@@ -106,19 +106,19 @@ public class WidgetContentCreator {
 		return pendingIntent;
 	}
 
-	private void updateDataInWidget(RemoteViews remoteViews, StopMonitoringExtendedInfo stopMonitoring, String stopDisplayName) throws Exception {
+	private void updateDataInWidget(RemoteViews remoteViews, StopMonitoringExtendedInfo stopMonitoring, String stopDisplayName, Date responseTimestamp) throws Exception {
 
 		remoteViews.setTextViewText(R.id.stop_code, stopDisplayName);
 
-		if (stopMonitoring == null || stopMonitoring.stopVisits == null || stopMonitoring.stopVisits.size() == 0) {
+		if (stopMonitoring == null || stopMonitoring.StopVisits == null || stopMonitoring.StopVisits.size() == 0) {
 			showNoDataMessage(remoteViews, 0);
 			for (int row = 1; row < lineNumberIds.length; row++) {
 				hide(remoteViews, row);
 			}
 		} else {
 			for (int row = 0; row < lineNumberIds.length; row++) {
-				if (row < stopMonitoring.stopVisits.size()) {
-					show(remoteViews, row, stopMonitoring.stopVisits.get(row));
+				if (row < stopMonitoring.StopVisits.size()) {
+					show(remoteViews, row, stopMonitoring.StopVisits.get(row), responseTimestamp);
 				} else {
 					hide(remoteViews, row);
 				}
@@ -142,11 +142,11 @@ public class WidgetContentCreator {
 		}
 	}
 
-	private void show(RemoteViews remoteViews, int row, StopVisit visit) {
-		remoteViews.setTextViewText(lineNumberIds[row], visit.publishedLineName);
+	private void show(RemoteViews remoteViews, int row, StopVisit visit, Date responseTimestamp) {
+		remoteViews.setTextViewText(lineNumberIds[row], visit.PublishedLineName);
 		remoteViews.setViewVisibility(lineNumberIds[row], View.VISIBLE);
 
-		int minutesFromNow = (int) (visit.expectedInSeconds / 60);
+		int minutesFromNow = (int) (visit.getExpectedInSeconds(responseTimestamp) / 60);
 		remoteViews.setTextViewText(timeIds[row], Integer.toString(minutesFromNow) + "'");
 		remoteViews.setViewVisibility(timeIds[row], View.VISIBLE);
 	}

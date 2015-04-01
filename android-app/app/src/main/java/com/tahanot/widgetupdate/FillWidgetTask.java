@@ -57,8 +57,8 @@ class FillWidgetTask extends AsyncTask<Integer, Void, FillWidgetResult> {
 				return markAllWidgetsArsErroneous(contentCreator, widgetIds);
 			}
 			
-			if (multipleStopMonitoring.error != null && multipleStopMonitoring.error != "") {
-				Logging.e(context, "Error in multipleStopMonitoring: " + multipleStopMonitoring.error);
+			if (multipleStopMonitoring.Error != null && multipleStopMonitoring.Error != "") {
+				Logging.e(context, "Error in multipleStopMonitoring: " + multipleStopMonitoring.Error);
 				return markAllWidgetsArsErroneous(contentCreator, widgetIds);
 			}
 
@@ -75,22 +75,22 @@ class FillWidgetTask extends AsyncTask<Integer, Void, FillWidgetResult> {
 					}
 
 					StopMonitoringExtendedInfo infoAboutStop = null;
-					for (StopMonitoringExtendedInfo s : multipleStopMonitoring.stops) {
-						if (s.stopCode == stopCode) {
+					for (StopMonitoringExtendedInfo s : multipleStopMonitoring.Stops) {
+						if (s.getStopCode() == stopCode) {
 							infoAboutStop = s;
 							break;
 						}
 					}
 					
-					if (infoAboutStop != null && infoAboutStop.error != null && infoAboutStop.error != "") {
-						Logging.e(context, "Error in stop " + stopCode + ": " + infoAboutStop.error);
+					if (infoAboutStop != null && infoAboutStop.Error != null && infoAboutStop.Error != "") {
+						Logging.e(context, "Error in stop " + stopCode + ": " + infoAboutStop.Error);
 						allSucceeded = false;
 						remoteViewsByWidget.put(widgetId, contentCreator.markWidgetAsErroneous(widgetId));
 					}
 
 					String stopDisplayName = persistence.getStopDisplayName(widgetId);					
 					Logging.i(context, "Creating remote views for stop code " + stopCode);
-					RemoteViews remoteViews = contentCreator.fillWidgetWithData(widgetId, persistence, stopCode, stopDisplayName, infoAboutStop);
+					RemoteViews remoteViews = contentCreator.fillWidgetWithData(widgetId, persistence, stopCode, stopDisplayName, infoAboutStop, multipleStopMonitoring.getResponseTimestamp());
 					remoteViewsByWidget.put(widgetId, remoteViews);
 				} catch (Exception e) {
 					e.printStackTrace();
