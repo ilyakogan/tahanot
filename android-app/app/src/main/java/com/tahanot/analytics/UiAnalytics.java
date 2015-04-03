@@ -3,12 +3,14 @@ package com.tahanot.analytics;
 import android.app.Activity;
 
 import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.tahanot.BusStopApplication;
 
 public class UiAnalytics {
     public static void trackScreen(Activity activity, String screenName)
     {
-        ((BusStopApplication)activity.getApplication()).getTracker().setScreenName(screenName);
-        ((BusStopApplication)activity.getApplication()).getTracker().send(new HitBuilders.ScreenViewBuilder().build());
+        Tracker tracker = ((BusStopApplication) activity.getApplication()).getTracker();
+        tracker.setScreenName(screenName);
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }
