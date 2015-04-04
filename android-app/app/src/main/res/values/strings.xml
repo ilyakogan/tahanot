@@ -22,7 +22,8 @@
     <string name="stops_listview_header">בחר תחנה:</string> 
     <string name="select_the_stop">בחר</string>
     <string name="is_this_the_right_stop">האם זאת התחנה הנכונה?</string>
-    <string name="this_is_the_right_stop">כן</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
     <string name="no_address">כתובת לא ידועה</string>
     <string name="tab_title_nearby">לפי קרבה</string>
     <string name="tab_title_search_by_code">לפי מספר תחנה</string>

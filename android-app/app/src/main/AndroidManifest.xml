@@ -49,7 +49,7 @@
         </receiver>
 
         <activity
-            android:name="com.tahanot.activities.Landing"
+            android:name=".LandingActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -59,7 +59,7 @@
         </activity>
         <!-- android:launchMode makes sure the Back button doesn't navigate to another Configuration activity. android:taskAffinity makes sure the Back button doesn't navigate to some other activity. -->
         <activity
-            android:name="com.tahanot.activities.StopSelection"
+            android:name=".stopselection.StopSelectionActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/stop_selection"
             android:launchMode="singleTop"
@@ -77,7 +77,7 @@
         </activity>
 
         <activity
-            android:name="com.tahanot.activities.WidgetContextMenu"
+            android:name=".WidgetContextMenuActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleInstance"
             android:noHistory="true"

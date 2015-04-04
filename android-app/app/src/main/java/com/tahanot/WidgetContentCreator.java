@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.RemoteViews;
 
-import com.tahanot.activities.*;
 import com.tahanot.entities.*;
 import com.tahanot.persistence.*;
 import com.tahanot.utils.*;
@@ -89,7 +88,7 @@ public class WidgetContentCreator {
 	}
 
 	private PendingIntent createPendingClickHandlerToShowActivity(int widgetId) {
-		Intent clickIntent = new Intent(context, WidgetContextMenu.class);
+		Intent clickIntent = new Intent(context, WidgetContextMenuActivity.class);
 		clickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
 		// Make the pending intent unique
 		clickIntent.setData(Uri.parse(clickIntent.toUri(Intent.URI_INTENT_SCHEME)));

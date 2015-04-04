@@ -1,12 +1,10 @@
-package com.tahanot.utils;
+package com.tahanot.stopselection;
 
 import java.util.*;
 
 import com.tahanot.*;
-import com.tahanot.interfaces.*;
 
 import android.content.*;
-import android.content.pm.*;
 import android.location.*;
 import android.os.*;
 

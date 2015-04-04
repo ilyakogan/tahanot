@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:_="http://schemas.android.com/apk/res/android"
     _:layout_width="match_parent"
-    _:layout_height="match_parent"
+    _:layout_height="wrap_content"
     _:orientation="vertical"
     _:visibility="visible" >
 
@@ -107,23 +107,47 @@
         _:textAppearance="?android:attr/textAppearanceMedium"
         _:textColor="#000000" />
 
+    <!--<LinearLayout-->
+        <!--_:layout_width="match_parent"-->
+        <!--_:layout_height="match_parent"-->
+        <!--_:layout_above="@+id/borderBottom"-->
+        <!--_:layout_below="@+id/borderBelowTitle"-->
+        <!--_:layout_toLeftOf="@+id/borderRight"-->
+        <!--_:layout_toRightOf="@+id/borderLeft"-->
+        <!--_:background="#ffc000"-->
+        <!--_:orientation="vertical" >-->
+
+        <!--<ListView-->
+            <!--_:id="@+id/routesListView"-->
+            <!--_:layout_width="wrap_content"-->
+            <!--_:layout_height="wrap_content"-->
+            <!--_:divider="@null"-->
+            <!--_:dividerHeight="0dp" >-->
+        <!--</ListView>-->
+    <!--</LinearLayout>-->
+
     <LinearLayout
         _:layout_width="match_parent"
-        _:layout_height="match_parent"
+        _:layout_height="wrap_content"
         _:layout_above="@+id/borderBottom"
         _:layout_below="@+id/borderBelowTitle"
         _:layout_toLeftOf="@+id/borderRight"
         _:layout_toRightOf="@+id/borderLeft"
-        _:background="#ffc000"
-        _:orientation="vertical" >
-
-        <ListView
-            _:id="@+id/routesListView"
-            _:layout_width="wrap_content"
+        _:orientation="horizontal">
+        <Button
+            _:id="@+id/no"
+            _:text="@string/no"
+            _:layout_width="match_parent"
             _:layout_height="wrap_content"
-            _:divider="@null"
-            _:dividerHeight="0dp" >
-        </ListView>
+            _:layout_weight="1">
+        </Button>
+        <Button
+            _:id="@+id/yes"
+            _:text="@string/yes"
+            _:layout_width="match_parent"
+            _:layout_height="wrap_content"
+            _:layout_weight="1">
+        </Button>
     </LinearLayout>
 
 </RelativeLayout>

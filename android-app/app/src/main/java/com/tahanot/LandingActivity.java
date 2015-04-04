@@ -1,4 +1,4 @@
-package com.tahanot.activities;
+package com.tahanot;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.tahanot.R;
-
-public class Landing extends Activity {
+public class LandingActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +29,7 @@ public class Landing extends Activity {
                     return true;
                 } else if (url.startsWith("mailto:")) {
                     MailTo mt = MailTo.parse(url);
-                    Intent i = newEmailIntent(Landing.this, mt.getTo(), mt.getSubject(), mt.getBody(), mt.getCc());
+                    Intent i = newEmailIntent(LandingActivity.this, mt.getTo(), mt.getSubject(), mt.getBody(), mt.getCc());
                     startActivity(i);
                     view.reload();
                     return true;

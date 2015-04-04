@@ -1,4 +1,4 @@
-package com.tahanot.analytics;
+package com.tahanot.utils;
 
 import android.app.Activity;
 

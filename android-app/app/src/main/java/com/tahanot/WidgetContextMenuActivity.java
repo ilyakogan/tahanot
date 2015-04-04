@@ -1,4 +1,4 @@
-package com.tahanot.activities;
+package com.tahanot;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,13 +13,12 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.tahanot.R;
-import com.tahanot.ResourceSaver;
-import com.tahanot.analytics.UiAnalytics;
+import com.tahanot.utils.UiAnalytics;
 import com.tahanot.persistence.WidgetPersistence;
+import com.tahanot.stopselection.StopSelectionActivity;
 import com.tahanot.widgetupdate.WidgetUpdateService;
 
-public class WidgetContextMenu extends Activity {
+public class WidgetContextMenuActivity extends Activity {
 
 	private int mWidgetId;
 	Activity mActivity = this;
@@ -163,7 +162,7 @@ public class WidgetContextMenu extends Activity {
 			ResourceSaver.userJustDidSomething();
             UiAnalytics.trackScreen(mActivity, "WidgetContextMenu-ChangeStop");
 
-			Intent intent = new Intent(mActivity, StopSelection.class);
+			Intent intent = new Intent(mActivity, StopSelectionActivity.class);
 			intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mWidgetId);
 			startActivity(intent);
 			finish();
@@ -177,7 +176,7 @@ public class WidgetContextMenu extends Activity {
 			ResourceSaver.userJustDidSomething();
             UiAnalytics.trackScreen(mActivity, "WidgetContextMenu-About");
 
-			Intent intent = new Intent(mActivity, Landing.class);
+			Intent intent = new Intent(mActivity, LandingActivity.class);
 			startActivity(intent);
 			finish();
 		}
