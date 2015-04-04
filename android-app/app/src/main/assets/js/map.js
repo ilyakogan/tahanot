@@ -2,7 +2,7 @@ var map
 var service
 var locationMarker
 var placeIds = []
-
+var geocoder
 
 
 function initialize() {
@@ -25,6 +25,7 @@ function initialize() {
         zoom: 17
     });
     service = new google.maps.places.PlacesService(map);
+    geocoder = new google.maps.Geocoder();
     locationMarker = createLocationMarker();
     if (navigator.geolocation) trackLocation();
 
@@ -106,6 +107,37 @@ function getNumericParameter(name, fallback) {
     var stringValue = decodeURIComponent(results[1].replace(/\+/g, " "));
     var numericValue = parseFloat(stringValue)
     return (isNaN(numericValue) ? fallback : numericValue)
+}
+
+function codeAddress() {
+  var address = document.getElementById('address').value;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+      //var marker = new google.maps.Marker({
+      //    map: map,
+      //    position: results[0].geometry.location
+      //});
+    } else {
+      //alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+function keyPressedInSearch(event) {
+  if (event.keyCode == 13) {
+    codeAddress()
+
+    // Unfocus the text box to remove keyboard on Android
+    var activeElement = document.activeElement;
+    if (activeElement) {
+       activeElement.blur();
+    } else if (document.parentElement) {
+       document.parentElement.focus();
+    } else {
+       window.focus();
+    }
+  }
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);

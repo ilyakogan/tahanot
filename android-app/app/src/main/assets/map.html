@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Place searches</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
-      html, body, #map-canvas {
+        html, body, #map-canvas {
         height: 100%;
         margin: 0px;
         padding: 0px
-      }
+        }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false&libraries=places"></script>
-	<script src="js/map.js"></script>
-	<link rel="stylesheet" href="css/map.css">
-	</script>
+    <script src="js/map.js"></script>
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-rtl/css/bootstrap-rtl.css">
+    <link rel="stylesheet" href="css/tahanot.css">
+    <link rel="stylesheet" href="css/map.css">
+    </script>
   </head>
   <body>
+    <div>
+      <input id="address" type="text" class="form-control" placeholder="חפש כתובת"
+      onkeypress="keyPressedInSearch(event)"></div>
+      <!--<button type="button" class="btn btn-default" onclick="codeAddress()">-->
+        <!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span> חיפוש-->
+      <!--</button>-->
+    </div>
     <div id="map-canvas"></div>
-  </body>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    </body>
 </html>
