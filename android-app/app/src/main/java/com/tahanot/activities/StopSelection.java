@@ -16,6 +16,7 @@ import com.tahanot.WidgetContentCreator;
 import com.tahanot.activities.fragments.StopSignDialogFragment;
 import com.tahanot.activities.interfaces.GoogleStopSelectedListener;
 import com.tahanot.activities.interfaces.StopSelectedListener;
+import com.tahanot.entities.GtfsStop;
 import com.tahanot.entities.StopSign;
 import com.tahanot.fragmentlisteners.StopConfirmedFragmentListener;
 import com.tahanot.persistence.WidgetPersistence;
@@ -23,6 +24,9 @@ import com.tahanot.tasks.BringStopTask;
 import com.tahanot.utils.LocationProxy;
 import com.tahanot.utils.Logging;
 import com.tahanot.widgetupdate.WidgetUpdateService;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class StopSelection extends WidgetConfigActivity implements StopSelectedListener, StopConfirmedFragmentListener, GoogleStopSelectedListener {
     private int DEFAULT_TAB = 2;
@@ -48,12 +52,6 @@ public class StopSelection extends WidgetConfigActivity implements StopSelectedL
     }
 
     @Override
-    public void onStopSelected(double lat, double lng) {
-        WebView webView = (WebView) findViewById(R.id.webView1);
-        webView.loadData("Lat: " + lat + ", Lng: " + lng, "text/html; charset=UTF-8", null);;
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         mIsActive = true;
@@ -75,6 +73,31 @@ public class StopSelection extends WidgetConfigActivity implements StopSelectedL
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("tab", getActionBar().getSelectedNavigationIndex());
+    }
+
+    @Override
+    public void onStopSelected(double lat, double lng) {
+        String resourceName = String.format("stop_%.6f_%.6f", round(lat, 6), round(lng, 6));
+        int identifier = getResources().getIdentifier(resourceName, "integer", getPackageName());
+        int stopCode = getResources().getInteger(identifier);
+
+        StopSign stopSign = new StopSign();
+        stopSign.RawStop = new GtfsStop();
+        stopSign.RawStop.Code = stopCode;
+
+        if (!mIsActive || isStopSignDialogShown()) return;
+        mDialog = new StopSignDialogFragment();
+        Logging.i(this, "onStopSelected: " + stopSign.RawStop.Code);
+        mDialog.setStopSign(stopSign);
+        mDialog.show(getFragmentManager(), "stop_sign");
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     @Override
