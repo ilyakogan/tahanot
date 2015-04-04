@@ -8,8 +8,8 @@ android {
         applicationId "com.tahanot"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 1000003
-        versionName "1.0.3"
+        versionCode 1000004
+        versionName "1.0.4"
         multiDexEnabled true
     }
     productFlavors {
