@@ -15,7 +15,6 @@
     <string name="widget_message_loading">מעדכן…</string>
     <string name="widget_message_error">המידע לא זמין</string>
     <string name="widget_message_saving_resources">גע\nלהמשך\nעדכון</string>
-    <string name="no_routes">אין קווים</string>
     <string name="route">קו</string>
     <string name="routes">קווים</string>
     <string name="towards">לכיוון</string>

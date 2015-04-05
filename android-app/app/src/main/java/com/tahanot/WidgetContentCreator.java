@@ -57,9 +57,10 @@ public class WidgetContentCreator {
 	}
 
 	public void showMessageInWidget(RemoteViews remoteViews, int widgetId, int messageId, boolean shouldAClickOpenActivity) {
-		remoteViews.setViewVisibility(R.id.waiting_for_data, View.VISIBLE);
-		remoteViews.setViewVisibility(R.id.border, View.INVISIBLE);
-		remoteViews.setTextViewText(R.id.waiting_for_data, context.getString(messageId));
+        showMessage(remoteViews, messageId);
+//		remoteViews.setViewVisibility(R.id.waiting_for_data, View.VISIBLE);
+//		remoteViews.setViewVisibility(R.id.border, View.INVISIBLE);
+//		remoteViews.setTextViewText(R.id.waiting_for_data, context.getString(messageId));
 		makeRowsSemiTransparent(remoteViews);
 		if (shouldAClickOpenActivity) {
 			remoteViews.setOnClickPendingIntent(R.id.stop_widget, createPendingClickHandlerToShowActivity(widgetId));
@@ -75,7 +76,6 @@ public class WidgetContentCreator {
 			updateDataInWidget(remoteViews, stopMonitoring, stopDisplayName, responseTimestamp);
 			Logging.i(context, "fillWidgetWithData: " + widgetId + " - " + stopDisplayName);
 
-			remoteViews.setViewVisibility(R.id.waiting_for_data, View.INVISIBLE);
 			remoteViews.setViewVisibility(R.id.border, View.VISIBLE);
 			remoteViews.setOnClickPendingIntent(R.id.stop_widget, createPendingClickHandlerToShowActivity(widgetId));
 
@@ -110,11 +110,12 @@ public class WidgetContentCreator {
 		remoteViews.setTextViewText(R.id.stop_code, stopDisplayName);
 
 		if (stopMonitoring == null || stopMonitoring.StopVisits == null || stopMonitoring.StopVisits.size() == 0) {
-			showNoDataMessage(remoteViews, 0);
-			for (int row = 1; row < lineNumberIds.length; row++) {
+			showMessage(remoteViews, R.string.no_data);
+			for (int row = 0; row < lineNumberIds.length; row++) {
 				hide(remoteViews, row);
 			}
-		} else {
+            remoteViews.setViewVisibility(R.id.waiting_for_data, View.VISIBLE);
+        } else {
 			for (int row = 0; row < lineNumberIds.length; row++) {
 				if (row < stopMonitoring.StopVisits.size()) {
 					show(remoteViews, row, stopMonitoring.StopVisits.get(row), responseTimestamp);
@@ -122,7 +123,8 @@ public class WidgetContentCreator {
 					hide(remoteViews, row);
 				}
 			}
-		}
+            remoteViews.setViewVisibility(R.id.waiting_for_data, View.INVISIBLE);
+        }
 
 		makeRowsOpaque(remoteViews);
 	}
@@ -150,11 +152,11 @@ public class WidgetContentCreator {
 		remoteViews.setViewVisibility(timeIds[row], View.VISIBLE);
 	}
 
-	private void showNoDataMessage(RemoteViews remoteViews, int row) {
-		remoteViews.setViewVisibility(lineNumberIds[row], View.INVISIBLE);
-		remoteViews.setTextViewText(timeIds[row], context.getResources().getString(R.string.no_data));
-		remoteViews.setViewVisibility(timeIds[row], View.VISIBLE);
-	}
+	private void showMessage(RemoteViews remoteViews, int messageId) {
+        remoteViews.setViewVisibility(R.id.waiting_for_data, View.VISIBLE);
+        remoteViews.setViewVisibility(R.id.border, View.INVISIBLE);
+        remoteViews.setTextViewText(R.id.waiting_for_data, context.getString(messageId));
+    }
 
 	private void hide(RemoteViews remoteViews, int row) {
 		remoteViews.setViewVisibility(lineNumberIds[row], View.INVISIBLE);

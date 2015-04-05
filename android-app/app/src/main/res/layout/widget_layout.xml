@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:layout_margin="2dp"
     android:background="@drawable/widget_layout_shape"
-    android:padding="2dp" >
+    android:padding="2dp">
 
     <TextView
         android:id="@+id/stop_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/timeTextViewId0"
+        android:layout_alignLeft="@+id/lines_container"
         android:layout_alignParentTop="true"
         android:layout_marginTop="2dp"
         android:gravity="center_horizontal"
@@ -32,362 +32,422 @@
         android:background="#ffff00"
         android:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/timeTextViewId0"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:id="@+id/lines_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/border"
+        android:orientation="vertical"
         android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+        android:layout_below="@+id/border">
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/border"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/timeTextViewId1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/timeTextViewId0"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/timeTextViewId0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/timeTextViewId0"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/lineNumberTextViewId0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/timeTextViewId2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/timeTextViewId1"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/timeTextViewId1"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/timeTextViewId1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/timeTextViewId3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/timeTextViewId2"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/lineNumberTextViewId1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/timeTextViewId2"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/timeTextViewId4"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/timeTextViewId3"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/timeTextViewId2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/timeTextViewId3"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/lineNumberTextViewId2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/timeTextViewId5"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/timeTextViewId4"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/timeTextViewId4"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/timeTextViewId3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/timeTextViewId6"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/timeTextViewId5"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/lineNumberTextViewId3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/timeTextViewId5"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/timeTextViewId7"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/timeTextViewId6"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/timeTextViewId4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/timeTextViewId6"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/lineNumberTextViewId4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/timeTextViewId8"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/timeTextViewId7"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/timeTextViewId7"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/timeTextViewId5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/timeTextViewId9"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/timeTextViewId8"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/lineNumberTextViewId5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/timeTextViewId8"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/timeTextViewId10"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/timeTextViewId9"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/timeTextViewId6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/timeTextViewId9"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/lineNumberTextViewId6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/timeTextViewId11"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/timeTextViewId10"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/timeTextViewId10"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/timeTextViewId7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/timeTextViewId12"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/timeTextViewId11"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+            <TextView
+                android:id="@+id/lineNumberTextViewId7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/lineNumberTextViewId12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/timeTextViewId11"
-        android:padding="2dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        android:visibility="invisible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/timeTextViewId8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/lineNumberTextViewId8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/timeTextViewId9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/lineNumberTextViewId9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/timeTextViewId10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/lineNumberTextViewId10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/timeTextViewId11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/lineNumberTextViewId11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/timeTextViewId12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/lineNumberTextViewId12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/waiting_for_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:gravity="center"
         android:shadowColor="#c0c0ff"
         android:shadowDx="0.0"
