@@ -22,9 +22,11 @@
         android:theme="@style/AppTheme"
         android:supportsRtl="true">
 
+        <!-- exported=true should help the widgets not to disappear from some devices: http://stackoverflow.com/questions/24091148/widget-disappearing-every-time-the-app-is-updated-on-samsung-device -->
         <receiver
             android:name=".WidgetProvider"
-            android:label="@string/stopWidgetName1x2" >
+            android:label="@string/stopWidgetName1x2"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -38,7 +40,8 @@
         </receiver>
         <receiver
             android:name="com.tahanot.WidgetProvider1x3"
-            android:label="@string/stopWidgetName1x3" >
+            android:label="@string/stopWidgetName1x3"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
