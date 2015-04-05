@@ -56,4 +56,5 @@
     <string name="change_stop_name_description">תחנה %1$d (%2$s) תוצג בתור:</string>
     <string name="bringingStopDetails">מביא פרטי תחנה...</string>
     <string name="tapOnStop">לחץ על תחנה</string>
+    <string name="loading_map">טוען תחנות...</string>
 </resources>

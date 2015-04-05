@@ -2,6 +2,7 @@ package com.tahanot.stopselection;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,8 +19,9 @@ import com.tahanot.widgetupdate.WidgetUpdateService;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class StopSelectionActivity extends Activity implements GoogleStopSelectedListener {
+public class StopSelectionActivity extends Activity {
     private int widgetId;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class StopSelectionActivity extends Activity implements GoogleStopSelecte
         webView.clearHistory();
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new AndroidBridge(this), "AndroidBridge");
+
+        progressDialog = ProgressDialog.show(this, "", getString(R.string.loading_map), true);
     }
 
     @Override
@@ -43,7 +47,14 @@ public class StopSelectionActivity extends Activity implements GoogleStopSelecte
         widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
-    @Override
+    public void onStopsDisplayed() {
+        if (progressDialog != null)
+        {
+            progressDialog.dismiss();
+        }
+        progressDialog = null;
+    }
+
     public void onStopSelected(double lat, double lng, String name) {
         String resourceName = String.format("stop_%.6f_%.6f", round(lat, 6), round(lng, 6));
         int identifier = getResources().getIdentifier(resourceName, "integer", getPackageName());

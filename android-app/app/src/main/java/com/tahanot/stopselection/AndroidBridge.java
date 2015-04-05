@@ -11,11 +11,11 @@ public class AndroidBridge {
 
     @JavascriptInterface
     public void onStopSelected(final double lat, final double lng, final String name) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                activity.onStopSelected(lat,lng, name);
-            }
-        });
+        activity.runOnUiThread(() -> activity.onStopSelected(lat,lng, name));
+    }
+
+    @JavascriptInterface
+    public void onStopsDisplayed() {
+        activity.runOnUiThread(() -> activity.onStopsDisplayed());
     }
 }
