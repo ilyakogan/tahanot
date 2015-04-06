@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.appwidget.AppWidgetManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -48,8 +47,7 @@ public class StopSelectionActivity extends Activity {
     }
 
     public void onStopsDisplayed() {
-        if (progressDialog != null)
-        {
+        if (progressDialog != null) {
             progressDialog.dismiss();
         }
         progressDialog = null;
@@ -68,14 +66,8 @@ public class StopSelectionActivity extends Activity {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.is_this_the_right_stop)
                 .setMessage(stop.Code + "\n" + stop.Name)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        succeed(stop);
-                    }
-                })
-                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
+                .setPositiveButton(R.string.yes, (dialog, which) -> succeed(stop))
+                .setNegativeButton(R.string.no, (dialog, which) -> {
                 })
                 .setIcon(R.drawable.bus_stop_sign_icon_50)
                 .show();

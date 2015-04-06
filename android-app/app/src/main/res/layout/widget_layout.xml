@@ -43,7 +43,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId0"
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -74,7 +76,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId1"
@@ -82,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -105,7 +109,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId2"
@@ -113,6 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -136,7 +142,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId3"
@@ -144,6 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -167,7 +175,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId4"
@@ -175,6 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -198,7 +208,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId5"
@@ -206,6 +217,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -229,7 +241,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId6"
@@ -237,6 +250,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -260,7 +274,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId7"
@@ -268,6 +283,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -291,7 +307,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId8"
@@ -299,6 +316,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -322,7 +340,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId9"
@@ -330,6 +349,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -353,7 +373,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId10"
@@ -361,6 +382,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -384,7 +406,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId11"
@@ -392,6 +415,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
@@ -415,7 +439,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutDirection="ltr">
 
             <TextView
                 android:id="@+id/timeTextViewId12"
@@ -423,6 +448,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
+                android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff"
                 android:textStyle="bold"
