@@ -41,13 +41,6 @@ require(["mapLocationTracker", "mapStops", "queryParamHandler", "bridgeProxy"], 
           mapLocationTracker.tryCenterOnAddress(address)
         }
 
-        function keyPressedInSearch(event) {
-          if (event.keyCode == 13) {
-            onAddressEntered()
-            blurControls()
-          }
-        }
-
         function blurControls() {
             // Unfocus the text box to remove keyboard on Android
             var activeElement = document.activeElement;
@@ -62,7 +55,15 @@ require(["mapLocationTracker", "mapStops", "queryParamHandler", "bridgeProxy"], 
 
         //google.maps.event.addDomListener(window, 'load', initialize)
         initialize()
-        $("#address").on("keypress", keyPressedInSearch)
-        $("#address-btn").on("click", onAddressEntered)
+        $("#address").on("keypress", function() {
+            if (event.keyCode == 13) {
+                onAddressEntered()
+                blurControls()
+            }
+        })
+        $("#address-btn").on("click", function () {
+            onAddressEntered()
+            blurControls() 
+        })
   //  }
 })
