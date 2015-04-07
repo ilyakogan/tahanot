@@ -7,6 +7,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.RemoteViews;
 
@@ -33,6 +34,7 @@ public class StopSelectionActivity extends Activity {
         webView.clearCache(true);
         webView.clearHistory();
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebChromeClient(new WebChromeClient());
         webView.addJavascriptInterface(new AndroidBridge(this), "AndroidBridge");
 
         progressDialog = ProgressDialog.show(this, "", getString(R.string.loading_map), true);
