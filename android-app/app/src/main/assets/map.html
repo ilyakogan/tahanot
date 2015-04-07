@@ -11,8 +11,17 @@
         padding: 0px
         }
     </style>
+
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false&libraries=places&language=he"></script>
+    <script data-main="js/map" src="lib/js/require.js"></script>
+
+    <!--
+    
+    
+    <script src="js/queryParamHandler.js"></script>
+    <script src="js/mapStops.js"></script>
     <script src="js/map.js"></script>
+        -->
 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-rtl/css/bootstrap-rtl.css">
@@ -21,19 +30,27 @@
     </script>
   </head>
   <body>
-    <div>
-      <input id="address" type="text" class="form-control" placeholder="חפש כתובת"
-      onkeypress="keyPressedInSearch(event)"></div>
-      <!--<button type="button" class="btn btn-default" onclick="codeAddress()">-->
-        <!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span> חיפוש-->
-      <!--</button>-->
-    </div>
+        <div class="input-group input-group-lg">
+          <input id="address" type="text" class="form-control" placeholder="כתובת">
+          <span class="input-group-btn">
+            <button id="address-btn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+          </span>
+        </div>
     <div id="map-canvas"></div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        requirejs.config({
+            baseUrl: './js',
+        });
+
+        //requirejs(['map']);
+
+        // require(["map"], function(map) {
+            
+        // })
+    </script>
 
     </body>
 </html>

@@ -15,7 +15,7 @@ public class AndroidBridge {
     }
 
     @JavascriptInterface
-    public void onStopsDisplayed() {
-        activity.runOnUiThread(() -> activity.onStopsDisplayed());
+    public void onFirstStopDisplayed() {
+        activity.runOnUiThread(() -> activity.onFirstStopDisplayed());
     }
 }

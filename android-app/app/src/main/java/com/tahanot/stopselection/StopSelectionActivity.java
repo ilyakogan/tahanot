@@ -46,7 +46,7 @@ public class StopSelectionActivity extends Activity {
         widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
-    public void onStopsDisplayed() {
+    public void onFirstStopDisplayed() {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
