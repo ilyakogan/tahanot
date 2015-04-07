@@ -4,7 +4,7 @@ define(function() {
 	    var regex = new RegExp("[\\?&]" + paramName + "=([^&#]*)")
 	    var results = regex.exec(location.search);
 	    if (results === null) return null
-	    var stringValue = decodeURIComponent(results[1].replace(/\+/g, " "));
+	    return decodeURIComponent(results[1].replace(/\+/g, " "));
 	}
 
 	var getNumeric = function(paramName, defaultValue) {
