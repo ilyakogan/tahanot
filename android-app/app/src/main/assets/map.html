@@ -5,10 +5,28 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
-        html, body, #map-canvas {
-        height: 100%;
-        margin: 0px;
-        padding: 0px
+        html, body {
+            height: 100%;
+        }
+
+        #map-canvas {
+            position:absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%
+        }
+
+        #map-container {
+            height: 70%;
+            width:100%;
+            position:relative;
+            top:0;
+        }
+
+        #stops {
+            position: relative;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 
@@ -30,13 +48,42 @@
     </script>
   </head>
   <body>
+
         <div class="input-group input-group-lg">
           <input id="address" type="text" class="form-control" placeholder="כתובת">
           <span class="input-group-btn">
             <button id="address-btn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
           </span>
         </div>
-    <div id="map-canvas"></div>
+
+    <div id="map-container" class="container-fluid">
+        <div id="map-canvas"></div>
+    </div>
+    
+        <table id="stops" class="table table-condensed">
+          <tr>
+            <th scope="row">
+                23685
+            </th>
+            <td>
+                שם תחנה
+            </td>
+            <td>
+                <button class="btn btn-default" type="button">בחר</button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+                23685
+            </th>
+            <td>
+                שם תחנה
+            </td>
+            <td>
+                <button class="btn btn-default" type="button">בחר</button>
+            </td>
+          </tr>
+        </table>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
