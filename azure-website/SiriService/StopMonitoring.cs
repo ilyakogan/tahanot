@@ -142,6 +142,7 @@ namespace SiriBackend
                 stopVisit.LineRef = lineRef;
                 stopVisit.PublishedLineName = journey.PublishedLineName.Value;
                 stopVisit.DestinationRef = journey.DestinationRef.Value;
+                stopVisit.DestinationDisplay = journey.DestinationDisplay;
 
                 GtfsFacade gtfsFacade = new GtfsFacade();
                 GtfsRoute route = gtfsFacade.GetRoute(int.Parse(lineRef));

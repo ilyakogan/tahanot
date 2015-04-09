@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ServiceConfiguration serviceName="CloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="2" osVersion="*" schemaVersion="2012-10.1.8">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="CloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="2" osVersion="*" schemaVersion="2014-06.2.4">
   <Role name="SiriWebRole">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=siri;AccountKey=/1Kpb2TaPlTesEMdyfOn5Ox5z2nnyd1ETc/3NFpQcexf/vv2tUPI+BlH2gVdc0/W6HHnqFv3eohORMuyJB6kdg==" />
       <Setting name="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=hatahanahabaa;AccountKey=6QTer41kJ13RJXrz/ohDIE1gMf33J58OIHgYDpDdKwMr4JMK2MhUZ5KntYMxo5axh8yySMJ+gj2eMDvUs9EkAg==" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
       <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="hatahanahabaa" />
