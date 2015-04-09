@@ -55,6 +55,7 @@ public class StopSelectionActivity extends Activity implements StopMonitoringQue
 
     @Override
     protected void onStop() {
+        super.onStop();
         stopMonitoringQueueWorker.stopRepeatingTask();
     }
 
