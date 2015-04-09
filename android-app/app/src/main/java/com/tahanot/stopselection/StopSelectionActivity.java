@@ -11,17 +11,20 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.RemoteViews;
 
+import com.google.gson.Gson;
 import com.tahanot.R;
 import com.tahanot.WidgetContentCreator;
+import com.tahanot.entities.MultipleStopMonitoringExtendedInfo;
 import com.tahanot.persistence.WidgetPersistence;
 import com.tahanot.widgetupdate.WidgetUpdateService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class StopSelectionActivity extends Activity {
+public class StopSelectionActivity extends Activity implements StopMonitoringQueueWorker.Listener {
     private int widgetId;
     private ProgressDialog progressDialog;
+    private StopMonitoringQueueWorker stopMonitoringQueueWorker = new StopMonitoringQueueWorker(this, this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +38,11 @@ public class StopSelectionActivity extends Activity {
         webView.clearHistory();
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebChromeClient(new WebChromeClient());
-        webView.addJavascriptInterface(new AndroidBridge(this), "AndroidBridge");
+        webView.addJavascriptInterface(new AndroidBridge(this, stopMonitoringQueueWorker), "AndroidBridge");
 
         progressDialog = ProgressDialog.show(this, "", getString(R.string.loading_map), true);
+
+        stopMonitoringQueueWorker.startRepeatingTask();
     }
 
     @Override
@@ -46,6 +51,11 @@ public class StopSelectionActivity extends Activity {
 
         Intent intent = getIntent();
         widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+    }
+
+    @Override
+    protected void onStop() {
+        stopMonitoringQueueWorker.stopRepeatingTask();
     }
 
     public void onFirstStopDisplayed() {
@@ -115,4 +125,9 @@ public class StopSelectionActivity extends Activity {
     }
 
 
+    @Override
+    public void onMonitoringInfoArrived(MultipleStopMonitoringExtendedInfo info) {
+        WebView webView = (WebView) findViewById(R.id.webView1);
+        webView.loadUrl("javascript:onMonitoringInfoArrived(" + new Gson().toJson(info) + ")");
+    }
 }

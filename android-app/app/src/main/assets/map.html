@@ -7,7 +7,7 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false&libraries=places&language=he"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script data-main="js/mapMain" src="lib/js/require.js"></script>
     <script>
@@ -18,33 +18,42 @@
     
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-rtl/css/bootstrap-rtl.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/tahanot.css">
-    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/map.css">    
     </script>
 </head>
 <body>
     
-    <div class="input-group input-group-lg">
-      <input id="address" type="text" class="form-control" placeholder="כתובת">
-      <!-- <span class="input-group-btn">
-        <button id="address-btn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-      </span> -->
-    </div>
+    <input id="address" type="text" class="form-control input-lg" placeholder="כתובת">
 
     <div id="map-container" class="container-fluid">
         <div id="map-canvas"></div>
     </div>
 
-    <div id="nearby-stops-area" ng-controller="nearbyStopsController">
-        <h4>התחנות הקרובות:</h4>
-        <table id="nearby-stops-table" class="table table-condensed" style="display: none;">
-          <tr ng-repeat="stop in stops">
-            <th scope="row">{{ stop.id }}</th>
-            <td>{{ stop.name }}</td>
-            <td><button class="btn btn-default btn-sm" type="button" ng-click="select(stop)">בחר</button></td>
-          </tr>
-        </table>
+    <div id="nearby-stops-area" ng-controller="nearbyStopsController" style="display: none">
+        <!-- <h4>התחנות הקרובות:</h4> -->
+        <div class="panel panel-default" ng-repeat="stop in stops" style="margin-bottom: 5px">
+          <div class="panel-heading row" style="padding-top: 3px; padding-bottom: 3px; padding-right: 0px">
+              <div class="col-xs-2"><strong>{{ stop.stopCode }}</strong></div>
+              <div class="col-xs-6" style="text-align: center"><strong>{{ stop.name }}</strong></div>
+              <div class="col-xs-4"><button class="btn btn-default btn-sm" type="button" ng-click="select(stop)">הצג בווידג'ט</button></div>
+          </div>
+          
+          <div class="panel-body" style="padding-top: 3px; padding-bottom: 3px;" ng-show="stop.visits.length">
+            <div style="border-radius: 5px; padding: 5px 10px 5px 5px; background-color: #000; color: #ffff00;">
+                <div class="row" ng-repeat="visit in stop.visits">                
+                  <div class="col-xs-2">{{ visit.lineNumber }}</div>
+                  <div class="col-xs-7">{{ visit.destination }}</div>
+                  <div class="col-xs-3" ng-switch on="visit.isAlreadyHere">
+                    <i class="fa fa-arrow-down" style="color: #ffff00;" ng-switch-when="true"></i>
+                    <span ng-switch-when="false">{{ visit.minutesToArrival }}</span>
+                  </div>
+                </div>
+            </div>
+            
+          </div>
+        </div>
     </div>
-
-    </body>
+</body>
 </html>

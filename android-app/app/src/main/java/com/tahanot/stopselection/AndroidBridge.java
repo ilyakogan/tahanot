@@ -6,9 +6,11 @@ import com.tahanot.utils.Logging;
 
 public class AndroidBridge {
     private StopSelectionActivity activity;
+    private StopMonitoringQueueWorker stopMonitoringQueueWorker;
 
-    public AndroidBridge(StopSelectionActivity activity) {
+    public AndroidBridge(StopSelectionActivity activity, StopMonitoringQueueWorker stopMonitoringQueueWorker) {
         this.activity = activity;
+        this.stopMonitoringQueueWorker = stopMonitoringQueueWorker;
     }
 
     @JavascriptInterface
@@ -30,5 +32,10 @@ public class AndroidBridge {
             Logging.e(activity, "Cannot get stop ID by coordinates for Javascript");
             return 0;
         }
+    }
+
+    @JavascriptInterface
+    public void requestStopMonitoring(int stopCode) {
+        stopMonitoringQueueWorker.enqueue(stopCode);
     }
 }

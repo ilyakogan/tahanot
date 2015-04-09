@@ -28,13 +28,23 @@ define(function() {
         }
         else {
             console.log("Bridge: getStopCode");
-            return 0;
+            return 21470;
+        }
+    }
+
+    function requestStopMonitoring(stopCode) {
+        if (window.AndroidBridge) {
+            window.AndroidBridge.requestStopMonitoring(stopCode);
+        }
+        else {
+            console.log("Bridge: requestStopMonitoring");
         }
     }
 
 	return {
 		onStopsDisplayed: onStopsDisplayed,
 		onStopSelected: onStopSelected,
-        getStopCode: getStopCode
+        getStopCode: getStopCode,
+        requestStopMonitoring: requestStopMonitoring
 	}
 })
