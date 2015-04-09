@@ -1,6 +1,5 @@
-define(function() {
+define(["stopsRepository", "bridge"], function(stopsRepository, bridge) {
     return function(map, onStopsDisplayed, onStopSelected) {
-        var placeIds = []
 
         function searchForStops() {
             var request = {
@@ -16,17 +15,21 @@ define(function() {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 var anyNewStops = false
                 for (var i = 0; i < results.length; i++) {
-                    if (placeIds.indexOf(results[i].place_id) == -1) {
-                        placeIds.push(results[i].place_id)
-                        createStopMarker(results[i])
-                        anyNewStops = true
+                    var place = results[i];
+                    if (!stopsRepository.exists(place)) {
+                        place.stopCode = bridge.getStopCode(place);
+                        stopsRepository.add(place);
+                        createStopMarker(place);
+                        anyNewStops = true;
                     }
                 }
-                if (anyNewStops && pagination.hasNextPage) {
-                    pagination.nextPage()
-                }
+
+                // Disable pagination to improve performance. Pagination allows 60 results instead of 20.
+                // if (anyNewStops && pagination.hasNextPage) {
+                //     pagination.nextPage();
+                // }
             }
-            if (anyNewStops) onStopsDisplayed()
+            if (anyNewStops) onStopsDisplayed();
         }
 
         var image = {
@@ -52,6 +55,6 @@ define(function() {
 
         return {
             searchForStops: searchForStops
-        }
+        };
     }
 })

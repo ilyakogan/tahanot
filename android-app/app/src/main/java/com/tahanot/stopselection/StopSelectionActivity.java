@@ -55,13 +55,15 @@ public class StopSelectionActivity extends Activity {
         progressDialog = null;
     }
 
-    public void onStopSelected(double lat, double lng, String name) {
-        String resourceName = String.format("stop_%.6f_%.6f", round(lat, 6), round(lng, 6));
-        int identifier = getResources().getIdentifier(resourceName, "integer", getPackageName());
-        int stopCode = getResources().getInteger(identifier);
-
+    public void onStopSelected(double lat, double lng, String name, boolean showAreYouSure) {
+        int stopCode = new StopConverter(this).coordinatesToStopCode(lat, lng);
         Stop stop = new Stop(stopCode, name);
-        showAreYouSureDialog(stop);
+        if (showAreYouSure) {
+            showAreYouSureDialog(stop);
+        }
+        else {
+            succeed(stop);
+        }
     }
 
     private void showAreYouSureDialog(final Stop stop) {

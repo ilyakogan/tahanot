@@ -1,7 +1,7 @@
 define(function() {
     return function(map) {    	
-        var geocoder = new google.maps.Geocoder()
-        var locationMarker
+        var geocoder = new google.maps.Geocoder();
+        var locationMarker;
 
     	function createLocationMarker() {
             return new google.maps.Marker({

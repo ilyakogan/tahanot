@@ -1,3 +1,23 @@
-.login-control {
-	display: none;
+html, body {
+    height: 100%;
+    overflow-y: hidden;
+}
+
+#map-canvas {
+    position:relative;
+    height: 100%;
+    width: 100%
+}
+
+#map-container {
+    height: 60%;
+    width:100%;
+    padding: 0;
+    top:0;
+}
+
+#nearby-stops-area {
+    width: 100%;
+    max-height: 200px;
+    overflow-y: scroll;
 }
