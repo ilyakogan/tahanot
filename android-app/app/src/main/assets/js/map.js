@@ -1,4 +1,4 @@
-require(["mapLocationTracker", "mapStops", "queryParamHandler", "bridge", "nearbyStops"], 
+define(["mapLocationTracker", "mapStops", "queryParamHandler", "bridge", "nearbyStops"], 
     function(MapLocationTracker, MapStops, queryParamHandler, bridge, nearbyStops) {
 
     var map;
@@ -30,7 +30,7 @@ require(["mapLocationTracker", "mapStops", "queryParamHandler", "bridge", "nearb
 
         mapStops = MapStops(map, onStopsDisplayed, onStopSelected);
         mapStops.searchForStops();
-        registerUiEvents();
+        
         registerMapEvents();
     }
 
@@ -41,23 +41,6 @@ require(["mapLocationTracker", "mapStops", "queryParamHandler", "bridge", "nearb
 
     function onStopSelected(place) {
         bridge.onStopSelected(place, "map");
-    }
-
-    function onAddressEntered() {
-      var address = document.getElementById('address').value;
-      mapLocationTracker.tryCenterOnAddress(address);
-    }
-
-    function blurControls() {
-        // Unfocus the text box to remove keyboard on Android
-        var activeElement = document.activeElement;
-        if (activeElement) {
-           activeElement.blur();
-        } else if (document.parentElement) {
-           document.parentElement.focus();
-        } else {
-           window.focus();
-        }
     }
 
     function registerMapEvents() {
@@ -71,19 +54,9 @@ require(["mapLocationTracker", "mapStops", "queryParamHandler", "bridge", "nearb
         })
     }
 
-    function registerUiEvents() {
-        $("#address").on("keypress", function() {
-            if (event.keyCode == 13) {
-                onAddressEntered()
-                blurControls()
-            }
-        })
+    initialize();
 
-        $("#address-btn").on("click", function () {
-            onAddressEntered()
-            blurControls() 
-        })
-    }
-
-    initialize()    
+    return {
+        getMapLocationTracker: function() { return mapLocationTracker; }
+    };
 })
