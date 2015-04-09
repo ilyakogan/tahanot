@@ -40,8 +40,8 @@ require(["angular/tahanotApp", "nearbyStops", "bridge"], function(tahanotApp, ne
 	        				var minutesToArrival = minutesBetween(parseDate(info.ResponseTimestamp), parseDate(visit.ExpectedArrivalTime));
 	        				stopModel.visits.push({
 	        					lineNumber: visit.PublishedLineName,
-	        					destination: '(בקרוב - תצוגת יעד)',
-	        					minutesToArrival: minutesToArrival + " דקות",
+	        					destination: '', // todo
+	        					minutesToArrival: minutesToArrival,
 	        					isAlreadyHere: (minutesToArrival < 1)
 	        				});
 	        			});

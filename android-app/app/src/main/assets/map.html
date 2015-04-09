@@ -31,7 +31,7 @@
         <div id="map-canvas"></div>
     </div>
 
-    <div id="nearby-stops-area" ng-controller="nearbyStopsController" style="display: none">
+    <div id="nearby-stops-area" ng-controller="nearbyStopsController" style="display: none; margin-top: 5px">
         <!-- <h4>התחנות הקרובות:</h4> -->
         <div class="panel panel-default" ng-repeat="stop in stops" style="margin-bottom: 5px">
           <div class="panel-heading row" style="padding-top: 3px; padding-bottom: 3px; padding-right: 0px">
@@ -43,11 +43,15 @@
           <div class="panel-body" style="padding-top: 3px; padding-bottom: 3px;" ng-show="stop.visits.length">
             <div style="border-radius: 5px; padding: 5px 10px 5px 5px; background-color: #000; color: #ffff00;">
                 <div class="row" ng-repeat="visit in stop.visits">                
-                  <div class="col-xs-2">{{ visit.lineNumber }}</div>
-                  <div class="col-xs-7">{{ visit.destination }}</div>
-                  <div class="col-xs-3" ng-switch on="visit.isAlreadyHere">
-                    <i class="fa fa-arrow-down" style="color: #ffff00;" ng-switch-when="true"></i>
-                    <span ng-switch-when="false">{{ visit.minutesToArrival }}</span>
+                  <div class="col-xs-3">קו {{ visit.lineNumber }}</div>
+                  <!-- <div class="col-xs-7">{{ visit.destination }}</div> -->
+                  <div class="col-xs-9" ng-switch on="visit.isAlreadyHere">
+                    <!-- <i class="fa fa-arrow-down" style="color: #ffff00;" ng-switch-when="true"></i> -->
+                    <span ng-switch-when="true">קרוב לתחנה</span>
+                    <span ng-switch-when="false">
+                        יגיע בעוד 
+                        <ng-pluralize count="visit.minutesToArrival" when="{'1': 'דקה', 'other': '{} דקות'}"></ng-pluralize>
+                    </span>
                   </div>
                 </div>
             </div>
