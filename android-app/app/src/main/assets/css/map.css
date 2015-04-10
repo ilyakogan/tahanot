@@ -1,6 +1,17 @@
-html, body {
+body {
     height: 100%;
-    overflow-y: hidden;
+    position: relative;
+}
+
+#navbar-main {
+    padding: 5px;
+}
+
+#map-container {
+    height: 100%;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #map-canvas {
@@ -9,16 +20,12 @@ html, body {
     width: 100%
 }
 
-#map-container {
-    height: 60%;
-    width:100%;
-    padding: 0;
-    top:0;
+.pagination>li>a, .pagination>li>a:hover, .pagination>li>a:focus {
+    background-color: inherit;
+    color: black;
 }
 
-#nearby-stops-area {
-    width: 100%;
-    max-height: 200px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+/*Google address autocomlete*/
+.pac-container {
+    padding-top: 5px;
 }

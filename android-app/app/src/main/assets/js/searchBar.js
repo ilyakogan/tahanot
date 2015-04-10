@@ -1,8 +1,7 @@
-define(["map"], function(map) {
-
-	var mapLocationTracker = map.getMapLocationTracker();
-
-   	function initSearchBar() {
+define(["map", "eventServices/addressEntered"], function(map, addressEntered) {
+   	var geocoder = new google.maps.Geocoder();
+    
+    function initSearchBar() {
         autocomplete = new google.maps.places.Autocomplete((document.getElementById('address')), { 
             types: ['geocode'] 
         });
@@ -11,17 +10,23 @@ define(["map"], function(map) {
             onAddressEntered()
             blurControls() 
         });
+    }    
 
-        // Will be needed only if search button is shown again
-        // $("#address-btn").on("click", function () {
-        //     onAddressEntered()
-        //     blurControls() 
-        // });
+    function getLocation(address) {
+        var promise = $.Deferred();
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                promise.resolve(results[0].geometry.location);
+            } else {
+                promise.reject();
+            }
+        });
+        return promise;
     }    
 
     function onAddressEntered() {
       var address = document.getElementById('address').value;
-      mapLocationTracker.tryCenterOnAddress(address);
+      getLocation(address).done(addressEntered.broadcast);
     }
 
     function blurControls() {

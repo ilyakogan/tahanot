@@ -1,4 +1,4 @@
-define(["stopsRepository"], function(stopsRepository) {
+define(["stopsRepository", "eventServices/mapCenterChanged"], function(stopsRepository, mapCenterChanged) {
     var center;
     var updatedCallbacks = $.Callbacks();
 
@@ -27,7 +27,11 @@ define(["stopsRepository"], function(stopsRepository) {
 
     function subscribeToUpdates(callback) {
         updatedCallbacks.add(callback);
-    }
+    }    
+
+    mapCenterChanged.listen(function(centerLocation) {
+        refresh(centerLocation);
+    });
 
 	return {
 		refresh: refresh,

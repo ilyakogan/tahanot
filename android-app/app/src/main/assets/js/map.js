@@ -1,8 +1,8 @@
-define(["mapLocationTracker", "mapStops", "queryParamHandler", "bridge", "nearbyStops"], 
-    function(MapLocationTracker, MapStops, queryParamHandler, bridge, nearbyStops) {
+define(["mapStops", "queryParamHandler", "bridge", "nearbyStops", "eventServices/mapCenterChanged"], 
+    function(MapStops, queryParamHandler, bridge, nearbyStops, mapCenterChanged) {
 
     var map;
-    var mapLocationTracker;
+    var mapMover;
 
     function initialize() {
         var lat = queryParamHandler.getNumeric('lat', 32.08);
@@ -25,11 +25,8 @@ define(["mapLocationTracker", "mapStops", "queryParamHandler", "bridge", "nearby
             zoom: 17
         });
 
-        mapLocationTracker = MapLocationTracker(map);
-        mapLocationTracker.initialize();
-
-        mapStops = MapStops(map, onStopsDisplayed, onStopSelected);
-        mapStops.searchForStops();
+        mapStops = MapStops(map, onStopsDisplayed);
+        mapCenterChanged.broadcast(map.getCenter());
         
         registerMapEvents();
     }
@@ -39,24 +36,19 @@ define(["mapLocationTracker", "mapStops", "queryParamHandler", "bridge", "nearby
         nearbyStops.refresh(map.getCenter());
     }
 
-    function onStopSelected(place) {
-        bridge.onStopSelected(place, "map");
-    }
-
     function registerMapEvents() {
         google.maps.event.addListener(map, 'center_changed', function() {
+            // The timeout fixes a bug when handling the event prevents the map from actually moving
             window.setTimeout(function() { 
-                mapStops.searchForStops();
+                mapCenterChanged.broadcast(map.getCenter());
             }, 0)
         });
-        google.maps.event.addListener(map, 'dragend', function() {
-            nearbyStops.refresh(map.getCenter());
-        })
     }
 
     initialize();
 
     return {
-        getMapLocationTracker: function() { return mapLocationTracker; }
+        panTo: function(location) { map.panTo(location); },
+        googleMap: map
     };
 })

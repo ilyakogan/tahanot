@@ -1,9 +1,10 @@
-define(["stopsRepository", "bridge"], function(stopsRepository, bridge) {
-    return function(map, onStopsDisplayed, onStopSelected) {
+define(["stopsRepository", "bridge", "eventServices/mapCenterChanged", "eventServices/mapStopClicked"], 
+function(stopsRepository, bridge, mapCenterChanged, mapStopClicked) {
+    return function(map, onStopsDisplayed) {
 
-        function searchForStops() {
+        function searchForStops(centerLocation) {
             var request = {
-                location: map.getCenter(),
+                location: centerLocation,
                 types: ['bus_station'],
                 rankBy: google.maps.places.RankBy.DISTANCE
             }
@@ -24,7 +25,7 @@ define(["stopsRepository", "bridge"], function(stopsRepository, bridge) {
                     }
                 }
 
-                // Disable pagination to improve performance. Pagination allows 60 results instead of 20.
+                // This code is disabled to improve performance. Pagination allows 60 results instead of 20.
                 // if (anyNewStops && pagination.hasNextPage) {
                 //     pagination.nextPage();
                 // }
@@ -49,9 +50,13 @@ define(["stopsRepository", "bridge"], function(stopsRepository, bridge) {
             });
 
             google.maps.event.addListener(stopMarker, 'click', function() {
-                onStopSelected(place)        
+                mapStopClicked.broadcast(place);
             });
         }
+
+        mapCenterChanged.listen(function(centerLocation) {
+            mapStops.searchForStops(centerLocation);
+        });
 
         return {
             searchForStops: searchForStops

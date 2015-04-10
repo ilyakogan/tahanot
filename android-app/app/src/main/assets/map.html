@@ -7,7 +7,7 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false&libraries=places&language=he"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script data-main="js/mapMain" src="lib/js/require.js"></script>
     <script>
@@ -23,16 +23,30 @@
     <link rel="stylesheet" href="css/map.css">    
     </script>
 </head>
-<body>
-    
-    <input id="address" type="text" class="form-control input-lg" placeholder="כתובת">
+<body data-spy="scroll" data-target="#navbar-main" data-offset="50">
+    <nav id="navbar-main" class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="row">
+          <ul class="nav pagination pagination-lg col-xs-4 col-sm-3 col-md-2 col-lg-1" role="tablist" style="margin: 0">
+            <li role="presentation" class="active"><a href="#map-section"><i class="fa fa-globe"></i></a></li>
+            <li role="presentation"><a href="#nearby-stops-section"><i class="fa fa-list"></i></a></li>          
+          </ul>
+          <div class="col-xs-8 col-sm-9 col-md-10 col-lg-11" role="search">
+            <input id="address" type="text" class="form-control input-lg" placeholder="&#xF002; כתובת" style="font-family:Arial, FontAwesome"/>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-    <div id="map-container" class="container-fluid">
-        <div id="map-canvas"></div>
+    <div id="map-section" class="page-section">
+        <div id="map-container" class="navigation-section container-fluid">
+            <div id="map-canvas"></div>          
+        </div>
     </div>
 
-    <div id="nearby-stops-area" ng-controller="nearbyStopsController" style="display: none; margin-top: 5px">
-        <!-- <h4>התחנות הקרובות:</h4> -->
+    
+    <div id="nearby-stops-section" class="page-section" ng-controller="nearbyStopsController" style="display: none; margin-top: 5px">
+        <h2 id="nearby-stops-title">תחנות בסביבה</h2>
         <div class="panel panel-default" ng-repeat="stop in stops" style="margin-bottom: 5px">
           <div class="panel-heading row" style="padding-top: 3px; padding-bottom: 3px; padding-right: 0px">
               <div class="col-xs-2"><strong>{{ stop.stopCode }}</strong></div>

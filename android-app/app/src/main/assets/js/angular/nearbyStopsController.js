@@ -9,7 +9,7 @@ require(["angular/tahanotApp", "nearbyStops", "bridge"], function(tahanotApp, ne
 	    nearbyStops.subscribeToUpdates(function(places) {
 	    	$scope.$apply(function() {
 	    		$scope.stops = [];
-		    	places.slice(0,5).forEach(function(place) {
+		    	places.slice(0,10).forEach(function(place) {
 		    		$scope.stops.push({
 		    			stopCode: place.stopCode,
 		    			name: place.name,
@@ -53,6 +53,6 @@ require(["angular/tahanotApp", "nearbyStops", "bridge"], function(tahanotApp, ne
 
 	angular.element(document).ready(function() {
 	    angular.bootstrap(document, ["tahanot"]);
-	    $("#nearby-stops-area").show();
+	    $("#nearby-stops-section").show();
 	});	
 });
