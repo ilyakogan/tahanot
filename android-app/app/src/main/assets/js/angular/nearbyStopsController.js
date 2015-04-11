@@ -1,8 +1,9 @@
 require(["angular/tahanotApp", "map", "stopsRepository", "bridge", "mapPageScroller", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed", "utils/distance"], 
 function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterChanged, newStopsDisplayed, distance) {
 
-	tahanotApp.app.controller('nearbyStopsController', function($scope, $http) {
+	tahanotApp.app.controller('nearbyStopsController', ['$scope', '$http', '$location', function($scope, $http, $location) {
 	    $scope.stops = [];
+	    $scope.isForWidget = $location.search().isForWidget;
 	    var mapCenter;
 
 	    $scope.selectForWidget = function(stop) { 
@@ -21,7 +22,7 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterCha
     		mapCenter = map.getCenter();
 	        var places = stopsRepository.getStopsAround(mapCenter);
         	$scope.stops = [];
-	    	places.slice(0,10).forEach(function(place) {
+	    	places.slice(0,8).forEach(function(place) {
 	    		$scope.stops.push({
 	    			stopCode: place.stopCode,
 	    			name: place.name,
@@ -80,7 +81,7 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterCha
 
 		mapCenterChanged.listen(function() { $scope.$apply(refresh); });
 	    newStopsDisplayed.listen(function() { $scope.$apply(refresh); });
-	});
+	}]);
 
 	angular.element(document).ready(function() {
 	    angular.bootstrap(document, ["tahanot"]);

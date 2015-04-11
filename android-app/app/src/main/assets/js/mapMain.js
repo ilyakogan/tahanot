@@ -13,11 +13,6 @@ function visualTouches() {
 		$(".page-section").css("padding-top", navBarHeight);
 	});
 
-	// Make the pagination control work as a scrollspy
-	$('.pagination > li').click(function (e) {
-		$('[data-spy="scroll"]').scrollspy('refresh');
-	})
-
 	// Make scrolling smooth
 	$('.pagination a').click(function (event) {
 		var scrollPos = jQuery('body').find($(this).attr('href')).offset().top;

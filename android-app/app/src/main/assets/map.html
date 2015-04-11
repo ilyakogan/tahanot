@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Place searches</title>
+    <title>תחנות</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false&libraries=places&language=he"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script data-main="js/mapMain" src="lib/js/require.js"></script>
     <script>
@@ -21,18 +21,19 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/tahanot.css">
     <link rel="stylesheet" href="css/map.css">    
+    <link rel="stylesheet" href="css/fixed-grid.css">    
     </script>
 </head>
 <body data-offset="50">
     <nav id="navbar-main" class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
         <div class="row">
-          <ul class="nav pagination pagination-lg col-xs-6 col-sm-5 col-md-3 col-lg-2" role="tablist" style="margin: 0">
+          <ul class="nav pagination pagination-lg col-fixed-150" role="tablist" style="margin: 0">
             <li role="presentation" class="active"><a href="#map-section"><i class="fa fa-globe"></i></a></li>
             <li role="presentation"><a href="#nearby-stops-section"><i class="fa fa-clock-o"></i></a></li>          
             <li role="presentation"><a href="#hello-section"><i class="fa fa-question"></i></a></li>          
           </ul>
-          <div class="col-xs-6 col-sm-7 col-md-9 col-lg-10" role="search">
+          <div class="col-xs-12 col-offset-150" role="search">
             <input id="address" type="text" class="form-control input-lg" placeholder="&#xF002; כתובת" style="font-family:Arial, FontAwesome"/>
           </div>
         </div>
@@ -59,8 +60,8 @@
                 <button class="btn btn-default btn-sm" type="button" ng-click="showOnMap(stop)">
                   <i class="fa fa-map-marker"></i>&nbsp;<strong>{{ stop.stopCode }}</strong></td>
                 </button>
-              <td class="col-xs-6 nearby-stop-title" style="text-align: center"><h4>{{ stop.name }}</h4></td>
-              <td class="col-xs-3 nearby-stop-title"><button class="btn btn-primary btn-sm" type="button" ng-click="selectForWidget(stop)">הצג בווידג'ט</button></td>
+              <td class="nearby-stop-title" ng-class="isForWidget ? 'col-xs-5' : 'col-xs-9'" style="text-align: center"><h4>{{ stop.name }}</h4></td>
+              <td class="col-xs-4 nearby-stop-title" ng-show="isForWidget"><button class="btn btn-primary" type="button" ng-click="selectForWidget(stop)">הצג בווידג'ט</button></td>
             </tr>
           </table>
           

@@ -18,7 +18,7 @@ public class LandingActivity extends Activity {
         // TODO: Analytics
         //Crashlytics.start(this);
         setContentView(R.layout.webview);
-        webViewHolder = new WebViewHolder((WebView) findViewById(R.id.webView1), this, Optional.absent());
+        webViewHolder = new WebViewHolder((WebView) findViewById(R.id.webView1), this, Optional.absent(), "");
         webViewHolder.start();
     }
 }

@@ -15,13 +15,15 @@ public class WebViewHolder implements AndroidBridge.MapEventHandler, StopMonitor
     private WebView webView;
     private Activity activity;
     private Optional<AndroidBridge.StopSelectionEventHandler> stopSelectionEventHandler;
+    private String additionalUrlParams;
     private ProgressDialog progressDialog;
     private StopMonitoringQueueWorker stopMonitoringQueueWorker;
 
-    public WebViewHolder(WebView webView, Activity activity, Optional<AndroidBridge.StopSelectionEventHandler> stopSelectionEventHandler) {
+    public WebViewHolder(WebView webView, Activity activity, Optional<AndroidBridge.StopSelectionEventHandler> stopSelectionEventHandler, String additionalUrlParams) {
         this.webView = webView;
         this.activity = activity;
         this.stopSelectionEventHandler = stopSelectionEventHandler;
+        this.additionalUrlParams = additionalUrlParams;
     }
 
     public void start() {
@@ -47,10 +49,10 @@ public class WebViewHolder implements AndroidBridge.MapEventHandler, StopMonitor
 
     private String getMapUrl(Location location) {
         if (location != null) {
-            return String.format("file:///android_asset/map.html?lat=%s&lng=%s", location.getLatitude(), location.getLongitude());
+            return String.format("file:///android_asset/map.html?lat=%s&lng=%s&%s", location.getLatitude(), location.getLongitude(), additionalUrlParams);
         }
         else {
-            return "file:///android_asset/map.html";
+            return String.format("file:///android_asset/map.html?%s", additionalUrlParams);
         }
     }
 

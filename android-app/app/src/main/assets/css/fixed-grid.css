@@ -1,0 +1,9 @@
+.col-fixed-150{
+    width:150px;
+    position:fixed;
+}
+
+.col-offset-150{
+    margin-right: 150px;
+    padding-left: 155px;
+}
