@@ -7,7 +7,8 @@ require(["angular/nearbyStopsController"]);
 function visualTouches() {
 	// Set sections heights so they're prepared for navigation
 	$(document).ready(function(){
-		$(".page-section").height($(window).height()).width("100%");
+		$("#map-section").height($(window).height()).width("100%");
+		$("#hello-section").height($(window).height()).width("100%");
 		var navBarHeight = $("#navbar-main").outerHeight();
 		$(".page-section").css("padding-top", navBarHeight);
 	});
@@ -23,6 +24,8 @@ function visualTouches() {
 		$('body,html').animate({ scrollTop: scrollPos}, 500, function () {});
 		return false;
 	});
+
+	$('body').scrollspy({ target: '#navbar-main' })
 }
 
 visualTouches();
