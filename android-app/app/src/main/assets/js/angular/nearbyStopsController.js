@@ -1,10 +1,15 @@
-require(["angular/tahanotApp", "nearbyStops", "bridge"], function(tahanotApp, nearbyStops, bridge) {
+require(["angular/tahanotApp", "nearbyStops", "bridge", "mapPageScroller"], function(tahanotApp, nearbyStops, bridge, mapPageScroller) {
 
 	tahanotApp.app.controller('nearbyStopsController', function($scope, $http) {
 	    $scope.stops = [];
-	    $scope.select = function(stop) { 
+	    
+	    $scope.selectForWidget = function(stop) { 
 	    	bridge.onStopSelected(stop.place, "nearbyStops");
 	    };
+
+	    $scope.showOnMap = function(stop) {
+	    	mapPageScroller.showOnMap(stop.place);
+	    }
 
 	    nearbyStops.subscribeToUpdates(function(places) {
 	    	$scope.$apply(function() {

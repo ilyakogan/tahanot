@@ -29,3 +29,8 @@ body {
 .pac-container {
     padding-top: 5px;
 }
+
+.nearby-stop-title {
+    padding-left: 5px;
+    padding-right: 5px;
+}
