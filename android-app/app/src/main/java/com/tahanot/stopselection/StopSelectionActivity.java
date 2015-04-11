@@ -33,7 +33,7 @@ public class StopSelectionActivity extends Activity implements StopMonitoringQue
 
         Location location = LocationProxy.get().getLastLocation(true);
         WebView webView = (WebView) findViewById(R.id.webView1);
-        webView.loadUrl(String.format("file:///android_asset/map.html?lat=%s&lng=%s", location.getLatitude(), location.getLongitude()));
+        webView.loadUrl(getMapUrl(location));
         webView.clearCache(true);
         webView.clearHistory();
         webView.getSettings().setJavaScriptEnabled(true);
@@ -43,6 +43,15 @@ public class StopSelectionActivity extends Activity implements StopMonitoringQue
         progressDialog = ProgressDialog.show(this, "", getString(R.string.loading_map), true);
 
         stopMonitoringQueueWorker.startRepeatingTask();
+    }
+
+    private String getMapUrl(Location location) {
+        if (location != null) {
+            return String.format("file:///android_asset/map.html?lat=%s&lng=%s", location.getLatitude(), location.getLongitude());
+        }
+        else {
+            return "file:///android_asset/map.html";
+        }
     }
 
     @Override
