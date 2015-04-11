@@ -18,24 +18,34 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterCha
 	    }
 
 	    function refresh() {
-	    	$scope.$apply(function() {
-		    	mapCenter = map.getCenter();
-		        var places = stopsRepository.getStopsAround(mapCenter);
-	        	$scope.stops = [];
-		    	places.slice(0,10).forEach(function(place) {
-		    		$scope.stops.push({
-		    			stopCode: place.stopCode,
-		    			name: place.name,
-		    			place: place,
-		    			visitsAvailable: false,
-		    			isSelected: function() { return isStopSelected(this); }
-		    		});				
-		    		bridge.requestStopMonitoring(place.stopCode);
-		    	});		    	
-			});
+    		mapCenter = map.getCenter();
+	        var places = stopsRepository.getStopsAround(mapCenter);
+        	$scope.stops = [];
+	    	places.slice(0,10).forEach(function(place) {
+	    		$scope.stops.push({
+	    			stopCode: place.stopCode,
+	    			name: place.name,
+	    			place: place,
+	    			visitsAvailable: false,
+	    			isSelected: function() { return isStopSelected(this); }
+	    		});				
+	    		bridge.requestStopMonitoring(place.stopCode);
+	    	});
 	    }
 
+		$scope.canRefreshVisits = function() {
+			var visitsAvailable = false;
+			$scope.stops.forEach(function(stop) {
+				if (stop.visitsAvailable) {
+					visitsAvailable = true;
+				}
+			});
+			return visitsAvailable;
+		}
 
+		$scope.refreshVisits = refresh;
+
+	    
 	    function parseDate(msAjaxDate) {
 	    	return new Date(parseInt(msAjaxDate.replace("/Date(", "").replace(")/",""), 10));
 	    }
@@ -47,7 +57,7 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterCha
 		// Response from Android
 		window.onMonitoringInfoArrived = function(monitoringInfo) {
 			$scope.$apply(function() {
-	        	$scope.stops.forEach(function(stopModel) {
+				$scope.stops.forEach(function(stopModel) {
         			stopModel.visitsAvailable = true;
         		});
 	        	monitoringInfo.Stops.forEach(function(monitoringStop) {
@@ -68,8 +78,8 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterCha
 			});
 	    };
 
-		mapCenterChanged.listen(refresh);
-	    newStopsDisplayed.listen(refresh);
+		mapCenterChanged.listen(function() { $scope.$apply(refresh); });
+	    newStopsDisplayed.listen(function() { $scope.$apply(refresh); });
 	});
 
 	angular.element(document).ready(function() {
