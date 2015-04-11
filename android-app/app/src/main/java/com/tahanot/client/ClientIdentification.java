@@ -1,4 +1,4 @@
-package com.tahanot.web;
+package com.tahanot.client;
 
 import android.content.Context;
 import android.content.SharedPreferences;

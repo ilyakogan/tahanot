@@ -15,10 +15,10 @@ define(["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
 
     function onStopSelected(place, source) {
     	if (window.AndroidBridge) {
-        	window.AndroidBridge.onStopSelected(place.geometry.location.k, place.geometry.location.D, place.name, source);
+        	window.AndroidBridge.onStopSelected(place.geometry.location.k, place.geometry.location.D, place.name);
         }
         else {
-        	console.log("Bridge: onStopSelected: " + place.name + ", from source: " + source);
+        	console.log("Bridge: onStopSelected: " + place.name);
         }
     }
 

@@ -1,11 +1,11 @@
-package com.tahanot.web;
+package com.tahanot.client;
 
 import android.content.Context;
 
 import com.tahanot.R;
 import com.tahanot.entities.MultipleStopMonitoringExtendedInfo;
 import com.tahanot.utils.CollectionUtils;
-import com.tahanot.web.restclients.Siri;
+import com.tahanot.client.restclients.Siri;
 
 import java.util.Collection;
 import java.util.HashMap;

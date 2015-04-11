@@ -1,4 +1,4 @@
-package com.tahanot.web.restclients;
+package com.tahanot.client.restclients;
 
 import com.tahanot.entities.MultipleStopMonitoringExtendedInfo;
 

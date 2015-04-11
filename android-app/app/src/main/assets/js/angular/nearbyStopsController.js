@@ -6,7 +6,7 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterCha
 	    var mapCenter;
 
 	    $scope.selectForWidget = function(stop) { 
-	    	bridge.onStopSelected(stop.place, "nearbyStops");
+	    	bridge.onStopSelected(stop.place);
 	    };
 
 	    $scope.showOnMap = function(stop) {

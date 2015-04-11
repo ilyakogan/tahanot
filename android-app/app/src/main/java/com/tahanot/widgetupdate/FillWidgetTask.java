@@ -14,7 +14,7 @@ import com.tahanot.persistence.WidgetPersistence;
 import com.tahanot.utils.CancellationFunction;
 import com.tahanot.utils.ExpirationToken;
 import com.tahanot.utils.Logging;
-import com.tahanot.web.StopMonitoringProvider;
+import com.tahanot.client.StopMonitoringProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;

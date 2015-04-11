@@ -52,7 +52,7 @@
         </receiver>
 
         <activity
-            android:name=".LandingActivity"
+            android:name=".ui.LandingActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,7 +62,7 @@
         </activity>
         <!-- android:launchMode makes sure the Back button doesn't navigate to another Configuration activity. android:taskAffinity makes sure the Back button doesn't navigate to some other activity. -->
         <activity
-            android:name=".stopselection.StopSelectionActivity"
+            android:name=".ui.StopSelectionActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/stop_selection"
             android:launchMode="singleTop"

@@ -1,4 +1,4 @@
-package com.tahanot.stopselection;
+package com.tahanot.ui;
 
 import android.location.*;
 

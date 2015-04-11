@@ -1,4 +1,4 @@
-package com.tahanot.stopselection;
+package com.tahanot.ui;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import com.tahanot.entities.MultipleStopMonitoringExtendedInfo;
 import com.tahanot.utils.Logging;
-import com.tahanot.web.StopMonitoringProvider;
+import com.tahanot.client.StopMonitoringProvider;
 
 import java.util.ArrayList;
 import java.util.Collection;

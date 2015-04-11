@@ -13,9 +13,10 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.tahanot.ui.LandingActivity;
 import com.tahanot.utils.UiAnalytics;
 import com.tahanot.persistence.WidgetPersistence;
-import com.tahanot.stopselection.StopSelectionActivity;
+import com.tahanot.ui.StopSelectionActivity;
 import com.tahanot.widgetupdate.WidgetUpdateService;
 
 public class WidgetContextMenuActivity extends Activity {

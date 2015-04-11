@@ -1,4 +1,4 @@
-package com.tahanot.stopselection;
+package com.tahanot.ui;
 
 public class Stop {
     public int Code;

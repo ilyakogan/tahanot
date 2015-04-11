@@ -1,14 +1,24 @@
-package com.tahanot.stopselection;
+package com.tahanot.ui;
 
 import android.content.Context;
 
-import static com.tahanot.stopselection.StopSelectionActivity.round;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class StopConverter {
     private Context context;
 
     public StopConverter(Context context) {
         this.context = context;
+    }
+
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     public int coordinatesToStopCode(double lat, double lng) {

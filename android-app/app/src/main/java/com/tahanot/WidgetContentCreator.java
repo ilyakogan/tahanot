@@ -10,7 +10,7 @@ import android.widget.RemoteViews;
 import com.tahanot.entities.*;
 import com.tahanot.persistence.*;
 import com.tahanot.utils.*;
-import com.tahanot.web.*;
+import com.tahanot.client.*;
 import com.tahanot.widgetupdate.*;
 
 import java.util.Date;
