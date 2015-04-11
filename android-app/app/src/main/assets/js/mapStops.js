@@ -18,16 +18,13 @@ function(map, stopsRepository, bridge, mapCenterChanged, mapStopClicked, newStop
                 var place = results[i];
                 if (!stopsRepository.exists(place)) {
                     place.stopCode = bridge.getStopCode(place);
-                    stopsRepository.add(place);
-                    createStopMarker(place);
-                    anyNewStops = true;
+                    if (place.stopCode != 0) {
+                        stopsRepository.add(place);
+                        createStopMarker(place);
+                        anyNewStops = true;
+                    }
                 }
             }
-
-            // This code is disabled to improve performance. Pagination allows 60 results instead of 20.
-            // if (anyNewStops && pagination.hasNextPage) {
-            //     pagination.nextPage();
-            // }
         }
         if (anyNewStops) newStopsDisplayed.broadcast();
     }

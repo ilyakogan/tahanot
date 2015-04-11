@@ -29,7 +29,7 @@
         <div class="row">
           <ul class="nav pagination pagination-lg col-xs-4 col-sm-3 col-md-2 col-lg-1" role="tablist" style="margin: 0">
             <li role="presentation" class="active"><a href="#map-section"><i class="fa fa-globe"></i></a></li>
-            <li role="presentation"><a href="#nearby-stops-section"><i class="fa fa-list"></i></a></li>          
+            <li role="presentation"><a href="#nearby-stops-section"><i class="fa fa-clock-o"></i></a></li>          
           </ul>
           <div class="col-xs-8 col-sm-9 col-md-10 col-lg-11" role="search">
             <input id="address" type="text" class="form-control input-lg" placeholder="&#xF002; כתובת" style="font-family:Arial, FontAwesome"/>
@@ -47,21 +47,25 @@
     
     <div id="nearby-stops-section" class="page-section" ng-controller="nearbyStopsController" style="display: none">
         <h2 id="nearby-stops-title">תחנות בסביבה</h2>
-        <div class="panel panel-default" style="margin-left: 5px; margin-right: 5px;" ng-repeat="stop in stops">
-          <!-- <div class="panel-heading"> -->
-            <table class="table">
-              <tr class="active">
-                <td class="col-xs-3 nearby-stop-title">
-                  <button class="btn btn-default btn-sm" type="button" ng-click="showOnMap(stop)">
-                    <i class="fa fa-map-marker"></i>&nbsp;<strong>{{ stop.stopCode }}</strong></td>
-                  </button>
-                <td class="col-xs-6 nearby-stop-title" style="text-align: center"><h4>{{ stop.name }}</h4></td>
-                <td class="col-xs-3 nearby-stop-title"><button class="btn btn-primary btn-sm" type="button" ng-click="selectForWidget(stop)">הצג בווידג'ט</button></td>
-              </tr>
-            </table>
-          <!-- </div> -->
+        <div class="panel panel-default" style="margin-left: 5px; margin-right: 5px;" ng-repeat="stop in stops" ng-class="{'selected-stop': stop.isSelected()}">
+          <table class="table">
+            <tr class="active">
+              <td class="col-xs-3 nearby-stop-title">
+                <button class="btn btn-default btn-sm" type="button" ng-click="showOnMap(stop)">
+                  <i class="fa fa-map-marker"></i>&nbsp;<strong>{{ stop.stopCode }}</strong></td>
+                </button>
+              <td class="col-xs-6 nearby-stop-title" style="text-align: center"><h4>{{ stop.name }}</h4></td>
+              <td class="col-xs-3 nearby-stop-title"><button class="btn btn-primary btn-sm" type="button" ng-click="selectForWidget(stop)">הצג בווידג'ט</button></td>
+            </tr>
+          </table>
           
-          <table class="table" ng-show="stop.visits.length">
+          <table class="table">
+            <tr ng-hide="stop.visitsAvailable">
+              <td><i class="fa fa-spinner fa-pulse"></i> מחכה לזמני אמת</td>
+            </tr>
+            <tr ng-show="stop.visitsAvailable && !stop.visits.length">
+              <td>אין זמני אמת לחצי השעה הקרובה</td>
+            </tr>
             <tr ng-repeat="visit in stop.visits">
               <th scope="row">קו {{ visit.lineNumber }}</th>
               <td>

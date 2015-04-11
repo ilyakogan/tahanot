@@ -3,7 +3,8 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterCha
 
 	tahanotApp.app.controller('nearbyStopsController', function($scope, $http) {
 	    $scope.stops = [];
-	    
+	    var mapCenter;
+
 	    $scope.selectForWidget = function(stop) { 
 	    	bridge.onStopSelected(stop.place, "nearbyStops");
 	    };
@@ -12,21 +13,30 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterCha
 	    	mapPageScroller.showOnMap(stop.place);
 	    }
 
+	    function isStopSelected(stop) {
+	    	return stop && mapCenter && 
+	    			Math.abs(stop.place.geometry.location.D - mapCenter.D) < 0.0000001 &&
+	    			Math.abs(stop.place.geometry.location.k - mapCenter.k) < 0.0000001;
+	    }
+
 	    function refresh(newCenter) {
 	    	$scope.$apply(function() {
-		    	var center = map.getCenter();
-		        var places = stopsRepository.getStopsAround(center);
+		    	mapCenter = map.getCenter();
+		        var places = stopsRepository.getStopsAround(mapCenter);
 	        	$scope.stops = [];
 		    	places.slice(0,10).forEach(function(place) {
 		    		$scope.stops.push({
 		    			stopCode: place.stopCode,
 		    			name: place.name,
-		    			place: place
+		    			place: place,
+		    			visitsAvailable: false,
+		    			isSelected: function() { return isStopSelected(this); }
 		    		});				
 		    		bridge.requestStopMonitoring(place.stopCode);
 		    	});		    	
 			});
 	    }
+
 
 	    function parseDate(msAjaxDate) {
 	    	return new Date(parseInt(msAjaxDate.replace("/Date(", "").replace(")/",""), 10));
@@ -37,15 +47,17 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterCha
 	    }
 
 		// Response from Android
-		window.onMonitoringInfoArrived = function(info) {
+		window.onMonitoringInfoArrived = function(monitoringInfo) {
 			$scope.$apply(function() {
-	        	var stops = info.Stops;
-	        	stops.forEach(function(monitoringStop) {
+	        	$scope.stops.forEach(function(stopModel) {
+        			stopModel.visitsAvailable = true;
+        		});
+	        	monitoringInfo.Stops.forEach(function(monitoringStop) {
 	        		$scope.stops.forEach(function(stopModel) {
 	        			if (stopModel.stopCode !== monitoringStop.MotiroringRef) return; // note typo
 	        			stopModel.visits = [];
 	        			monitoringStop.StopVisits.forEach(function(visit) {
-	        				var minutesToArrival = minutesBetween(parseDate(info.ResponseTimestamp), parseDate(visit.ExpectedArrivalTime));
+	        				var minutesToArrival = minutesBetween(parseDate(monitoringInfo.ResponseTimestamp), parseDate(visit.ExpectedArrivalTime));
 	        				stopModel.visits.push({
 	        					lineNumber: visit.PublishedLineName,
 	        					destination: '', // todo

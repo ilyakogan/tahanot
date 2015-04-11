@@ -17,7 +17,7 @@ body {
 #map-canvas {
     position:relative;
     height: 100%;
-    width: 100%
+    width: 100%;
 }
 
 .pagination>li>a, .pagination>li>a:hover, .pagination>li>a:focus {
@@ -38,4 +38,8 @@ body {
 .nearby-stop-title h4 {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.selected-stop {
+    border: #337ab7 1px solid;
 }

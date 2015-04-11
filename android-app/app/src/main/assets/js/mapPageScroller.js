@@ -9,7 +9,7 @@ function(map, mapStopClicked, addressEntered) {
 		map.panTo(place.geometry.location);
 		setTimeout(function() {
 			scrollTo("#nearby-stops-section");
-		}, 1000);
+		}, 700);
 	})
 
 	addressEntered.listen(function(location) {
