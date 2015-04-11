@@ -43,3 +43,9 @@ body {
 .selected-stop {
     border: #337ab7 1px solid;
 }
+
+#address {
+    font-family: Arial, FontAwesome;
+    /* this solves weird alignment of long text on Android */
+    direction: ltr
+}

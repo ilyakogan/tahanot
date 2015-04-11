@@ -10,6 +10,8 @@ define(["map", "eventServices/addressEntered"], function(map, addressEntered) {
             onAddressEntered()
             blurControls() 
         });
+
+        $("#address").click(function() { $("#address").select(); } );
     }    
 
     function getLocation(address) {
