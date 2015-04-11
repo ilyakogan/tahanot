@@ -27,8 +27,9 @@ define(function() {
     }
 
     function getStopsAround(center) {
-        places.slice().sort(byDistanceFrom(center));
-        return places;
+    	var placesCopy = places.slice()
+        placesCopy.sort(byDistanceFrom(center));
+        return placesCopy;
     }
 
 	return {
