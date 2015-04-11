@@ -1,4 +1,4 @@
-require(["map"]);
+require(["mapStops"]);
 require(["geolocationTracker"]);
 require(["searchBar"]);
 require(["mapPageScroller"]);

@@ -1,4 +1,5 @@
-define(["stopsRepository", "eventServices/mapCenterChanged"], function(stopsRepository, mapCenterChanged) {
+define(["map", "stopsRepository", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed"], 
+function(map, stopsRepository, mapCenterChanged, newStopsDisplayed) {
     var center;
     var updatedCallbacks = $.Callbacks();
 
@@ -29,12 +30,15 @@ define(["stopsRepository", "eventServices/mapCenterChanged"], function(stopsRepo
         updatedCallbacks.add(callback);
     }    
 
-    mapCenterChanged.listen(function(centerLocation) {
-        refresh(centerLocation);
+    mapCenterChanged.listen(function() {
+        refresh(map.getCenter());
     });
 
+    newStopsDisplayed.listen(function() {
+        refresh(map.getCenter()); 
+    })
+
 	return {
-		refresh: refresh,
         subscribeToUpdates: subscribeToUpdates
 	};
 });

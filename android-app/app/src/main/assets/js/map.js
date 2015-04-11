@@ -1,5 +1,5 @@
-define(["mapStops", "queryParamHandler", "bridge", "nearbyStops", "eventServices/mapCenterChanged"], 
-    function(MapStops, queryParamHandler, bridge, nearbyStops, mapCenterChanged) {
+define(["queryParamHandler", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed"], 
+    function(queryParamHandler, mapCenterChanged, newStopsDisplayed) {
 
     var map;
     var mapMover;
@@ -25,22 +25,16 @@ define(["mapStops", "queryParamHandler", "bridge", "nearbyStops", "eventServices
             zoom: 17
         });
 
-        mapStops = MapStops(map, onStopsDisplayed);
-        mapCenterChanged.broadcast(map.getCenter());
-        
         registerMapEvents();
-    }
 
-    function onStopsDisplayed() {
-        bridge.onStopsDisplayed();
-        nearbyStops.refresh(map.getCenter());
+        mapCenterChanged.broadcast();
     }
 
     function registerMapEvents() {
         google.maps.event.addListener(map, 'center_changed', function() {
             // The timeout fixes a bug when handling the event prevents the map from actually moving
             window.setTimeout(function() { 
-                mapCenterChanged.broadcast(map.getCenter());
+                mapCenterChanged.broadcast();
             }, 0)
         });
     }
@@ -49,6 +43,7 @@ define(["mapStops", "queryParamHandler", "bridge", "nearbyStops", "eventServices
 
     return {
         panTo: function(location) { map.panTo(location); },
+        getCenter: function() { return map.getCenter(); },
         googleMap: map
     };
 })

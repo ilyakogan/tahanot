@@ -1,4 +1,5 @@
-require(["angular/tahanotApp", "nearbyStops", "bridge", "mapPageScroller"], function(tahanotApp, nearbyStops, bridge, mapPageScroller) {
+require(["angular/tahanotApp", "map", "stopsRepository", "bridge", "mapPageScroller", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed"], 
+function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterChanged, newStopsDisplayed) {
 
 	tahanotApp.app.controller('nearbyStopsController', function($scope, $http) {
 	    $scope.stops = [];
@@ -11,9 +12,11 @@ require(["angular/tahanotApp", "nearbyStops", "bridge", "mapPageScroller"], func
 	    	mapPageScroller.showOnMap(stop.place);
 	    }
 
-	    nearbyStops.subscribeToUpdates(function(places) {
+	    function refresh(newCenter) {
 	    	$scope.$apply(function() {
-	    		$scope.stops = [];
+		    	var center = map.getCenter();
+		        var places = stopsRepository.getStopsAround(center);
+	        	$scope.stops = [];
 		    	places.slice(0,10).forEach(function(place) {
 		    		$scope.stops.push({
 		    			stopCode: place.stopCode,
@@ -23,7 +26,7 @@ require(["angular/tahanotApp", "nearbyStops", "bridge", "mapPageScroller"], func
 		    		bridge.requestStopMonitoring(place.stopCode);
 		    	});		    	
 			});
-	    });
+	    }
 
 	    function parseDate(msAjaxDate) {
 	    	return new Date(parseInt(msAjaxDate.replace("/Date(", "").replace(")/",""), 10));
@@ -54,6 +57,9 @@ require(["angular/tahanotApp", "nearbyStops", "bridge", "mapPageScroller"], func
 	        	});
 			});
 	    };
+
+		mapCenterChanged.listen(refresh);
+	    newStopsDisplayed.listen(refresh);
 	});
 
 	angular.element(document).ready(function() {
