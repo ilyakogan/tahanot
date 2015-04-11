@@ -31,11 +31,15 @@ define(["queryParamHandler", "eventServices/mapCenterChanged", "eventServices/ne
     }
 
     function registerMapEvents() {
-        google.maps.event.addListener(map, 'center_changed', function() {
-            // The timeout fixes a bug when handling the event prevents the map from actually moving
-            window.setTimeout(function() { 
-                mapCenterChanged.broadcast();
-            }, 0)
+        // google.maps.event.addListener(map, 'center_changed', function() {
+        //     // The timeout fixes a bug when handling the event prevents the map from actually moving
+        //     window.setTimeout(function() { 
+        //         mapCenterChanged.broadcast();
+        //     }, 0)
+        // });
+
+        google.maps.event.addListener(map, 'idle', function() {
+            mapCenterChanged.broadcast();
         });
     }
 

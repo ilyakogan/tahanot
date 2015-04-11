@@ -1,4 +1,4 @@
-define(function() {
+define(["utils/distance"], function(distance) {
 	var places = [];
     var placeIds = [];
     		
@@ -11,17 +11,10 @@ define(function() {
 		return (placeIds.indexOf(place.place_id) != -1)
 	}
 
-	function lineDistance(location1, location2)
-    {
-      var x = location1.k - location2.k;         
-      var y = location1.D - location2.D;          
-      return Math.sqrt(x*x + y*y);
-    }
-
     function byDistanceFrom(center) {
     	return function(place1, place2) {
-	        distance1 = lineDistance(place1.geometry.location, center);
-	        distance2 = lineDistance(place2.geometry.location, center);
+	        distance1 = distance(place1.geometry.location, center);
+	        distance2 = distance(place2.geometry.location, center);
 	        return distance1 - distance2;
 	    };
     }

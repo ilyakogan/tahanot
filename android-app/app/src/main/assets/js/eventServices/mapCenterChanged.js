@@ -1,14 +1,7 @@
-define(["utils/throttle"], function(Throttle) {
+define(function() {
 	var callbacks = $.Callbacks();
-
-    var throttle = new Throttle(1000);
-
 	return {
-		broadcast: function(centerLocation) { 
-			throttle(function() { 
-				callbacks.fire(centerLocation); 
-			})
-		},
+		broadcast: function() { callbacks.fire(); },
 	    listen: function(callback) { callbacks.add(callback); }
 	};
 });

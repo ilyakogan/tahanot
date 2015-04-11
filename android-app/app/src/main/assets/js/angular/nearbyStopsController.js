@@ -1,5 +1,5 @@
-require(["angular/tahanotApp", "map", "stopsRepository", "bridge", "mapPageScroller", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed"], 
-function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterChanged, newStopsDisplayed) {
+require(["angular/tahanotApp", "map", "stopsRepository", "bridge", "mapPageScroller", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed", "utils/distance"], 
+function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterChanged, newStopsDisplayed, distance) {
 
 	tahanotApp.app.controller('nearbyStopsController', function($scope, $http) {
 	    $scope.stops = [];
@@ -14,12 +14,10 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterCha
 	    }
 
 	    function isStopSelected(stop) {
-	    	return stop && mapCenter && 
-	    			Math.abs(stop.place.geometry.location.D - mapCenter.D) < 0.0000001 &&
-	    			Math.abs(stop.place.geometry.location.k - mapCenter.k) < 0.0000001;
+	    	return stop && mapCenter && distance(stop.place.geometry.location, mapCenter) < 0.0000001;
 	    }
 
-	    function refresh(newCenter) {
+	    function refresh() {
 	    	$scope.$apply(function() {
 		    	mapCenter = map.getCenter();
 		        var places = stopsRepository.getStopsAround(mapCenter);
