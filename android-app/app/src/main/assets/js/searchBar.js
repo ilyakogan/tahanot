@@ -1,4 +1,4 @@
-define(["map", "eventServices/addressEntered"], function(map, addressEntered) {
+define("searchBar", ["map", "eventServices/addressEntered"], function(map, addressEntered) {
    	var geocoder = new google.maps.Geocoder();
     
     function initSearchBar() {

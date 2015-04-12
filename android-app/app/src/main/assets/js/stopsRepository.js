@@ -1,4 +1,4 @@
-define(["utils/distance"], function(distance) {
+define("stopsRepository", ["utils/distance"], function(distance) {
 	var places = [];
     var placeIds = [];
     		

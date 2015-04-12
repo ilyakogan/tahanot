@@ -1,4 +1,4 @@
-define(function() {
+define("queryParamHandler", function() {
 	var getString = function(paramName) {
 		paramName = paramName.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]")
 	    var regex = new RegExp("[\\?&]" + paramName + "=([^&#]*)")

@@ -1,4 +1,4 @@
-define(function() {
+define("eventServices/mapStopClicked", function() {
 	var callbacks = $.Callbacks();
 
 	return {

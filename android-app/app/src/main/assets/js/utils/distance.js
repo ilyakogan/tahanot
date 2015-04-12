@@ -1,4 +1,4 @@
-define(function() {
+define("utils/distance", function() {
     return function(location1, location2)
     {
       var x = location1.k - location2.k;         

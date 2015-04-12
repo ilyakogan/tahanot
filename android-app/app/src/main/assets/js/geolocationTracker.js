@@ -1,4 +1,4 @@
-define(["map"], function(map) {
+define("geolocationTracker", ["map"], function(map) {
     var locationMarker;
 
 	function createLocationMarker() {

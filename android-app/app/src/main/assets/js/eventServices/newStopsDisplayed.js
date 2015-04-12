@@ -1,4 +1,4 @@
-define(function() {
+define("eventServices/newStopsDisplayed", function() {
     var callbacks = $.Callbacks();
 
     return {

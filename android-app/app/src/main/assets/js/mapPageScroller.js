@@ -1,4 +1,4 @@
-define(["map", "eventServices/mapStopClicked", "eventServices/addressEntered"], 
+define("mapPageScroller", ["map", "eventServices/mapStopClicked", "eventServices/addressEntered"], 
 function(map, mapStopClicked, addressEntered) {
 	function scrollTo(selector, completeCallback) {
 		var scrollPos = $(selector).offset().top;

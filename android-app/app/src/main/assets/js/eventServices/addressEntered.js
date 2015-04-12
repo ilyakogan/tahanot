@@ -1,4 +1,4 @@
-define(function() {
+define("eventServices/addressEntered", function() {
 	var callbacks = $.Callbacks();
 
 	return {

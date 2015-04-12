@@ -1,4 +1,4 @@
-define(["queryParamHandler", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed"], 
+define("map", ["queryParamHandler", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed"], 
     function(queryParamHandler, mapCenterChanged, newStopsDisplayed) {
 
     var map;

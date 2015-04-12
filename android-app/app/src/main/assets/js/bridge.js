@@ -1,4 +1,4 @@
-define(["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
+define("bridge", ["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
 	var wasStopDisplayedSent = false
 
 	function onStopsDisplayed() {
