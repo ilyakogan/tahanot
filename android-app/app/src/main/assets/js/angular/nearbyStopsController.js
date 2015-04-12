@@ -12,6 +12,7 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapStopClick
 	    };
 
 	    $scope.showOnMap = function(stop) {
+	    	selectedStopPlace = stop.place;
 	    	mapPageScroller.showOnMap(stop.place);
 	    }
 
@@ -19,6 +20,7 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapStopClick
 			return {
     			stopCode: place.stopCode,
     			name: place.name,
+    			place: place,
     			visitsAvailable: false,
     			isSelected: isSelected
     		}
