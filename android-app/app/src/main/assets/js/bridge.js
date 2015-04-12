@@ -28,7 +28,7 @@ define("bridge", ["eventServices/newStopsDisplayed"], function(newStopsDisplayed
         }
         else {
             console.log("Bridge: getStopCode");
-            return 21470;
+            return (place.geometry.location.D % 1 * 1000000).toFixed();
         }
     }
 

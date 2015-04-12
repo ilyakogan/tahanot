@@ -9,7 +9,7 @@
     <script src="lib/js/jquery-2.1.3.min.js"></script>
     <script src="lib/js/angular.min.js"></script>
     <script src="lib/js/bootstrap.min.js"></script>
-    <script data-main="mapAll" src="lib/js/require.js"></script>
+    <script data-main="js/mapMain.js" src="lib/js/require.js"></script>
     
     <link rel="stylesheet" href="lib/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/css/bootstrap-rtl.min.css">
@@ -48,7 +48,7 @@
             <i class="icon-refresh"></i>
           </button>
         </h2>
-        <div class="panel panel-default" style="margin-left: 5px; margin-right: 5px;" ng-repeat="stop in stops" ng-class="{'selected-stop': stop.isSelected}">
+        <div class="panel panel-default" style="margin-left: 5px; margin-right: 5px;" ng-repeat="stop in stops track by $index" ng-class="{'selected-stop': stop.isSelected}">
           <table class="table">
             <tr class="active">
               <td class="col-xs-3 nearby-stop-title">

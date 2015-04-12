@@ -1,10 +1,11 @@
-require(["angular/tahanotApp", "map", "stopsRepository", "bridge", "mapPageScroller", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed", "utils/distance"], 
-function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterChanged, newStopsDisplayed, distance) {
+require(["angular/tahanotApp", "map", "stopsRepository", "bridge", "mapPageScroller", "eventServices/mapStopClicked", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed", "utils/distance"], 
+function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapStopClicked, mapCenterChanged, newStopsDisplayed, distance) {
 
 	tahanotApp.app.controller('nearbyStopsController', ['$scope', '$http', '$location', function($scope, $http, $location) {
 	    $scope.stops = [];
 	    $scope.isForWidget = $location.search().isForWidget;
 	    var mapCenter;
+	    var selectedStopPlace;
 
 	    $scope.selectForWidget = function(stop) { 
 	    	bridge.onStopSelected(stop.place);
@@ -14,22 +15,27 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterCha
 	    	mapPageScroller.showOnMap(stop.place);
 	    }
 
-	    function isStopSelected(stop) {
-	    	return stop && mapCenter && distance(stop.place.geometry.location, mapCenter) < 0.0000001;
+	    function createStop(place, isSelected) {
+			return {
+    			stopCode: place.stopCode,
+    			name: place.name,
+    			visitsAvailable: false,
+    			isSelected: isSelected
+    		}
 	    }
 
 	    function refresh() {
-    		mapCenter = map.getCenter();
-	        var places = stopsRepository.getStopsAround(mapCenter);
+    		var stopsAroundCenter = stopsRepository.getStopsAround(map.getCenter());
         	$scope.stops = [];
-	    	places.slice(0,8).forEach(function(place) {
-	    		$scope.stops.push({
-	    			stopCode: place.stopCode,
-	    			name: place.name,
-	    			place: place,
-	    			visitsAvailable: false,
-	    			isSelected: function() { return isStopSelected(this); }
-	    		});				
+        	if (selectedStopPlace) {
+        		$scope.stops.push(createStop(selectedStopPlace, true));
+	    		bridge.requestStopMonitoring(selectedStopPlace.stopCode);
+        	}
+	    	stopsAroundCenter.slice(0,8).forEach(function(place) {
+	    		if (place == selectedStopPlace) {
+	    			return;
+	    		}
+	    		$scope.stops.push(createStop(place, false));
 	    		bridge.requestStopMonitoring(place.stopCode);
 	    	});
 	    }
@@ -81,6 +87,7 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapCenterCha
 
 		mapCenterChanged.listen(function() { $scope.$apply(refresh); });
 	    newStopsDisplayed.listen(function() { $scope.$apply(refresh); });
+	    mapStopClicked.listen(function(place) { selectedStopPlace = place; })
 	}]);
 
 	angular.element(document).ready(function() {
