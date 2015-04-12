@@ -45,7 +45,7 @@
     <div id="nearby-stops-section" class="page-section" ng-controller="nearbyStopsController" style="display: none">
         <h2 id="nearby-stops-title">תחנות בסביבה 
           <button type="button" class="btn btn-default" ng-show="canRefreshVisits()" ng-click="refreshVisits()">
-            <i class="icon-refresh"></i>
+            <i class="fa fa-refresh"></i>
           </button>
         </h2>
         <div class="panel panel-default" style="margin-left: 5px; margin-right: 5px;" ng-repeat="stop in stops" ng-class="{'selected-stop': stop.isSelected}">
