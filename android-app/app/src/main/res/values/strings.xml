@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">תחנות - מידע זמן אמת על אוטובוסים</string>
+    <string name="app_name">תחנות</string>
     <string name="stopWidgetName1x2">תחנות - תחנת אוטובוס 1x2</string>
     <string name="stopWidgetName1x3">תחנות - תחנת אוטובוס 1x3</string>
     <string name="dialog_no_location_alert">מיקומך טרם עודכן.</string>

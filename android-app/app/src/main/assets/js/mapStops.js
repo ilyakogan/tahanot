@@ -1,21 +1,25 @@
 define("mapStops", ["map", "stopsRepository", "bridge", "eventServices/mapCenterChanged", "eventServices/mapStopClicked", "eventServices/newStopsDisplayed", "utils/distance"], 
 function(map, stopsRepository, bridge, mapCenterChanged, mapStopClicked, newStopsDisplayed, distance) {
 
-    function searchForStops(centerLocation) {
-        var center = map.getCenter();
-        setTimeout(function() {            
-            if (distance(center, map.getCenter()) > 0.01) {
+    function searchForStopsDelayed() {
+        var centerBefore = map.getCenter();
+        setTimeout(function() { 
+            if (distance(centerBefore, map.getCenter()) > 0.01) {
                 // Don't waste resources on showing stops, map is still moving
                 return;
-            }
-            var request = {
-                location: center,
-                types: ['bus_station'],
-                rankBy: google.maps.places.RankBy.DISTANCE
-            }
-            var service = new google.maps.places.PlacesService(map.googleMap)
-            service.nearbySearch(request, onStopsFound);
-        }, 500);
+            }           
+            searchForStops()
+        }, 4000);
+    }
+
+    function searchForStops() {        
+        var request = {
+            location: map.getCenter(),
+            types: ['bus_station'],
+            rankBy: google.maps.places.RankBy.DISTANCE
+        }
+        var service = new google.maps.places.PlacesService(map.googleMap)
+        service.nearbySearch(request, onStopsFound);
     }
 
     function onStopsFound(results, status, pagination) {
@@ -58,8 +62,8 @@ function(map, stopsRepository, bridge, mapCenterChanged, mapStopClicked, newStop
     }
 
     mapCenterChanged.listen(function() {
-        searchForStops();
+        searchForStopsDelayed();
     });
 
-    searchForStops(map.getCenter());
+    searchForStops();
 })
