@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">תחנות</string>
+    <string name="app_long_name">תחנות - אוטובוסים בזמן אמת</string>
     <string name="stopWidgetName1x2">תחנות - תחנת אוטובוס 1x2</string>
     <string name="stopWidgetName1x3">תחנות - תחנת אוטובוס 1x3</string>
     <string name="ok">אישור</string>
@@ -15,7 +16,7 @@
     <string name="menu_item_select_different_stop">בחר תחנה אחרת</string>
     <string name="menu_item_about">משוב ותמיכה</string>
     <string name="menu_item_share">ספר על \"תחנות\" לחברים</string>
-    <string name="share_text">היי, יש אפליקציה ממש טובה בשם \"תחנות\" שמאפשרת לראות על מסך הבית של האנדרואיד מתי יעבור האוטובוס הבא בתחנות הקבועות שלך. \n
+    <string name="share_text">היי, רציתי לספר לך על אפליקציית \"תחנות\" שמציגה מתי יגיע האוטובוס לתחנה בזמן אמת. \n
                 
         הנה קישור להתקנה:
         

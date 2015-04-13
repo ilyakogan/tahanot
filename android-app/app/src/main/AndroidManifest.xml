@@ -53,6 +53,7 @@
 
         <activity
             android:name=".ui.LandingActivity"
+            android:label="@string/app_long_name"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
