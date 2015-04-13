@@ -1,39 +1,14 @@
 <resources>
-
     <string name="app_name">תחנות</string>
     <string name="stopWidgetName1x2">תחנות - תחנת אוטובוס 1x2</string>
     <string name="stopWidgetName1x3">תחנות - תחנת אוטובוס 1x3</string>
-    <string name="dialog_no_location_alert">מיקומך טרם עודכן.</string>
     <string name="ok">אישור</string>
     <string name="cancel">ביטול</string>
-    <string name="title_activity_stops_nearby">תחנות קרובות לכאן</string>
     <string name="no_data">אין נתונים</string>
-    <string name="searching_for_nearby_stops">מחפש תחנות קרובות…</string>
-    <string name="searching_for_location">מאתר את מיקומך…</string>
-    <string name="error_getting_nearby_stops">שגיאה בקבלת רשימת תחנות</string>
-    <string name="searching">מחפש…</string>
     <string name="widget_message_loading">מעדכן…</string>
     <string name="widget_message_error">המידע לא זמין</string>
     <string name="widget_message_saving_resources">גע\nלהמשך\nעדכון</string>
-    <string name="route">קו</string>
-    <string name="routes">קווים</string>
-    <string name="towards">לכיוון</string>
-    <string name="stops_listview_header">בחר תחנה:</string> 
-    <string name="select_the_stop">בחר</string>
-    <string name="is_this_the_right_stop">האם זאת התחנה הנכונה?</string>
-    <string name="yes">כן</string>
-    <string name="no">לא</string>
-    <string name="no_address">כתובת לא ידועה</string>
-    <string name="tab_title_nearby">לפי קרבה</string>
-    <string name="tab_title_search_by_code">לפי מספר תחנה</string>
-    <string name="tab_title_map">לפי מפה</string>
-    <string name="tab_title_search">חיפוש</string>
-    <string name="tab_title_instructions">ברוכים הבאים!</string>
-    <string name="tab_title_about">מידע ויצירת קשר</string>
-    <string name="your_location">מיקומך:</string>
     <string name="stop_selection">בחירת תחנה לתצוגה</string>
-    <string name="intro_title">תחנות - ווידג\'ט זמני אוטובוסים</string>
-    <string name="stop_selection_confirmed">התחנה נבחרה</string>
     <string name="context_menu_title">בחר פעולה:</string>
     <string name="menu_item_update">עדכן זמנים</string>
     <string name="menu_item_change_stop_name">ערוך שם</string>
@@ -46,15 +21,7 @@
         
         https://play.google.com/store/apps/details?id=com.tahanot</string>
        <string name="share_title">שתף קישור להורדת \"תחנות\" באמצעות:</string>
-    <string name="stop_code">מספר התחנה:</string>
-    <string name="stop_code_explanation">(מופיע על רוב שלטי התחנות החדשים)</string>
-    <string name="search">חפש</string>
-    <string name="stop_not_found">התחנה לא נמצאה</string>
-    <string name="error_bringing_stop_connection_error">שגיאה בהצגת תחנה: אין תקשורת</string>
-    <string name="error_bringing_stop">שגיאה בהצגת תחנה</string>
     <string name="title_change_stop_name">עריכת שם התחנה</string>
     <string name="change_stop_name_description">תחנה %1$d (%2$s) תוצג בתור:</string>
-    <string name="bringingStopDetails">מביא פרטי תחנה...</string>
-    <string name="tapOnStop">לחץ על תחנה</string>
     <string name="loading_map">טוען תחנות...</string>
 </resources>
