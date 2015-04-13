@@ -8,8 +8,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.provider.Settings.Secure;
 
+import com.crashlytics.android.Crashlytics;
 import com.tahanot.BusStopApplication;
-import com.tahanot.utils.Logging;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -27,7 +27,7 @@ public class ClientIdentification {
 					+ "&deviceId=" + urlEncode(getAndroidId(context)) + "&widgetId=" + widgetId + "&deviceName=" + urlEncode(getDeviceName())
 					+ "&appVersion=" + urlEncode(getAppVersion(context));
 		} catch (Exception ex) {
-			Logging.e(context, ex.getMessage());
+			Crashlytics.logException(ex);
 			return "&installationId=ErrorIdentifyingClient";
 		}
 	}
@@ -41,7 +41,7 @@ public class ClientIdentification {
             params.put("deviceName",getDeviceName());
             params.put("appVersion", getAppVersion(context));
         } catch (Exception ex) {
-            Logging.e(context, ex.getMessage());
+            Crashlytics.logException(ex);
             params.put("installationId", "ErrorIdentifyingClient");
         }
         return params;

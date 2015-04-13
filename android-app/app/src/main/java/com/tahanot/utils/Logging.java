@@ -21,20 +21,4 @@ public final class Logging {
 			Log.i(context.getPackageName(), message);
 		}
 	}
-	
-	public static void w(Context context, String message)
-	{
-		if (LOGGING_ENABLED)
-		{
-			Log.w(context.getPackageName(), message);
-		}
-	}
-	
-	public static void e(Context context, String message)
-	{
-		if (LOGGING_ENABLED)
-		{
-			Log.e(context.getPackageName(), message);
-		}
-	}
 }

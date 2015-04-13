@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.common.base.Optional;
 import com.tahanot.R;
 import com.tahanot.WidgetContentCreator;
@@ -22,7 +24,14 @@ public class StopSelectionActivity extends Activity implements AndroidBridge.Sto
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview);
         webViewHolder = new WebViewHolder((WebView) findViewById(R.id.webView1), this, Optional.of(this), "isForWidget=true");
-        webViewHolder.start();
+        try {
+            webViewHolder.start();
+        }
+        catch (Exception ex) {
+            Crashlytics.logException(ex);
+            Toast.makeText(this, R.string.error_occurred, Toast.LENGTH_SHORT).show();
+        }
+        Crashlytics.log("Stop selection activity created");
     }
 
     @Override
@@ -41,13 +50,20 @@ public class StopSelectionActivity extends Activity implements AndroidBridge.Sto
 
     public void onStopSelected(double lat, double lng, String name) {
         runOnUiThread(() -> {
-            int stopCode = new StopConverter(this).coordinatesToStopCode(lat, lng);
-            Stop stop = new Stop(stopCode, name);
-            succeed(stop);
+            try {
+                int stopCode = new StopConverter(this).coordinatesToStopCode(lat, lng);
+                Stop stop = new Stop(stopCode, name);
+                succeed(stop);
+            }
+            catch (Exception ex) {
+                Crashlytics.logException(ex);
+                Toast.makeText(this, R.string.error_occurred, Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
     private void succeed(Stop stop) {
+        Crashlytics.log("Stop selected");
         saveStopDetails(stop);
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);

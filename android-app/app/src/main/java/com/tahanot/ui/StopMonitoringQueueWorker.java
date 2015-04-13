@@ -4,9 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 
-import com.tahanot.entities.MultipleStopMonitoringExtendedInfo;
-import com.tahanot.utils.Logging;
+import com.crashlytics.android.Crashlytics;
 import com.tahanot.client.StopMonitoringProvider;
+import com.tahanot.entities.MultipleStopMonitoringExtendedInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -55,7 +55,7 @@ public class StopMonitoringQueueWorker {
                         catch (Exception ex)
                         {
                             ex.printStackTrace();
-                            Logging.e(context, "Error getting stop monitoring for Javascript: " + ex);
+                            Crashlytics.logException(ex);
                         }
 
                         pendingStopCodes.clear();
