@@ -5,13 +5,12 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import gueei.binding.Binder;
 
 public class BusStopApplication extends MultiDexApplication {
 	private static Application instance;
@@ -32,7 +31,7 @@ public class BusStopApplication extends MultiDexApplication {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Binder.init(this);
+        Crashlytics.start(this);
 	}
 
     private List<Tracker> mTrackers = new ArrayList<>();
