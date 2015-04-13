@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.RemoteViews;
 
+import com.crashlytics.android.Crashlytics;
 import com.tahanot.BusStopApplication;
 import com.tahanot.FillWidgetResult;
 import com.tahanot.WidgetContentCreator;
@@ -50,15 +51,16 @@ class FillWidgetTask extends AsyncTask<Integer, Void, FillWidgetResult> {
 				stopCodes.add(stopCode);
 			}
 
-			MultipleStopMonitoringExtendedInfo multipleStopMonitoring = new StopMonitoringProvider().getMultipleStopMonitoring(stopCodes, context);
+            Crashlytics.log("Stop monitoring requested by widgets");
+            MultipleStopMonitoringExtendedInfo multipleStopMonitoring = new StopMonitoringProvider().getMultipleStopMonitoring(stopCodes, context);
 
 			if (cancellationFunction.isCancelled()) {
-				Logging.e(context, "Error filling widgets: task was cancelled");
+                Crashlytics.logException(new Exception("Error filling widgets: task was cancelled"));
 				return markAllWidgetsArsErroneous(contentCreator, widgetIds);
 			}
 			
 			if (multipleStopMonitoring.Error != null && multipleStopMonitoring.Error != "") {
-				Logging.e(context, "Error in multipleStopMonitoring: " + multipleStopMonitoring.Error);
+                Crashlytics.logException(new Exception("Error in multipleStopMonitoring: " + multipleStopMonitoring.Error));
 				return markAllWidgetsArsErroneous(contentCreator, widgetIds);
 			}
 
@@ -83,7 +85,7 @@ class FillWidgetTask extends AsyncTask<Integer, Void, FillWidgetResult> {
 					}
 					
 					if (infoAboutStop != null && infoAboutStop.Error != null && infoAboutStop.Error != "") {
-						Logging.e(context, "Error in stop " + stopCode + ": " + infoAboutStop.Error);
+                        Crashlytics.logException(new Exception("Error in stop " + stopCode + ": " + infoAboutStop.Error));
 						allSucceeded = false;
 						remoteViewsByWidget.put(widgetId, contentCreator.markWidgetAsErroneous(widgetId));
 					}

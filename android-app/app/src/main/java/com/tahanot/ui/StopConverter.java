@@ -21,10 +21,16 @@ public class StopConverter {
         return bd.doubleValue();
     }
 
-    public int coordinatesToStopCode(double lat, double lng) {
-        String resourceName = String.format("stop_%.6f_%.6f", round(lat, 6), round(lng, 6));
-        int identifier = context.getResources().getIdentifier(resourceName, "integer", context.getPackageName());
-        int stopCode = context.getResources().getInteger(identifier);
-        return stopCode;
+    public int coordinatesToStopCode(double lat, double lng) throws Exception {
+        try {
+            String resourceName = String.format("stop_%.6f_%.6f", round(lat, 6), round(lng, 6));
+            int identifier = context.getResources().getIdentifier(resourceName, "integer", context.getPackageName());
+            int stopCode = context.getResources().getInteger(identifier);
+            return stopCode;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Cannot convert coordinates " + lat + ", " + lng + " to stop code", ex);
+        }
     }
 }

@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.crashlytics.android.Crashlytics;
+
 public class HelloWebViewClient extends WebViewClient {
     private Context context;
 
@@ -16,21 +18,28 @@ public class HelloWebViewClient extends WebViewClient {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        if (url != null && url.startsWith("market://")) {
-            view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-            return true;
-        } else if (url != null && url.startsWith("mailto:")) {
-            MailTo mt = MailTo.parse(url);
-            Intent i = newEmailIntent(mt.getTo(), mt.getSubject(), mt.getBody(), mt.getCc());
-            context.startActivity(i);
-            view.reload();
-            return true;
-        } else if (url != null && url.startsWith("http")) {
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-            context.startActivity(i);
-            return true;
-        } else {
+        try {
+            if (url != null && url.startsWith("market://")) {
+                view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                return true;
+            } else if (url != null && url.startsWith("mailto:")) {
+                MailTo mt = MailTo.parse(url);
+                Intent i = newEmailIntent(mt.getTo(), mt.getSubject(), mt.getBody(), mt.getCc());
+                context.startActivity(i);
+                view.reload();
+                return true;
+            } else if (url != null && url.startsWith("http")) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                context.startActivity(i);
+                return true;
+            } else {
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Crashlytics.logException(ex);
             return false;
         }
     }

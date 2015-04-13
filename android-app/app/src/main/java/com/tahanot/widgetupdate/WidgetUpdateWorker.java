@@ -1,16 +1,21 @@
 package com.tahanot.widgetupdate;
 
-import java.util.*;
-import java.util.concurrent.*;
+import android.appwidget.AppWidgetManager;
+import android.content.Context;
 
-import android.appwidget.*;
-import android.content.*;
+import com.crashlytics.android.Crashlytics;
+import com.tahanot.FillWidgetResult;
+import com.tahanot.WidgetContentCreator;
+import com.tahanot.WidgetIds;
+import com.tahanot.persistence.WidgetPersistence;
+import com.tahanot.timers.WidgetUpdateTimer;
+import com.tahanot.utils.CollectionUtils;
+import com.tahanot.utils.ExpirationToken;
+import com.tahanot.utils.Logging;
+import com.tahanot.utils.TaskExecutor;
 
-import com.tahanot.*;
-import com.tahanot.persistence.*;
-import com.tahanot.timers.*;
-import com.tahanot.utils.*;
-import com.tahanot.widgetupdate.WidgetUpdateService.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 // Handler that receives messages from the thread
 final class WidgetUpdateWorker {
@@ -43,8 +48,7 @@ final class WidgetUpdateWorker {
 				}
 			}
 		} catch (Exception e) {
-			Logging.e(mContext, "Exception in WidgetUpdateService.onHandleIntent: " + e + ": " + e.getMessage());
-			e.printStackTrace();
+            Crashlytics.logException(e);
 			if (!expirationToken.hasExpired()) {
 				WidgetUpdateTimer.restartSoon(mContext);
 			}
@@ -85,12 +89,12 @@ final class WidgetUpdateWorker {
 //			}
 		} catch (TimeoutException e) {
 			timeoutLeft = 0;
-			Logging.e(mContext, "Timeout waiting for update task to finish. Exception: " + e + ": " + e.getMessage());
-			task.cancel(false);
+            Crashlytics.logException(e);
+            task.cancel(false);
 			return false;
 		} catch (Exception e) {
-			Logging.e(mContext, "Exception while waiting for update task to finish. Exception: " + e + ": " + e.getMessage());
-			return false;
+            Crashlytics.logException(e);
+            return false;
 		}
 	}
 }
