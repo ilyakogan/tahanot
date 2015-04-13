@@ -40,17 +40,14 @@
         android:padding="2dp"
         android:layout_below="@+id/border">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -63,7 +60,6 @@
                 android:id="@+id/lineNumberTextViewId0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -71,19 +67,16 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -96,7 +89,6 @@
                 android:id="@+id/lineNumberTextViewId1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -104,19 +96,17 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -129,7 +119,7 @@
                 android:id="@+id/lineNumberTextViewId2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -137,19 +127,17 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -162,7 +150,7 @@
                 android:id="@+id/lineNumberTextViewId3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -170,19 +158,17 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -195,7 +181,7 @@
                 android:id="@+id/lineNumberTextViewId4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -203,19 +189,17 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -228,7 +212,7 @@
                 android:id="@+id/lineNumberTextViewId5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -236,19 +220,17 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -261,7 +243,7 @@
                 android:id="@+id/lineNumberTextViewId6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -269,19 +251,17 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -294,7 +274,7 @@
                 android:id="@+id/lineNumberTextViewId7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -302,19 +282,17 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -327,7 +305,7 @@
                 android:id="@+id/lineNumberTextViewId8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -335,19 +313,17 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -360,7 +336,7 @@
                 android:id="@+id/lineNumberTextViewId9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -368,19 +344,17 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -393,7 +367,7 @@
                 android:id="@+id/lineNumberTextViewId10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -401,19 +375,17 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -426,7 +398,7 @@
                 android:id="@+id/lineNumberTextViewId11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -434,19 +406,17 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="ltr">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/timeTextViewId12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="left"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -459,7 +429,7 @@
                 android:id="@+id/lineNumberTextViewId12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                
                 android:padding="2dp"
                 android:gravity="right"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -467,7 +437,7 @@
                 android:textStyle="bold"
                 android:typeface="monospace"
                 android:visibility="invisible" />
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
     <TextView
