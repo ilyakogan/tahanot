@@ -14,7 +14,7 @@ import java.util.Collection;
 public class StopMonitoringQueueWorker {
     private Context context;
     private Listener listener;
-    private int mInterval = 5000; // 5 seconds by default, can be changed later
+    private int mInterval = 2000;
     private Handler mHandler = new Handler();
     ArrayList<Integer> pendingStopCodes = new ArrayList<>();
 
@@ -46,8 +46,10 @@ public class StopMonitoringQueueWorker {
     synchronized private void processItems() {
         AsyncTask<Collection<Integer>, Void, MultipleStopMonitoringExtendedInfo> task =
                 new AsyncTask<Collection<Integer>, Void, MultipleStopMonitoringExtendedInfo>() {
+                    Collection<Integer> stopCodes;
                     @Override
                     protected MultipleStopMonitoringExtendedInfo doInBackground(Collection<Integer>... stopCodes) {
+                        this.stopCodes = stopCodes[0];
                         MultipleStopMonitoringExtendedInfo monitoringInfo = null;
                         try {
                             monitoringInfo = new StopMonitoringProvider().getMultipleStopMonitoring(stopCodes[0], context);
@@ -65,7 +67,7 @@ public class StopMonitoringQueueWorker {
                     @Override
                     protected void onPostExecute(MultipleStopMonitoringExtendedInfo monitoringInfo) {
                         if (monitoringInfo != null) {
-                            listener.onMonitoringInfoArrived(monitoringInfo);
+                            listener.onMonitoringInfoArrived(stopCodes, monitoringInfo);
                         }
                     }
                 };
@@ -77,6 +79,6 @@ public class StopMonitoringQueueWorker {
     }
 
     interface Listener {
-        void onMonitoringInfoArrived(MultipleStopMonitoringExtendedInfo info);
+        void onMonitoringInfoArrived(Collection<Integer> stopCodes, MultipleStopMonitoringExtendedInfo info);
     }
 }

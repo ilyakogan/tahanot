@@ -1,4 +1,4 @@
-define("mapStops", ["map", "stopsRepository", "bridge", "eventServices/mapCenterChanged", "eventServices/mapStopClicked", "eventServices/newStopsDisplayed", "utils/distance"], 
+define(["map", "stopsRepository", "nativeApp/bridge", "eventServices/mapCenterChanged", "eventServices/mapStopClicked", "eventServices/newStopsDisplayed", "utils/distance"], 
 function(map, stopsRepository, bridge, mapCenterChanged, mapStopClicked, newStopsDisplayed, distance) {
 
     function searchForStopsDelayed() {

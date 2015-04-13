@@ -1,5 +1,5 @@
-require(["angular/tahanotApp", "map", "stopsRepository", "bridge", "mapPageScroller", "eventServices/mapStopClicked", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed", "utils/distance"], 
-function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapStopClicked, mapCenterChanged, newStopsDisplayed, distance) {
+require(["angular/tahanotApp", "map", "stopsRepository", "stopMonitoringCache", "nativeApp/bridge", "mapPageScroller", "eventServices/mapStopClicked", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed"], 
+function(tahanotApp, map, stopsRepository, stopMonitoringCache, bridge, mapPageScroller, mapStopClicked, mapCenterChanged, newStopsDisplayed) {
 
 	tahanotApp.app.controller('nearbyStopsController', ['$scope', '$http', '$location', function($scope, $http, $location) {
 	    $scope.stops = [];
@@ -16,6 +16,23 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapStopClick
 	    	mapPageScroller.showOnMap(stop.place);
 	    }
 
+		$scope.refreshVisits = function(stop) { 
+			getVisits(stop, true);
+		}
+
+	    function refresh() {
+    		var stopsAroundCenter = stopsRepository.getStopsAround(map.getCenter());
+        	$scope.stops = [];
+        	if (selectedStopPlace) {
+        		addStop(createStop(selectedStopPlace, true));
+        	}
+	    	stopsAroundCenter.slice(0,8).forEach(function(place) {
+	    		if (place != selectedStopPlace) {
+		    		addStop(createStop(place, false));
+		    	}
+	    	});
+	    }
+
 	    function createStop(place, isSelected) {
 			return {
     			stopCode: place.stopCode,
@@ -26,66 +43,32 @@ function(tahanotApp, map, stopsRepository, bridge, mapPageScroller, mapStopClick
     		}
 	    }
 
-	    function refresh() {
-    		var stopsAroundCenter = stopsRepository.getStopsAround(map.getCenter());
-        	$scope.stops = [];
-        	if (selectedStopPlace) {
-        		$scope.stops.push(createStop(selectedStopPlace, true));
-	    		bridge.requestStopMonitoring(selectedStopPlace.stopCode);
-        	}
-	    	stopsAroundCenter.slice(0,8).forEach(function(place) {
-	    		if (place == selectedStopPlace) {
-	    			return;
-	    		}
-	    		$scope.stops.push(createStop(place, false));
-	    		bridge.requestStopMonitoring(place.stopCode);
-	    	});
+	    function addStop(stop) {
+	    	$scope.stops.push(stop);
+	    	getVisits(stop);
 	    }
 
-		$scope.canRefreshVisits = function() {
-			var visitsAvailable = false;
-			$scope.stops.forEach(function(stop) {
-				if (stop.visitsAvailable) {
-					visitsAvailable = true;
-				}
+		function getVisits(stop, force) {
+			stop.visits = [];
+	    	stop.isReceivingVisits = true;
+	    	stop.failedReceivingVisits = false;
+    		var promise = stopMonitoringCache.get(stop.stopCode, force, 15000);
+    		promise.done(function(visits) {
+				callInScope(function() {
+	    			if ($scope.stops.indexOf(stop) === -1) return;
+	    			stop.visits = visits;
+	    			stop.isReceivingVisits = false;
+	    		});
 			});
-			return visitsAvailable;
+			promise.fail(function() {
+				$scope.$apply(function() {
+					stop.isReceivingVisits = false;
+					stop.failedReceivingVisits = true;
+				});
+			});
 		}
 
-		$scope.refreshVisits = refresh;
-
-	    
-	    function parseDate(msAjaxDate) {
-	    	return new Date(parseInt(msAjaxDate.replace("/Date(", "").replace(")/",""), 10));
-	    }
-
-	    function minutesBetween(olderDate, newerDate) {
-	    	return Math.floor((newerDate - olderDate) / 60000);
-	    }
-
-		// Response from Android
-		window.onMonitoringInfoArrived = function(monitoringInfo) {
-			$scope.$apply(function() {
-				$scope.stops.forEach(function(stopModel) {
-        			stopModel.visitsAvailable = true;
-        		});
-	        	monitoringInfo.Stops.forEach(function(monitoringStop) {
-	        		$scope.stops.forEach(function(stopModel) {
-	        			if (stopModel.stopCode !== monitoringStop.MotiroringRef) return; // note typo
-	        			stopModel.visits = [];
-	        			monitoringStop.StopVisits.forEach(function(visit) {
-	        				var minutesToArrival = minutesBetween(parseDate(monitoringInfo.ResponseTimestamp), parseDate(visit.ExpectedArrivalTime));
-	        				stopModel.visits.push({
-	        					lineNumber: visit.PublishedLineName,
-	        					destination: '', // todo
-	        					minutesToArrival: minutesToArrival,
-	        					isAlreadyHere: (minutesToArrival < 1)
-	        				});
-	        			});
-	        		});
-	        	});
-			});
-	    };
+	    function callInScope(f) { if (!$scope.$$phase) { $scope.$apply(f); } else { f(); } }
 
 		mapCenterChanged.listen(function() { $scope.$apply(refresh); });
 	    newStopsDisplayed.listen(function() { $scope.$apply(refresh); });

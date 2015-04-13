@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 import com.tahanot.R;
 import com.tahanot.entities.MultipleStopMonitoringExtendedInfo;
 
+import java.util.Collection;
+
 public class WebViewHolder implements AndroidBridge.MapEventHandler, StopMonitoringQueueWorker.Listener {
     private WebView webView;
     private Activity activity;
@@ -67,7 +69,8 @@ public class WebViewHolder implements AndroidBridge.MapEventHandler, StopMonitor
     }
 
     @Override
-    public void onMonitoringInfoArrived(MultipleStopMonitoringExtendedInfo info) {
-        webView.loadUrl("javascript:onMonitoringInfoArrived(" + new Gson().toJson(info) + ")");
+    public void onMonitoringInfoArrived(Collection<Integer> stopCodes, MultipleStopMonitoringExtendedInfo info) {
+        Gson gson = new Gson();
+        webView.loadUrl("javascript:onMonitoringInfoArrived(" + gson.toJson(stopCodes) + ", " + gson.toJson(info) + ")");
     }
 }

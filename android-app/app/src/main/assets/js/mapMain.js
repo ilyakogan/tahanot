@@ -3,6 +3,7 @@ require(["geolocationTracker"]);
 require(["searchBar"]);
 require(["mapPageScroller"]);
 require(["angular/nearbyStopsController"]);
+require(["nativeApp/nativeAppCallbacks"])
 
 function visualTouches() {
 	// Set sections heights so they're prepared for navigation

@@ -1,4 +1,4 @@
-define("bridge", ["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
+define(["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
 	var wasStopDisplayedSent = false
 
 	function onStopsDisplayed() {
@@ -28,7 +28,7 @@ define("bridge", ["eventServices/newStopsDisplayed"], function(newStopsDisplayed
         }
         else {
             console.log("Bridge: getStopCode");
-            return (place.geometry.location.D % 1 * 1000000).toFixed();
+            return Math.round(place.geometry.location.D % 1 * 1000000);
         }
     }
 
@@ -38,6 +38,14 @@ define("bridge", ["eventServices/newStopsDisplayed"], function(newStopsDisplayed
         }
         else {
             console.log("Bridge: requestStopMonitoring");
+            setTimeout(function() {
+                if (stopCode % 2 == 0) {
+                    onMonitoringInfoArrived([stopCode], {"Stops":[{"MotiroringRef":stopCode,"StopVisits":[{"ExpectedArrivalTime":"\/Date(1427919240000)\/","PublishedLineName":"66"}]}],"ResponseTimestamp":"\/Date(1427919007162)\/"});
+                }
+                else {
+                    onMonitoringInfoArrived([stopCode], {"Stops":[{"MotiroringRef":11111111111,"StopVisits":[{"ExpectedArrivalTime":"\/Date(1427919240000)\/","PublishedLineName":"66"}]}],"ResponseTimestamp":"\/Date(1427919007162)\/"});
+                }
+            }, 2000);
         }
     }
 
