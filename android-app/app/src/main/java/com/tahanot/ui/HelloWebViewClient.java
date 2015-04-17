@@ -17,6 +17,11 @@ public class HelloWebViewClient extends WebViewClient {
     }
 
     @Override
+    public void onPageFinished(WebView view, String url)  {
+        TODO view.loadUrl("javascript:(function() { setParameters(2,3)})()");
+    }
+
+    @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         try {
             if (url != null && url.startsWith("market://")) {
