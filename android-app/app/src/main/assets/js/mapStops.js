@@ -1,17 +1,6 @@
 define(["map", "stopsRepository", "nativeApp/bridge", "eventServices/mapCenterChanged", "eventServices/mapStopClicked", "eventServices/newStopsDisplayed", "utils/distance"], 
 function(map, stopsRepository, bridge, mapCenterChanged, mapStopClicked, newStopsDisplayed, distance) {
 
-    function searchForStopsDelayed() {
-        var centerBefore = map.getCenter();
-        setTimeout(function() { 
-            if (distance(centerBefore, map.getCenter()) > 0.01) {
-                // Don't waste resources on showing stops, map is still moving
-                return;
-            }           
-            searchForStops()
-        }, 4000);
-    }
-
     function searchForStops() {        
         var request = {
             location: map.getCenter(),
@@ -62,7 +51,7 @@ function(map, stopsRepository, bridge, mapCenterChanged, mapStopClicked, newStop
     }
 
     mapCenterChanged.listen(function() {
-        searchForStopsDelayed();
+        searchForStops();
     });
 
     searchForStops();

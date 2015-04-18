@@ -27,27 +27,31 @@ define(["queryParamHandler", "eventServices/mapCenterChanged", "eventServices/ne
 
         registerMapEvents();
 
-        mapCenterChanged.broadcast();
+        mapCenterChanged.broadcastNow();
+    }
+
+    function getCenter() {
+        return map.getCenter();
     }
 
     function registerMapEvents() {
-        // google.maps.event.addListener(map, 'center_changed', function() {
-        //     // The timeout fixes a bug when handling the event prevents the map from actually moving
-        //     window.setTimeout(function() { 
-        //         mapCenterChanged.broadcast();
-        //     }, 0)
-        // });
-
         google.maps.event.addListener(map, 'idle', function() {
-            mapCenterChanged.broadcast();
+            mapCenterChanged.broadcastDelayed(getCenter);
         });
+    }
+
+    function addIdleListenerOnce(callback) { 
+        google.maps.event.addListenerOnce(map, 'idle', function() {
+            callback();
+        }); 
     }
 
     initialize();
 
     return {
         panTo: function(location) { map.panTo(location); },
-        getCenter: function() { return map.getCenter(); },
+        getCenter: getCenter,
+        addIdleListenerOnce: addIdleListenerOnce,
         googleMap: map
     };
 })

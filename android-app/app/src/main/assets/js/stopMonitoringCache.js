@@ -11,7 +11,6 @@ define(["nativeApp/bridge", "nativeApp/nativeAppCallbacks"], function(bridge, na
         this.deferreds = [];
 
         this.updateVisits = function(visits) {
-            console.log("updateVisits");
             thisStop.visits = visits;
             thisStop.ageOfData = new Date();
             thisStop.deferreds.forEach(function(deffered)  {

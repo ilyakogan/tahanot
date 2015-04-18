@@ -1,5 +1,5 @@
-define(["map", "eventServices/mapStopClicked", "eventServices/addressEntered"], 
-function(map, mapStopClicked, addressEntered) {
+define(["map", "eventServices/mapStopClicked", "eventServices/addressEntered", "eventServices/mapCenterChanged"], 
+function(map, mapStopClicked, addressEntered, mapCenterChanged) {
 	function scrollTo(selector, completeCallback) {
 		var scrollPos = $(selector).offset().top;
 		$('body,html').animate({ scrollTop: scrollPos}, 500, completeCallback);
@@ -16,6 +16,10 @@ function(map, mapStopClicked, addressEntered) {
 		scrollTo(
 			"#map-section",
 			function() {
+				map.addIdleListenerOnce(function(){
+				    mapCenterChanged.broadcastNow();
+				});
+
 				map.panTo(location);
 			});
 	});
