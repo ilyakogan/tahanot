@@ -31,10 +31,11 @@ define(function() {
             visitsByStopCode[stopCode] = visits;            
         });
 
-        visitsByStopCode.forEach(function(visits, stopCode) {
+        for (var stopCode in visitsByStopCode) {
+            var visits = visitsByStopCode[stopCode];
             callbacks.fire(stopCode, visits);
-        });
     };
+        };
 
     return {
         listen: function(callback) { callbacks.add(callback); }
