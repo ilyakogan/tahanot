@@ -18,7 +18,7 @@ define(["map", "utils/distance"], function(map, distance) {
                     return;
                 }
                 callbacks.fire();
-            }, 2000);
+            }, 1000);
         },
 
         broadcastNow: function() {
