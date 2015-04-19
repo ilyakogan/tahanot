@@ -5,7 +5,7 @@ define(function() {
         visitsByStopCode = initVisitsMap(stopCodes);
         addVisits(visitsByStopCode, monitoringInfo);
         fireCallbacks(visitsByStopCode);
-    };    
+    };
 
     function initVisitsMap(stopCodes) {
         visitsByStopCode = [];

@@ -1,12 +1,12 @@
-define(["queryParamHandler", "eventServices/mapCenterChanged", "eventServices/newStopsDisplayed"], 
-    function(queryParamHandler, mapCenterChanged, newStopsDisplayed) {
+define(["eventServices/mapCenterChanged", "eventServices/newStopsDisplayed", "nativeApp/nativeAppCallbacks/setInitialLocation"], 
+    function(mapCenterChanged, newStopsDisplayed, setInitialLocation) {
 
     var map;
     var mapMover;
 
     function initialize() {
-        var lat = queryParamHandler.getNumeric('lat', 32.08);
-        var lng = queryParamHandler.getNumeric('lng', 34.781);
+        var lat = 32.08;
+        var lng = 34.781;
         var initialLocation = new google.maps.LatLng(lat, lng);
         map = new google.maps.Map(document.getElementById('map-canvas'), {
             center: initialLocation,
@@ -27,6 +27,19 @@ define(["queryParamHandler", "eventServices/mapCenterChanged", "eventServices/ne
 
         registerMapEvents();
 
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(pos) { 
+                if (pos && pos.coords) {
+                    initMapCenter(pos.coords.latitude, pos.coords.longitude);
+                }
+            })
+        }
+
+        setInitialLocation.listen(initMapCenter)
+    }
+
+    function initMapCenter(lat, lng) {
+        map.setCenter(new google.maps.LatLng(lat, lng));
         mapCenterChanged.broadcastNow();
     }
 

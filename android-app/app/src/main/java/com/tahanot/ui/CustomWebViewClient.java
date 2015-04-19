@@ -2,6 +2,8 @@ package com.tahanot.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.location.Location;
 import android.net.MailTo;
 import android.net.Uri;
 import android.webkit.WebView;
@@ -9,16 +11,29 @@ import android.webkit.WebViewClient;
 
 import com.crashlytics.android.Crashlytics;
 
-public class HelloWebViewClient extends WebViewClient {
+public class CustomWebViewClient extends WebViewClient {
     private Context context;
+    private boolean isForWidget;
 
-    public HelloWebViewClient(Context context) {
+    public CustomWebViewClient(Context context, boolean isForWidget) {
         this.context = context;
+        this.isForWidget = isForWidget;
+    }
+
+    @Override
+    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+        super.onPageStarted(view, url, favicon);
     }
 
     @Override
     public void onPageFinished(WebView view, String url)  {
-        TODO view.loadUrl("javascript:(function() { setParameters(2,3)})()");
+        Location location = LocationProxy.get().getLastLocation(true);
+        if (location != null) {
+            view.loadUrl("javascript:setInitialLocation(" + location.getLatitude() + ", " + location.getLongitude() + ")");
+        }
+        if (isForWidget) {
+            view.loadUrl("javascript:setIsForWidget(true)");
+        }
     }
 
     @Override

@@ -23,7 +23,7 @@ public class StopSelectionActivity extends Activity implements AndroidBridge.Sto
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview);
-        webViewHolder = new WebViewHolder((WebView) findViewById(R.id.webView1), this, Optional.of(this), "isForWidget=true");
+        webViewHolder = new WebViewHolder((WebView) findViewById(R.id.webView1), this, Optional.of(this), true);
         try {
             webViewHolder.start();
         }

@@ -2,7 +2,6 @@ package com.tahanot.ui;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.location.Location;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
@@ -17,27 +16,26 @@ public class WebViewHolder implements AndroidBridge.MapEventHandler, StopMonitor
     private WebView webView;
     private Activity activity;
     private Optional<AndroidBridge.StopSelectionEventHandler> stopSelectionEventHandler;
-    private String additionalUrlParams;
+    private boolean isForWidget;
     private ProgressDialog progressDialog;
     private StopMonitoringQueueWorker stopMonitoringQueueWorker;
 
-    public WebViewHolder(WebView webView, Activity activity, Optional<AndroidBridge.StopSelectionEventHandler> stopSelectionEventHandler, String additionalUrlParams) {
+    public WebViewHolder(WebView webView, Activity activity, Optional<AndroidBridge.StopSelectionEventHandler> stopSelectionEventHandler, boolean isForWidget) {
         this.webView = webView;
         this.activity = activity;
         this.stopSelectionEventHandler = stopSelectionEventHandler;
-        this.additionalUrlParams = additionalUrlParams;
+        this.isForWidget = isForWidget;
     }
 
     public void start() {
         stopMonitoringQueueWorker = new StopMonitoringQueueWorker(activity, this);
 
-        Location location = LocationProxy.get().getLastLocation(true);
-        webView.loadUrl(getMapUrl(location));
+        webView.loadUrl(getMapUrl());
         webView.clearCache(true);
         webView.clearHistory();
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebChromeClient(new WebChromeClient());
-        webView.setWebViewClient(new HelloWebViewClient(activity));
+        webView.setWebViewClient(new CustomWebViewClient(activity, isForWidget));
         webView.addJavascriptInterface(new AndroidBridge(activity, this, stopSelectionEventHandler, stopMonitoringQueueWorker), "AndroidBridge");
 
         progressDialog = ProgressDialog.show(activity, "", activity.getString(R.string.loading_map), true);
@@ -49,13 +47,8 @@ public class WebViewHolder implements AndroidBridge.MapEventHandler, StopMonitor
         stopMonitoringQueueWorker.stopRepeatingTask();
     }
 
-    private String getMapUrl(Location location) {
-        if (location != null) {
-            return String.format("file:///android_asset/map.html?lat=%s&lng=%s&%s", location.getLatitude(), location.getLongitude(), additionalUrlParams);
-        }
-        else {
-            return String.format("file:///android_asset/map.html?%s", additionalUrlParams);
-        }
+    private String getMapUrl() {
+        return String.format("file:///android_asset/map.html");
     }
 
     @Override

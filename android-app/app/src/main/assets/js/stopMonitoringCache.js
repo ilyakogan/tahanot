@@ -1,4 +1,4 @@
-define(["nativeApp/bridge", "nativeApp/nativeAppCallbacks"], function(bridge, nativeAppCallbacks) {
+define(["nativeApp/bridge", "nativeApp/nativeAppCallbacks/onMonitoringInfoArrived"], function(bridge, onMonitoringInfoArrived) {
 
     const cacheTimeout = 30000;
 
@@ -81,7 +81,7 @@ define(["nativeApp/bridge", "nativeApp/nativeAppCallbacks"], function(bridge, na
         }, giveUpAfter);
     }
 
-    nativeAppCallbacks.listen(function(stopCode, visits) {
+    onMonitoringInfoArrived.listen(function(stopCode, visits) {
         var stop = getStop(stopCode);
         if (!stop) return;
         stop.updateVisits(visits);

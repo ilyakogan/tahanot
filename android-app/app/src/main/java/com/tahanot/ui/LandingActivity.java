@@ -17,7 +17,7 @@ public class LandingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview);
-        webViewHolder = new WebViewHolder((WebView) findViewById(R.id.webView1), this, Optional.absent(), "");
+        webViewHolder = new WebViewHolder((WebView) findViewById(R.id.webView1), this, Optional.absent(), false);
         try {
             webViewHolder.start();
         }
