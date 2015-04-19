@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Locale;
 
 public class StopConverter {
     private Context context;
@@ -23,7 +24,8 @@ public class StopConverter {
 
     public int coordinatesToStopCode(double lat, double lng) throws Exception {
         try {
-            String resourceName = String.format("stop_%.6f_%.6f", round(lat, 6), round(lng, 6));
+            // Locale.US should prevent Russian devices from converting "." to ","
+            String resourceName = String.format(Locale.US, "stop_%.6f_%.6f", round(lat, 6), round(lng, 6));
             int identifier = context.getResources().getIdentifier(resourceName, "integer", context.getPackageName());
             int stopCode = context.getResources().getInteger(identifier);
             return stopCode;
