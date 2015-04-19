@@ -12,22 +12,26 @@ import android.webkit.WebViewClient;
 import com.crashlytics.android.Crashlytics;
 
 public class CustomWebViewClient extends WebViewClient {
+    private final LocationProxy locationProxy;
     private Context context;
     private boolean isForWidget;
 
     public CustomWebViewClient(Context context, boolean isForWidget) {
         this.context = context;
         this.isForWidget = isForWidget;
+        this.locationProxy = LocationProxy.get();
     }
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
+        locationProxy.subscribeToOneTimeUpdate(location ->
+                view.loadUrl("javascript:setInitialLocation(" + location.getLatitude() + ", " + location.getLongitude() + ")"));
     }
 
     @Override
     public void onPageFinished(WebView view, String url)  {
-        Location location = LocationProxy.get().getLastLocation(true);
+        Location location = locationProxy.getLastLocation(true);
         if (location != null) {
             view.loadUrl("javascript:setInitialLocation(" + location.getLatitude() + ", " + location.getLongitude() + ")");
         }
