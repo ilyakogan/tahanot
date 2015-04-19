@@ -27,8 +27,8 @@ android {
         applicationId "com.tahanot"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 1001005
-        versionName "1.1.5"
+        versionCode 1001006
+        versionName "1.1.6"
         multiDexEnabled true
     }
 
