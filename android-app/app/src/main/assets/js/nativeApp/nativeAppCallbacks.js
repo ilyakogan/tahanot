@@ -36,7 +36,7 @@ define(function() {
     function fireCallbacks(visitsByStopCode) {
         for (var stopCode in visitsByStopCode) {
             var visits = visitsByStopCode[stopCode];
-            callbacks.fire(stopCode, visits);
+            callbacks.fire(parseInt(stopCode), visits);
         };
     }
 

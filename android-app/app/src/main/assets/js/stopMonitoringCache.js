@@ -13,17 +13,17 @@ define(["nativeApp/bridge", "nativeApp/nativeAppCallbacks"], function(bridge, na
         this.updateVisits = function(visits) {
             thisStop.visits = visits;
             thisStop.ageOfData = new Date();
-            thisStop.deferreds.forEach(function(deffered)  {
-                deffered.resolve(visits);
+            thisStop.deferreds.forEach(function(deferred)  {
+                deferred.resolve(visits);
             });
             thisStop.deferreds = [];
         }
 
-        this.requestStopMonitoring = function(deffered) {
+        this.requestStopMonitoring = function(deferred) {
             this.ageOfData = undefined;
             bridge.requestStopMonitoring(stopCode);
             thisStop.lastRequestSent = new Date();
-            thisStop.deferreds = [deffered];
+            thisStop.deferreds = [deferred];
         }
     }
 
