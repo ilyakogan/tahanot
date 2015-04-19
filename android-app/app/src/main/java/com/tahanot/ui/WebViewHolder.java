@@ -45,6 +45,10 @@ public class WebViewHolder implements AndroidBridge.MapEventHandler, StopMonitor
 
     public void stop() {
         stopMonitoringQueueWorker.stopRepeatingTask();
+
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     private String getMapUrl() {
