@@ -58,27 +58,34 @@
             </tr>
           </table>
           
-          <table class="table">
-            <tr ng-show="stop.isReceivingVisits">
-              <td><i class="fa fa-refresh fa-spin"></i> מחכה לזמני אמת</td>
-            </tr>
-            <tr ng-show="stop.failedReceivingVisits">
-              <td><i class="fa fa-chain-broken"></i> המידע לא זמין</td>
-            </tr>
-            <tr ng-show="!stop.isReceivingVisits && !stop.failedReceivingVisits && !stop.visits.length">
-              <td>אין זמני אמת לחצי השעה הקרובה</td>
-            </tr>
-            <tr ng-repeat="visit in stop.visits">
-              <th scope="row"><i class="fa fa-bus"></i> {{ visit.lineNumber }}</th>
-              <td>{{ visit.destination }}</td>
-              <td>
-                <i class="fa fa-clock-o"></i>
-                <span ng-show="visit.isAlreadyHere">קרוב לתחנה</span>
-                <span ng-hide="visit.isAlreadyHere">
-                    <ng-pluralize count="visit.minutesToArrival" when="{'1': 'דקה', 'other': '{} דקות'}"></ng-pluralize>
-                </span>
-              </td>
-            </tr>
+          
+          <div class="row" style="margin-left: 0; margin-right: 0" ng-show="stop.isReceivingVisits">
+            <div class="col-xs-12">
+              <i class="fa fa-refresh fa-spin"></i> מחכה לזמני אמת
+            </div>
+          </div>
+          <div class="row" style="margin-left: 0; margin-right: 0" ng-show="stop.failedReceivingVisits">
+            <div class="col-xs-12">
+              <i class="fa fa-chain-broken"></i> המידע לא זמין
+            </div>
+          </div>
+          <div class="row" style="margin-left: 0; margin-right: 0" ng-show="!stop.isReceivingVisits && !stop.failedReceivingVisits && !stop.visits.length">
+            <div class="col-xs-12">
+              אין זמני אמת לחצי השעה הקרובה
+            </div>
+          </div>
+          <div class="row" style="margin-left: 0; margin-right: 0" ng-repeat="visit in stop.visits">
+            <div class="col-xs-2" style="padding: 5px;"><i class="fa fa-bus"></i> {{ visit.lineNumber }}</div>
+            <div class="col-xs-7" style="padding: 5px; text-align: center;">{{ visit.destination }}</div>
+            <div class="col-xs-3" style="padding: 5px;">
+              <i class="fa fa-clock-o"></i>
+              <span ng-show="visit.isAlreadyHere">קרוב לתחנה</span>
+              <span ng-hide="visit.isAlreadyHere">
+                  <ng-pluralize count="visit.minutesToArrival" when="{'1': 'דקה', 'other': '{} דקות'}"></ng-pluralize>
+              </span>
+            </div>
+          </div>
+
           </table>
         </div>
     </div>

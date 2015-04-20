@@ -34,11 +34,11 @@ define(["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
 
     function getStopName(stopCode) {
         if (window.AndroidBridge) {
-            return window.AndroidBridge.getStopName(pstopCode);
+            return window.AndroidBridge.getStopName(stopCode);
         }
         else {
             console.log("Bridge: getStopName");
-            return "שם תחנה";
+            return "ביר אלמכסור 6/קופת חולים כללית,ביר אל מכסור";
         }
     }
 
@@ -50,11 +50,11 @@ define(["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
             console.log("Bridge: requestStopMonitoring");
             setTimeout(function() {
                 if (stopCode % 2 == 0) {
-                    var visit = function(line) { return {"ExpectedArrivalTime":"\/Date(1427919240000)\/","PublishedLineName":""+line,"DestinationRef":"21165"} }
+                    var visit = function(line) { return {"ExpectedArrivalTime":"\/Date(1427919976000)\/","PublishedLineName":""+(line*100),"DestinationRef":"21165"} }
                     onMonitoringInfoArrived([stopCode], {"Stops": [{"MotiroringRef":stopCode,"StopVisits": Array.apply(null, new Array(10)).map(function(_, x){return visit(x)}) }],"ResponseTimestamp":"\/Date(1427919007162)\/"});
                 }
                 else {
-                    onMonitoringInfoArrived([stopCode], {"Stops":[{"MotiroringRef":11111111111,"StopVisits":[{"ExpectedArrivalTime":"\/Date(1427919240000)\/","PublishedLineName":"66","DestinationRef":"21165"}]}],"ResponseTimestamp":"\/Date(1427919007162)\/"});
+                    onMonitoringInfoArrived([stopCode], {"Stops":[{"MotiroringRef":11111111111,"StopVisits":[{"ExpectedArrivalTime":"\/Date(1427919876000)\/","PublishedLineName":"66","DestinationRef":"21165"}]}],"ResponseTimestamp":"\/Date(1427919007162)\/"});
                 }
             }, 2000);
         }
