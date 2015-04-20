@@ -30,7 +30,7 @@ public class CustomWebViewClient extends WebViewClient {
                     view.loadUrl("javascript:setInitialLocation(" + location.getLatitude() + ", " + location.getLongitude() + ")"));
         }
         catch (Exception e) {
-            Crashlytics.logException(ex);
+            Crashlytics.logException(e);
         }
     }
 
@@ -44,7 +44,7 @@ public class CustomWebViewClient extends WebViewClient {
             }
         }
         catch (Exception e) {
-            Crashlytics.logException(ex);
+            Crashlytics.logException(e);
         }
 
         try {
@@ -53,7 +53,7 @@ public class CustomWebViewClient extends WebViewClient {
             }
         }
         catch (Exception e) {
-            Crashlytics.logException(ex);
+            Crashlytics.logException(e);
         }
     }
 
