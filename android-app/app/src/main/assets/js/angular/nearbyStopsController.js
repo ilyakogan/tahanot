@@ -53,7 +53,7 @@ function(tahanotApp, map, stopsRepository, stopMonitoringCache, bridge, mapPageS
 			stop.visits = [];
 	    	stop.isReceivingVisits = true;
 	    	stop.failedReceivingVisits = false;
-    		var promise = stopMonitoringCache.get(stop.stopCode, force, 15000);
+    		var promise = stopMonitoringCache.get(stop.stopCode, force, 30000);
     		promise.done(function(visits) {
 				callInScope(function() {
 	    			if ($scope.stops.indexOf(stop) === -1) return;
