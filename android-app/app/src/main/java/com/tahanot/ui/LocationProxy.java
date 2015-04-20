@@ -1,12 +1,17 @@
 package com.tahanot.ui;
 
-import java.util.*;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 
-import com.tahanot.*;
+import com.crashlytics.android.Crashlytics;
+import com.tahanot.BusStopApplication;
 
-import android.content.*;
-import android.location.*;
-import android.os.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class LocationProxy {
 
@@ -75,8 +80,22 @@ public class LocationProxy {
 
 	synchronized private void onListenerAdded() {
 		if (!mIsGettingUpdates) {
-			mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 10, locationListenerNetwork);
-			mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, locationListenerGps);
+            boolean providerFound = false;
+            if (mLocationManager.getAllProviders().contains(LocationManager.NETWORK_PROVIDER)) {
+                mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 10, locationListenerNetwork);
+                providerFound = true;
+            }
+            if (mLocationManager.getAllProviders().contains(LocationManager.GPS_PROVIDER)) {
+                mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, locationListenerGps);
+                providerFound = true;
+            }
+
+            if (!providerFound)
+            {
+                Crashlytics.logException(new Exception("Neither network provider nor GPS provider exist. Total number of location providers is " +
+                        mLocationManager.getAllProviders().size()));
+            }
+
 			mIsGettingUpdates = true;
 		}
 
