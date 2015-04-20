@@ -56,6 +56,18 @@ public class AndroidBridge {
         }
     }
 
+
+    @JavascriptInterface
+    public String getStopName(final int stopCode) {
+        try {
+            return new StopConverter(context).stopCodeToName(stopCode);
+        } catch (Exception ex) {
+            Crashlytics.logException(ex);
+            return "";
+        }
+    }
+
+
     @JavascriptInterface
     public void requestStopMonitoring(int stopCode) {
         try {

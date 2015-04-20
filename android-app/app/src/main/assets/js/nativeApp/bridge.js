@@ -32,6 +32,16 @@ define(["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
         }
     }
 
+    function getStopName(stopCode) {
+        if (window.AndroidBridge) {
+            return window.AndroidBridge.getStopName(pstopCode);
+        }
+        else {
+            console.log("Bridge: getStopName");
+            return "שם תחנה";
+        }
+    }
+
     function requestStopMonitoring(stopCode) {
         if (window.AndroidBridge) {
             window.AndroidBridge.requestStopMonitoring(stopCode);
@@ -40,10 +50,11 @@ define(["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
             console.log("Bridge: requestStopMonitoring");
             setTimeout(function() {
                 if (stopCode % 2 == 0) {
-                    onMonitoringInfoArrived([stopCode], {"Stops":[{"MotiroringRef":stopCode,"StopVisits":[{"ExpectedArrivalTime":"\/Date(1427919240000)\/","PublishedLineName":"66"}]}],"ResponseTimestamp":"\/Date(1427919007162)\/"});
+                    var visit = function(line) { return {"ExpectedArrivalTime":"\/Date(1427919240000)\/","PublishedLineName":""+line,"DestinationRef":"21165"} }
+                    onMonitoringInfoArrived([stopCode], {"Stops": [{"MotiroringRef":stopCode,"StopVisits": Array.apply(null, new Array(10)).map(function(_, x){return visit(x)}) }],"ResponseTimestamp":"\/Date(1427919007162)\/"});
                 }
                 else {
-                    onMonitoringInfoArrived([stopCode], {"Stops":[{"MotiroringRef":11111111111,"StopVisits":[{"ExpectedArrivalTime":"\/Date(1427919240000)\/","PublishedLineName":"66"}]}],"ResponseTimestamp":"\/Date(1427919007162)\/"});
+                    onMonitoringInfoArrived([stopCode], {"Stops":[{"MotiroringRef":11111111111,"StopVisits":[{"ExpectedArrivalTime":"\/Date(1427919240000)\/","PublishedLineName":"66","DestinationRef":"21165"}]}],"ResponseTimestamp":"\/Date(1427919007162)\/"});
                 }
             }, 2000);
         }
@@ -56,6 +67,7 @@ define(["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
 	return {
 		onStopSelected: onStopSelected,
         getStopCode: getStopCode,
+        getStopName: getStopName,
         requestStopMonitoring: requestStopMonitoring
 	}
 })

@@ -30,9 +30,20 @@ public class StopConverter {
             int stopCode = context.getResources().getInteger(identifier);
             return stopCode;
         }
-        catch (Exception ex)
-        {
+        catch (Exception ex) {
             throw new Exception("Cannot convert coordinates " + lat + ", " + lng + " to stop code", ex);
         }
+    }
+
+    public String stopCodeToName(int stopCode) {
+        String resourceName = String.format(Locale.US, "stop_%d_name", stopCode);
+        int identifier = context.getResources().getIdentifier(resourceName, "string", context.getPackageName());
+        String name = context.getResources().getString(identifier);
+
+        resourceName = String.format(Locale.US, "stop_%d_town", stopCode);
+        identifier = context.getResources().getIdentifier(resourceName, "string", context.getPackageName());
+        String town = context.getResources().getString(identifier);
+
+        return name + ", " + town;
     }
 }

@@ -70,6 +70,7 @@
             </tr>
             <tr ng-repeat="visit in stop.visits">
               <th scope="row"><i class="fa fa-bus"></i> {{ visit.lineNumber }}</th>
+              <td>{{ visit.destination }}</td>
               <td>
                 <i class="fa fa-clock-o"></i>
                 <span ng-show="visit.isAlreadyHere">קרוב לתחנה</span>

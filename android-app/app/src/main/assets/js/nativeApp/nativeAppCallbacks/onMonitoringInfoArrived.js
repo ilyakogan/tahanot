@@ -1,4 +1,4 @@
-define(function() {
+define(["nativeApp/bridge"], function(bridge) {
     var callbacks = $.Callbacks();
 
     window.onMonitoringInfoArrived = function(stopCodes, monitoringInfo) {
@@ -24,7 +24,7 @@ define(function() {
                 var minutesToArrival = minutesBetween(parseDate(monitoringInfo.ResponseTimestamp), parseDate(visit.ExpectedArrivalTime));
                 visits.push({
                     lineNumber: visit.PublishedLineName,
-                    destination: '', // todo
+                    destination: bridge.getStopName(parseInt(visit.DestinationRef)),
                     minutesToArrival: minutesToArrival,
                     isAlreadyHere: (minutesToArrival < 1)
                 });
