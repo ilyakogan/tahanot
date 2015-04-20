@@ -24,19 +24,36 @@ public class CustomWebViewClient extends WebViewClient {
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        super.onPageStarted(view, url, favicon);
-        locationProxy.subscribeToOneTimeUpdate(location ->
-                view.loadUrl("javascript:setInitialLocation(" + location.getLatitude() + ", " + location.getLongitude() + ")"));
+        try {
+            super.onPageStarted(view, url, favicon);
+            locationProxy.subscribeToOneTimeUpdate(location ->
+                    view.loadUrl("javascript:setInitialLocation(" + location.getLatitude() + ", " + location.getLongitude() + ")"));
+        }
+        catch (Exception e) {
+            Crashlytics.logException(ex);
+        }
     }
 
     @Override
     public void onPageFinished(WebView view, String url)  {
-        Location location = locationProxy.getLastLocation(true);
-        if (location != null) {
-            view.loadUrl("javascript:setInitialLocation(" + location.getLatitude() + ", " + location.getLongitude() + ")");
+        super.onPageFinished(view, url);
+        try {
+            Location location = locationProxy.getLastLocation(true);
+            if (location != null) {
+                view.loadUrl("javascript:setInitialLocation(" + location.getLatitude() + ", " + location.getLongitude() + ")");
+            }
         }
-        if (isForWidget) {
-            view.loadUrl("javascript:setIsForWidget(true)");
+        catch (Exception e) {
+            Crashlytics.logException(ex);
+        }
+
+        try {
+            if (isForWidget) {
+                view.loadUrl("javascript:setIsForWidget(true)");
+            }
+        }
+        catch (Exception e) {
+            Crashlytics.logException(ex);
         }
     }
 

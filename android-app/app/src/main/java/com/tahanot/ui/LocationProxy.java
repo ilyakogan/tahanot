@@ -148,10 +148,20 @@ public class LocationProxy {
 	synchronized public void onGotLocation(Location location) {
 		mRememberedLocation = location;
 		for (SimpleLocationListener listener : mListenersToNotifyOnce) {
-			listener.onLocationChanged(location);
+            try {
+                listener.onLocationChanged(location);
+            }
+            catch (Exception ex) {
+                Crashlytics.logException(new Exception("Failed notifying listener on location change", ex));
+            }
 		}
 		for (SimpleLocationListener listener : mListenersToNotifyAlways) {
-			listener.onLocationChanged(location);
+            try {
+    			listener.onLocationChanged(location);
+            }
+            catch (Exception ex) {
+                Crashlytics.logException(new Exception("Failed notifying listener on location change", ex));
+            }
 		}
 		mListenersToNotifyOnce.clear();
 		onListenerRemoved();
