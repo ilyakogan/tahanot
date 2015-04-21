@@ -5,8 +5,8 @@ function(map, mapStopClicked, addressEntered, mapCenterChanged) {
 		$('body,html').animate({ scrollTop: scrollPos}, 500, completeCallback);
 	}
 
-	mapStopClicked.listen(function(place) {
-		map.panTo(place.geometry.location);
+	mapStopClicked.listen(function(stop) {
+		map.panTo(new google.maps.LatLng(stop.location.latitude, stop.location.longitude));
 		setTimeout(function() {
 			scrollTo("#nearby-stops-section");
 		}, 700);
@@ -25,11 +25,11 @@ function(map, mapStopClicked, addressEntered, mapCenterChanged) {
 	});
 
 	return {
-		showOnMap: function(place) {
+		showOnMap: function(lat, lng) {
 			scrollTo(
 				"#map-section",
 				function() {
-					map.panTo(place.geometry.location);
+					map.panTo(new google.maps.LatLng(lat, lng));
 				});
 		}
 	}

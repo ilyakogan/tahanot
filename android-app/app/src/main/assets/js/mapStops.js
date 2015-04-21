@@ -1,32 +1,14 @@
-define(["map", "stopsRepository", "nativeApp/bridge", "eventServices/mapCenterChanged", "eventServices/mapStopClicked", "eventServices/newStopsDisplayed", "utils/distance"], 
-function(map, stopsRepository, bridge, mapCenterChanged, mapStopClicked, newStopsDisplayed, distance) {
+define(["map", "stopCache", "eventServices/mapCenterChanged", "eventServices/mapStopClicked", "eventServices/newStopsDisplayed", "utils/distance"], 
+function(map, stopCache, mapCenterChanged, mapStopClicked, newStopsDisplayed, distance) {
 
-    function searchForStops() {        
-        var request = {
-            location: map.getCenter(),
-            types: ['bus_station'],
-            rankBy: google.maps.places.RankBy.DISTANCE
-        }
-        var service = new google.maps.places.PlacesService(map.googleMap)
-        service.nearbySearch(request, onStopsFound);
-    }
-
-    function onStopsFound(results, status, pagination) {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-            var anyNewStops = false
-            for (var i = 0; i < results.length; i++) {
-                var place = results[i];
-                if (!stopsRepository.exists(place)) {
-                    place.stopCode = bridge.getStopCode(place);
-                    if (place.stopCode != 0) {
-                        stopsRepository.add(place);
-                        createStopMarker(place);
-                        anyNewStops = true;
-                    }
-                }
-            }
-        }
-        if (anyNewStops) newStopsDisplayed.broadcast();
+    function searchForStops() {
+        stopCache.addStopsAround(
+            map.getCenter().lat(), 
+            map.getCenter().lng(), 
+            function(newStop) {
+                createStopMarker(newStop);
+                newStopsDisplayed.broadcast();
+            });
     }
 
     var image = {
@@ -36,17 +18,16 @@ function(map, stopsRepository, bridge, mapCenterChanged, mapStopClicked, newStop
         anchor: new google.maps.Point(16, 63)
     };
 
-    function createStopMarker(place) {
-        var placeLoc = place.geometry.location;
+    function createStopMarker(stop) {
         var stopMarker = new google.maps.Marker({
             map: map.googleMap,
-            title: place.name,
+            title: stop.name,
             icon: image,
-            position: place.geometry.location
+            position: new google.maps.LatLng(stop.location.latitude, stop.location.longitude)
         });
 
         google.maps.event.addListener(stopMarker, 'click', function() {
-            mapStopClicked.broadcast(place);
+            mapStopClicked.broadcast(stop);
         });
     }
 

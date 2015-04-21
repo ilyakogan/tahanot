@@ -13,32 +13,12 @@ define(["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
         }
     }
 
-    function onStopSelected(place, source) {
+    function onStopSelected(stopCode, stopName) {
     	if (window.AndroidBridge) {
-        	window.AndroidBridge.onStopSelected(place.geometry.location.k, place.geometry.location.D, place.name);
+        	window.AndroidBridge.onStopSelected(stopCode, stopName);
         }
         else {
-        	console.log("Bridge: onStopSelected: " + place.name);
-        }
-    }
-
-    function getStopCode(place) {
-        if (window.AndroidBridge) {
-            return window.AndroidBridge.getStopCode(place.geometry.location.k, place.geometry.location.D);
-        }
-        else {
-            console.log("Bridge: getStopCode");
-            return Math.round(place.geometry.location.D % 1 * 1000000);
-        }
-    }
-
-    function getStopName(stopCode) {
-        if (window.AndroidBridge) {
-            return window.AndroidBridge.getStopName(stopCode);
-        }
-        else {
-            console.log("Bridge: getStopName");
-            return "ביר אלמכסור 6/קופת חולים כללית,ביר אל מכסור";
+        	console.log("Bridge: onStopSelected: " + name);
         }
     }
 
@@ -66,8 +46,8 @@ define(["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
 
 	return {
 		onStopSelected: onStopSelected,
-        getStopCode: getStopCode,
-        getStopName: getStopName,
+        // getStopCode: getStopCode,
+        // getStopName: getStopName,
         requestStopMonitoring: requestStopMonitoring
 	}
 })

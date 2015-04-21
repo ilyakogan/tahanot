@@ -48,10 +48,9 @@ public class StopSelectionActivity extends Activity implements AndroidBridge.Sto
         webViewHolder.stop();
     }
 
-    public void onStopSelected(double lat, double lng, String name) {
+    public void onStopSelected(int stopCode, String name) {
         runOnUiThread(() -> {
             try {
-                int stopCode = new StopConverter(this).coordinatesToStopCode(lat, lng);
                 Stop stop = new Stop(stopCode, name);
                 succeed(stop);
             }

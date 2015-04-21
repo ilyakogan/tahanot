@@ -34,7 +34,7 @@ define(["eventServices/mapCenterChanged", "eventServices/newStopsDisplayed", "na
                 }
             })
         }
-
+        
         setInitialLocation.listen(initMapCenter)
     }
 

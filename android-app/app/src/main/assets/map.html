@@ -9,6 +9,7 @@
     <script src="lib/js/jquery-2.1.3.min.js"></script>
     <script src="lib/js/angular.min.js"></script>
     <script src="lib/js/bootstrap.min.js"></script>
+    <script src="lib/js/parse-1.4.2.min.js"></script>
     <script data-main="mapAll" src="lib/js/require.js"></script>
     
     <link rel="stylesheet" href="lib/css/bootstrap.min.css">
@@ -79,7 +80,7 @@
             <div class="col-xs-7" style="padding: 5px; text-align: center;">{{ visit.destination }}</div>
             <div class="col-xs-3" style="padding: 5px;">
               <i class="fa fa-clock-o"></i>
-              <span ng-show="visit.isAlreadyHere">קרוב לתחנה</span>
+              <span ng-show="visit.isAlreadyHere">קרוב</span>
               <span ng-hide="visit.isAlreadyHere">
                   <ng-pluralize count="visit.minutesToArrival" when="{'1': 'דקה', 'other': '{} דקות'}"></ng-pluralize>
               </span>

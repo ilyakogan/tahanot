@@ -22,10 +22,10 @@ public class AndroidBridge {
     }
 
     @JavascriptInterface
-    public void onStopSelected(final double lat, final double lng, final String name) {
+    public void onStopSelected(final int stopCode, final String name) {
         try {
             if (stopSelectionEventHandler.isPresent()) {
-                stopSelectionEventHandler.get().onStopSelected(lat, lng, name);
+                stopSelectionEventHandler.get().onStopSelected(stopCode, name);
             }
         }
         catch (Exception ex)
@@ -47,28 +47,6 @@ public class AndroidBridge {
     }
 
     @JavascriptInterface
-    public int getStopCode(final double lat, final double lng) {
-        try {
-            return new StopConverter(context).coordinatesToStopCode(lat, lng);
-        } catch (Exception ex) {
-            Crashlytics.logException(ex);
-            return 0;
-        }
-    }
-
-
-    @JavascriptInterface
-    public String getStopName(final int stopCode) {
-        try {
-            return new StopConverter(context).stopCodeToName(stopCode);
-        } catch (Exception ex) {
-            Crashlytics.logException(ex);
-            return "";
-        }
-    }
-
-
-    @JavascriptInterface
     public void requestStopMonitoring(int stopCode) {
         try {
             Crashlytics.log("Stop monitoring requested by web view");
@@ -83,6 +61,6 @@ public class AndroidBridge {
     }
 
     public interface StopSelectionEventHandler {
-        void onStopSelected(double lat, double lng, String name);
+        void onStopSelected(int stopCode, String name);
     }
 }

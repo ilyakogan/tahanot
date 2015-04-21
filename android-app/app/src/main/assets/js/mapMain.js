@@ -27,5 +27,7 @@ function visualTouches() {
 	$('body').scrollspy({ target: '#navbar-main' })
 }
 
+Parse.initialize("Yyxpr1XarbQvtfHNYWKHUGlFdKDjWttPKLYgMXBe", "xscYP2yXXd0udn26sXIhaCCIEW28pN2Ux2th2IJS");
+
 visualTouches();
 
