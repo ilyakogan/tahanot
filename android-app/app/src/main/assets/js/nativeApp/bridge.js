@@ -1,4 +1,4 @@
-define(["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
+define(["eventServices/stopAdded"], function(stopAdded) {
 	var wasStopDisplayedSent = false
 
 	function onStopsDisplayed() {
@@ -40,7 +40,7 @@ define(["eventServices/newStopsDisplayed"], function(newStopsDisplayed) {
         }
     }
 
-    newStopsDisplayed.listen(function() {
+    stopAdded.listen(function() {
         return onStopsDisplayed();
     })
 

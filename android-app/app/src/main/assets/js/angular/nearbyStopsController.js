@@ -1,6 +1,6 @@
 require(["angular/tahanotApp", "map", "stopCache", "stopMonitoringCache", "nativeApp/bridge", "mapPageScroller", "eventServices/mapStopClicked", 
-	"eventServices/mapCenterChanged", "eventServices/newStopsDisplayed", "nativeApp/nativeAppCallbacks/setIsForWidget"], 
-function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScroller, mapStopClicked, mapCenterChanged, newStopsDisplayed, setIsForWidget) {
+	"eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/nativeAppCallbacks/setIsForWidget"], 
+function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScroller, mapStopClicked, mapCenterChanged, stopAdded, setIsForWidget) {
 
 	tahanotApp.app.controller('nearbyStopsController', ['$scope', '$http', function($scope, $http) {
 	    $scope.stops = [];
@@ -85,7 +85,7 @@ function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScrolle
 	    function callInScope(f) { if (!$scope.$$phase) { $scope.$apply(f); } else { f(); } }
 
 		mapCenterChanged.listen(function() { $scope.$apply(refresh); });
-	    newStopsDisplayed.listen(function() { $scope.$apply(refresh); });
+	    //stopAdded.listen(function() { $scope.$apply(refresh); });
 	    mapStopClicked.listen(function(stop) { selectedStopCode = stop.code; })
 
 	    setIsForWidget.listen(function(isForWidget) { 

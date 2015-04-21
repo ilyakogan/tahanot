@@ -2,7 +2,7 @@ define("eventServices/addressEntered", function() {
 	var callbacks = $.Callbacks();
 
 	return {
-		broadcast: function(location) { callbacks.fire(location); },
+		broadcast: function(lat, lng) { callbacks.fire(lat, lng); },
 	    listen: function(callback) { callbacks.add(callback); }
 	};
 });

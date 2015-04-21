@@ -1,14 +1,8 @@
-define(["map", "stopCache", "eventServices/mapCenterChanged", "eventServices/mapStopClicked", "eventServices/newStopsDisplayed", "utils/distance"], 
-function(map, stopCache, mapCenterChanged, mapStopClicked, newStopsDisplayed, distance) {
+define(["map", "stopCache", "eventServices/mapCenterChanged", "eventServices/mapStopClicked", "eventServices/stopAdded", "utils/distance"], 
+function(map, stopCache, mapCenterChanged, mapStopClicked, stopAdded, distance) {
 
     function searchForStops() {
-        stopCache.addStopsAround(
-            map.getCenter().lat(), 
-            map.getCenter().lng(), 
-            function(newStop) {
-                createStopMarker(newStop);
-                newStopsDisplayed.broadcast();
-            });
+        stopCache.addStopsAround(map.getCenter().lat(), map.getCenter().lng());
     }
 
     var image = {
@@ -34,6 +28,8 @@ function(map, stopCache, mapCenterChanged, mapStopClicked, newStopsDisplayed, di
     mapCenterChanged.listen(function() {
         searchForStops();
     });
+
+    stopAdded.listen(createStopMarker);
 
     searchForStops();
 })

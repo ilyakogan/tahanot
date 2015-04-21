@@ -1,8 +1,8 @@
-define("eventServices/newStopsDisplayed", function() {
+define(function() {
     var callbacks = $.Callbacks();
 
     return {
-        broadcast: function() { callbacks.fire(); },
+        broadcast: function(stop) { callbacks.fire(stop); },
         listen: function(callback) { callbacks.add(callback); }
     };
 });

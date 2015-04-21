@@ -1,5 +1,5 @@
-define(["eventServices/mapCenterChanged", "eventServices/newStopsDisplayed", "nativeApp/nativeAppCallbacks/setInitialLocation"], 
-    function(mapCenterChanged, newStopsDisplayed, setInitialLocation) {
+define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/nativeAppCallbacks/setInitialLocation"], 
+    function(mapCenterChanged, stopAdded, setInitialLocation) {
 
     var map;
     var mapMover;
@@ -34,7 +34,7 @@ define(["eventServices/mapCenterChanged", "eventServices/newStopsDisplayed", "na
                 }
             })
         }
-        
+
         setInitialLocation.listen(initMapCenter)
     }
 

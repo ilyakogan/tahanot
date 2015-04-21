@@ -1,4 +1,4 @@
-define("searchBar", ["map", "eventServices/addressEntered"], function(map, addressEntered) {
+define(["map", "eventServices/addressEntered", "stopCache"], function(map, addressEntered, stopCache) {
    	var geocoder = new google.maps.Geocoder();
     
     function initSearchBar() {
@@ -27,8 +27,17 @@ define("searchBar", ["map", "eventServices/addressEntered"], function(map, addre
     }    
 
     function onAddressEntered() {
-      var address = document.getElementById('address').value;
-      getLocation(address).done(addressEntered.broadcast);
+        var address = document.getElementById('address').value;
+        if (isNaN(address)) {
+            getLocation(address).done(function(location) {
+                addressEntered.broadcast(location.lat(), location.lng());
+            });
+        } 
+        else {
+            stopCache.getOrAdd(parseInt(address)).then(function(stop) {
+                addressEntered.broadcast(stop.location.latitude, stop.location.longitude);
+            });
+        }
     }
 
     function blurControls() {

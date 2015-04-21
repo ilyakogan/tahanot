@@ -12,7 +12,7 @@ function(map, mapStopClicked, addressEntered, mapCenterChanged) {
 		}, 700);
 	})
 
-	addressEntered.listen(function(location) {
+	addressEntered.listen(function(lat, lng) {
 		scrollTo(
 			"#map-section",
 			function() {
@@ -20,7 +20,7 @@ function(map, mapStopClicked, addressEntered, mapCenterChanged) {
 				    mapCenterChanged.broadcastNow();
 				});
 
-				map.panTo(location);
+				map.panTo(new google.maps.LatLng(lat, lng));
 			});
 	});
 
