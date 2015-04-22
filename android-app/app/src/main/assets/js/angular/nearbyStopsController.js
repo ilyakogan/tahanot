@@ -85,7 +85,15 @@ function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScrolle
 	    function callInScope(f) { if (!$scope.$$phase) { $scope.$apply(f); } else { f(); } }
 
 		mapCenterChanged.listen(function() { $scope.$apply(refresh); });
-	    //stopAdded.listen(function() { $scope.$apply(refresh); });
+	    
+	    stopAdded.listen(function() { 
+	    	$scope.$apply(function() {
+	    		if (!$scope.stops || !$scope.stops.length) {
+			    	refresh();		    	
+			    }
+		    }); 
+	    });
+	    
 	    mapStopClicked.listen(function(stop) { selectedStopCode = stop.code; })
 
 	    setIsForWidget.listen(function(isForWidget) { 
