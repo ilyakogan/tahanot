@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.location.Location;
 import android.net.MailTo;
 import android.net.Uri;
+import android.os.Handler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -24,35 +25,45 @@ public class CustomWebViewClient extends WebViewClient {
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        try {
-            super.onPageStarted(view, url, favicon);
-            locationProxy.subscribeToOneTimeUpdate(location ->
-                    view.loadUrl("javascript:setInitialLocation(" + location.getLatitude() + ", " + location.getLongitude() + ")"));
-        }
-        catch (Exception e) {
-            Crashlytics.logException(e);
-        }
-    }
 
-    @Override
-    public void onPageFinished(WebView view, String url)  {
-        super.onPageFinished(view, url);
-        try {
-            Location location = locationProxy.getLastLocation(true);
-            if (location != null) {
-                view.loadUrl("javascript:setInitialLocation(" + location.getLatitude() + ", " + location.getLongitude() + ")");
+        super.onPageStarted(view, url, favicon);
+
+        sendLocationToUi(view);
+
+        final Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            private int timesLeft = 20;
+
+            @Override
+            public void run() {
+                if (timesLeft-- > 0) {
+                    sendLocationToUi(view);
+                    handler.postDelayed(this, 1000);
+                }
             }
-        }
-        catch (Exception e) {
-            Crashlytics.logException(e);
-        }
+        };
+        runnable.run();
 
         try {
             if (isForWidget) {
                 view.loadUrl("javascript:setIsForWidget(true)");
             }
+        } catch (Exception e) {
+            Crashlytics.logException(e);
         }
-        catch (Exception e) {
+    }
+
+    @Override
+    public void onPageFinished(WebView view, String url) {
+        super.onPageFinished(view, url);
+
+        sendLocationToUi(view);
+
+        try {
+            if (isForWidget) {
+                view.loadUrl("javascript:setIsForWidget(true)");
+            }
+        } catch (Exception e) {
             Crashlytics.logException(e);
         }
     }
@@ -77,11 +88,20 @@ public class CustomWebViewClient extends WebViewClient {
             } else {
                 return false;
             }
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             Crashlytics.logException(ex);
             return false;
+        }
+    }
+
+    private void sendLocationToUi(WebView view) {
+        try {
+            Location location = locationProxy.getLastLocation(true);
+            if (location != null) {
+                view.loadUrl("javascript:onLocationChanged(" + location.getLatitude() + ", " + location.getLongitude() + ")");
+            }
+        } catch (Exception e) {
+            Crashlytics.logException(e);
         }
     }
 

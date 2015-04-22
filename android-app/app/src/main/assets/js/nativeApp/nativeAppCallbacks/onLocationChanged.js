@@ -1,7 +1,7 @@
 define(function() {
     var callbacks = $.Callbacks();
     
-    window.setInitialLocation = function(lat, lon) {
+    window.onLocationChanged = function(lat, lon) {
         callbacks.fire(lat, lon);
     };
 

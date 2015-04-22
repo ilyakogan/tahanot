@@ -4,7 +4,7 @@ require(["searchBar"]);
 require(["mapPageScroller"]);
 require(["angular/nearbyStopsController"]);
 require(["nativeApp/nativeAppCallbacks/onMonitoringInfoArrived"])
-require(["nativeApp/nativeAppCallbacks/setInitialLocation"])
+require(["nativeApp/nativeAppCallbacks/onLocationChanged"])
 require(["nativeApp/nativeAppCallbacks/setIsForWidget"])
 
 
