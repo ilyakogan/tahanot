@@ -1,4 +1,5 @@
-define(["map", "eventServices/mapStopClicked", "stopCache"], function(map, mapStopClicked, stopCache) {
+define(["map", "eventServices/mapStopClicked", "eventServices/addressEntered", "stopCache"], 
+function(map, mapStopClicked, addressEntered, stopCache) {
    	var geocoder = new google.maps.Geocoder();
     
     function initSearchBar() {
