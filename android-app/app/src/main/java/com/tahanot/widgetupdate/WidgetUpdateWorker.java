@@ -89,7 +89,7 @@ final class WidgetUpdateWorker {
 //			}
 		} catch (TimeoutException e) {
 			timeoutLeft = 0;
-            Crashlytics.logException(e);
+            Crashlytics.logException(new Exception("Updating widgets took over " + UPDATE_TIMEOUT_SEC + " seconds. Cancelling update.",e));
             task.cancel(false);
 			return false;
 		} catch (Exception e) {

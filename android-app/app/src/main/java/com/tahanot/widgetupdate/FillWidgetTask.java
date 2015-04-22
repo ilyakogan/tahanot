@@ -55,7 +55,6 @@ class FillWidgetTask extends AsyncTask<Integer, Void, FillWidgetResult> {
             MultipleStopMonitoringExtendedInfo multipleStopMonitoring = new StopMonitoringProvider().getMultipleStopMonitoring(stopCodes, context);
 
 			if (cancellationFunction.isCancelled()) {
-                Crashlytics.logException(new Exception("Error filling widgets: task was cancelled"));
 				return markAllWidgetsArsErroneous(contentCreator, widgetIds);
 			}
 			
@@ -95,7 +94,7 @@ class FillWidgetTask extends AsyncTask<Integer, Void, FillWidgetResult> {
 					RemoteViews remoteViews = contentCreator.fillWidgetWithData(widgetId, persistence, stopCode, stopDisplayName, infoAboutStop, multipleStopMonitoring.getResponseTimestamp());
 					remoteViewsByWidget.put(widgetId, remoteViews);
 				} catch (Exception e) {
-					e.printStackTrace();
+                    Crashlytics.logException(new Exception("Error filling widget", e));
 					allSucceeded = false;
 					remoteViewsByWidget.put(widgetId, contentCreator.markWidgetAsErroneous(widgetId));
 				}
@@ -103,7 +102,7 @@ class FillWidgetTask extends AsyncTask<Integer, Void, FillWidgetResult> {
 			Logging.i(context, "Filled " + remoteViewsByWidget.size() + " RemoteViews objects");
 			return new FillWidgetResult(allSucceeded, remoteViewsByWidget);
 		} catch (Exception e) {
-			e.printStackTrace();
+            Crashlytics.logException(new Exception("Error filling widgets", e));
 			return markAllWidgetsArsErroneous(contentCreator, widgetIds);
 		}
 	}
