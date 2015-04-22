@@ -24,22 +24,29 @@
     <nav id="navbar-main" class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
         <div class="row">
-          <ul class="nav pagination pagination-lg col-fixed-150" role="tablist" style="margin: 0">
+          <ul class="nav pagination pagination-lg col-xs-6" role="tablist" style="margin: 0">
             <li role="presentation" class="active"><a href="#map-section"><i class="fa fa-globe"></i></a></li>
             <li role="presentation"><a href="#nearby-stops-section"><i class="fa fa-clock-o"></i></a></li>          
             <li role="presentation"><a href="#hello-section"><i class="fa fa-question"></i></a></li>          
           </ul>
-          <div class="col-xs-12 col-offset-150" role="search">
-            <input id="address" type="text" class="form-control input-lg" placeholder="&#xF002; כתובת או מס' תחנה"/>
+
+          <div class="col-xs-6">
+            <a class="btn btn-default btn-lg pull-left" data-toggle="collapse" href="#searchCollapse" aria-expanded="false" aria-controls="searchCollapse">
+              <i class="fa fa-search"></i>
+            </a>
           </div>
+        </div>
+        
+        <div class="row collapse" id="searchCollapse" role="search">
+            <input id="address" type="text" class="form-control input-lg" placeholder="&#xF002; כתובת או מס' תחנה" style="margin-top: 10px"/>
         </div>
       </div>
     </nav>
 
     <div id="map-section" class="page-section">
         <div id="map-container" class="navigation-section container-fluid">
-            <div id="map-canvas"></div>          
-        </div>
+            <div id="map-canvas"></div>               
+        </div>        
     </div>
 
     

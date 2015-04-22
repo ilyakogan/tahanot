@@ -1,16 +1,19 @@
-define(["map", "eventServices/addressEntered", "stopCache"], function(map, addressEntered, stopCache) {
+define(["map", "eventServices/mapStopClicked", "stopCache"], function(map, mapStopClicked, stopCache) {
    	var geocoder = new google.maps.Geocoder();
     
     function initSearchBar() {
         autocomplete = new google.maps.places.Autocomplete((document.getElementById('address')), { 
-            types: ['geocode'] 
+            types: ['geocode'],
+            componentRestrictions: {'country':'il'}
         });
 
         google.maps.event.addListener(autocomplete, 'place_changed', function() {
-            onAddressEntered()
-            blurControls() 
+            onAddressEntered();
+            blurControls();
+            $('#searchCollapse').collapse('hide');
         });
 
+        $('#address').blur(function() { $('#searchCollapse').collapse('hide'); })
         $("#address").click(function() { $("#address").select(); } );
     }    
 
@@ -35,7 +38,7 @@ define(["map", "eventServices/addressEntered", "stopCache"], function(map, addre
         } 
         else {
             stopCache.getOrAdd(parseInt(address)).then(function(stop) {
-                addressEntered.broadcast(stop.location.latitude, stop.location.longitude);
+                mapStopClicked.broadcast(stop);
             });
         }
     }
