@@ -9,7 +9,7 @@ function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScrolle
 	    var selectedStopCode;
 
 	    $scope.selectForWidget = function(stopModel) { 
-	    	bridge.onStopSelected(stopModel.code, stopModel.name);
+	    	bridge.onStopSelected(stopModel.stopCode, stopModel.name);
 	    };
 
 	    $scope.showOnMap = function(stopModel) {

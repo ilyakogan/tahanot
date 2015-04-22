@@ -18,7 +18,7 @@ define(["eventServices/stopAdded"], function(stopAdded) {
         	window.AndroidBridge.onStopSelected(stopCode, stopName);
         }
         else {
-        	console.log("Bridge: onStopSelected: " + name);
+        	console.log("Bridge: onStopSelected: " + stopCode + ", " + stopName);
         }
     }
 
