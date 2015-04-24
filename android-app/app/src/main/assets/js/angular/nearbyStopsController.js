@@ -57,8 +57,7 @@ function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScrolle
 	    }
 
 		function getVisits(stopModel, force) {
-			stopModel.visits = [];
-	    	stopModel.isReceivingVisits = true;
+			stopModel.isReceivingVisits = true;
 	    	stopModel.failedReceivingVisits = false;
     		stopMonitoringCache.get(stopModel.stopCode, force, 30000).then(function(visits) {
 				callInScope(function() {
