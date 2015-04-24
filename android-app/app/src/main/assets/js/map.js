@@ -1,5 +1,6 @@
-define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/nativeAppCallbacks/onLocationChanged"], 
-    function(mapCenterChanged, stopAdded, onLocationChanged) {
+define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/nativeAppCallbacks/onLocationChanged", 
+    "text!customControls/focusMapControl.html", "require-css/css!customControls/focusMapControl.css"], 
+    function(mapCenterChanged, stopAdded, onLocationChanged, focusMapControlTemplate, focusMapControlCss) {
 
     var map;
     var mapMover;
@@ -51,9 +52,9 @@ define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/
         if (!locationMarker) {
             var circle = {
                 path: google.maps.SymbolPath.CIRCLE,
-                fillColor: 'red',
-                fillOpacity: .4,
-                scale: 4.5,
+                fillColor: 'blue',
+                fillOpacity: .6,
+                scale: 6,
                 strokeColor: 'black',
                 strokeWeight: 1
             };
@@ -63,6 +64,12 @@ define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/
                 icon: circle,
                 map: map,
             });
+
+            var controlDiv = $(focusMapControlTemplate);
+            controlDiv.click(function() {
+                map.panTo(locationMarker.position);
+            });
+            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlDiv[0]);
         }
         else {
             locationMarker.setPosition(location);

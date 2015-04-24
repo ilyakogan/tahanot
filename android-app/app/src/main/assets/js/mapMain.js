@@ -1,3 +1,11 @@
+requirejs.config({
+	map: {
+		'*': {
+			'css': '../lib/js/require-css/css'
+		}
+	}
+});
+
 require(["mapStops"]);
 require(["geolocationTracker"]);
 require(["searchBar"]);

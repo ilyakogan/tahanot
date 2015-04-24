@@ -1,0 +1,12 @@
+.circle {
+    height: 50px;
+    width: 50px;
+    padding: 13px;
+    background-color: white;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px; 
+    box-shadow: 1px 1px #aaa;
+    margin: 16px;
+    cursor: pointer;
+}
