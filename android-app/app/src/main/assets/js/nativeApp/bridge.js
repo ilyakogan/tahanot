@@ -29,14 +29,9 @@ define(["eventServices/stopAdded"], function(stopAdded) {
         else {
             console.log("Bridge: requestStopMonitoring");
             setTimeout(function() {
-                if (stopCode % 2 == 0) {
-                    var visit = function(line) { return {"ExpectedArrivalTime":"\/Date(1427919976000)\/","PublishedLineName":""+(line*100),"DestinationRef":"21165"} }
-                    onMonitoringInfoArrived([stopCode], {"Stops": [{"MotiroringRef":stopCode,"StopVisits": Array.apply(null, new Array(10)).map(function(_, x){return visit(x)}) }],"ResponseTimestamp":"\/Date(1427919007162)\/"});
-                }
-                else {
-                    onMonitoringInfoArrived([stopCode], {"Stops":[{"MotiroringRef":11111111111,"StopVisits":[{"ExpectedArrivalTime":"\/Date(1427919876000)\/","PublishedLineName":"66","DestinationRef":"21165"}]}],"ResponseTimestamp":"\/Date(1427919007162)\/"});
-                }
-            }, 2000);
+                var visit = function(line) { return {"ExpectedArrivalTime":"\/Date(1427919976000)\/","PublishedLineName":""+(line*100),"DestinationRef":"21165"} }
+                onMonitoringInfoArrived([stopCode], {"Stops": [{"MotiroringRef":stopCode,"StopVisits": Array.apply(null, new Array(2)).map(function(_, x){return visit(x)}) }],"ResponseTimestamp":"\/Date(1427919007162)\/"});
+            }, 8000);
         }
     }
 
