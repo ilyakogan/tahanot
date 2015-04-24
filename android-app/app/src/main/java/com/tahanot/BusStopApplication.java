@@ -8,7 +8,6 @@ import android.support.multidex.MultiDexApplication;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
-import com.parse.Parse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +32,6 @@ public class BusStopApplication extends MultiDexApplication {
 	public void onCreate() {
 		super.onCreate();
         Crashlytics.start(this);
-
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "Yyxpr1XarbQvtfHNYWKHUGlFdKDjWttPKLYgMXBe", "XZxlSiiA7g6RipnFsOwk7uBnUdmwnqHD5vOH8CV7");
     }
 
     private List<Tracker> mTrackers = new ArrayList<>();
