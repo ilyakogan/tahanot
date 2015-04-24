@@ -2,7 +2,7 @@ require(["angular/tahanotApp", "map", "stopCache", "stopMonitoringCache", "nativ
 	"eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/nativeAppCallbacks/setIsForWidget"], 
 function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScroller, mapStopClicked, mapCenterChanged, stopAdded, setIsForWidget) {
 
-	tahanotApp.app.controller('nearbyStopsController', ['$scope', '$http', function($scope, $http) {
+	tahanotApp.app.controller('nearbyStopsController', ['$scope', '$interval', function($scope, $interval) {
 	    $scope.stops = [];
 	    $scope.isForWidget = false;
 	    var mapCenter;
@@ -54,10 +54,17 @@ function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScrolle
 	    function addStopModel(stopModel) {
 	    	$scope.stops.push(stopModel);
 	    	getVisits(stopModel);
+	    	
+	    	stopModel.timelyRefresh = $interval(function() {
+	    		if ($scope.stops.indexOf(stopModel) === -1) {
+		    		$interval.cancel(stopModel.timelyRefresh);
+		    	};
+	    		getVisits(stopModel);
+	    	}, stopMonitoringCache.cacheTimeout + 1000) // Make sure there's a cache miss next time
 	    }
 
 		function getVisits(stopModel, force) {
-			stopModel.isReceivingVisits = true;
+		    stopModel.isReceivingVisits = true;
 	    	stopModel.failedReceivingVisits = false;
     		stopMonitoringCache.get(stopModel.stopCode, force, 30000).then(function(visits) {
 				callInScope(function() {
@@ -73,7 +80,8 @@ function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScrolle
 		    		});
 	    		});
 			},
-			function() { // fail
+			function(e) { // fail
+				console.error(e);
 				$scope.$apply(function() {
 					stop.isReceivingVisits = false;
 					stop.failedReceivingVisits = true;

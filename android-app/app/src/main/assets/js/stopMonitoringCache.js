@@ -34,18 +34,18 @@ define(["nativeApp/bridge", "nativeApp/nativeAppCallbacks/onMonitoringInfoArrive
 
         if (force) {
             stop.requestStopMonitoring(deferred);
-            setTimeout(function() { deferred.reject(); }, giveUpAfter);
+            prepareToGiveUp(deferred, giveUpAfter);
         }
         else if (isRecent(stop.ageOfData)) {
             deferred.resolve(stop.visits);
         }
         else if (isRecent(stop.lastRequestSent)) {
             stop.deferreds.push(deferred);
-            setTimeout(function() { deferred.reject(); }, giveUpAfter);
+            prepareToGiveUp(deferred, giveUpAfter);
         }
         else {
             stop.requestStopMonitoring(deferred);
-            setTimeout(function() { deferred.reject(); }, giveUpAfter);
+            prepareToGiveUp(deferred, giveUpAfter);
         }
 
         return deferred.promise();
@@ -75,7 +75,7 @@ define(["nativeApp/bridge", "nativeApp/nativeAppCallbacks/onMonitoringInfoArrive
         return time && (time > new Date() - cacheTimeout);
     }
 
-    function prepareToGiveUp(deferred) {
+    function prepareToGiveUp(deferred, giveUpAfter) {
         setTimeout(function() {
             deferred.reject();
         }, giveUpAfter);
@@ -88,6 +88,7 @@ define(["nativeApp/bridge", "nativeApp/nativeAppCallbacks/onMonitoringInfoArrive
     })
 
     return {
-        get: get
+        get: get,
+        cacheTimeout: cacheTimeout
     }
 })
