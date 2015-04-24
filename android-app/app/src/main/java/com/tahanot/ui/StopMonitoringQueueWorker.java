@@ -60,7 +60,6 @@ public class StopMonitoringQueueWorker {
                             Crashlytics.logException(ex);
                         }
 
-                        pendingStopCodes.clear();
                         return monitoringInfo;
                     }
 
