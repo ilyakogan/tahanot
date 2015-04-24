@@ -1,6 +1,6 @@
 require(["angular/tahanotApp", "map", "stopCache", "stopMonitoringCache", "nativeApp/bridge", "mapPageScroller", "eventServices/mapStopClicked", 
-	"eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/nativeAppCallbacks/setIsForWidget"], 
-function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScroller, mapStopClicked, mapCenterChanged, stopAdded, setIsForWidget) {
+	"eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/nativeAppCallbacks/setIsForWidget", "rewriteDestinationName"], 
+function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScroller, mapStopClicked, mapCenterChanged, stopAdded, setIsForWidget, rewriteDestinationName) {
 
 	tahanotApp.app.controller('nearbyStopsController', ['$scope', '$interval', function($scope, $interval) {
 	    $scope.stops = [];
@@ -44,6 +44,7 @@ function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScrolle
 			return {
     			stopCode: stop.code,
     			name: stop.name,
+    			town: stop.town,
     			lat: stop.location.latitude,
     			lng: stop.location.longitude,
     			visitsAvailable: false,
@@ -74,7 +75,9 @@ function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScrolle
 	    			visits.forEach(function(visit) {
 	    				stopCache.getOrAdd(visit.destinationRef).then(function(destinationStop) {
 	    					callInScope(function() {
-		    					visit.destination = destinationStop.name + ", " + destinationStop.town;
+	    						var rewrittenDestinationStop = rewriteDestinationName(destinationStop, stopModel);
+	    						var parts = [rewrittenDestinationStop.name, rewrittenDestinationStop.town];
+		    					visit.destination = $.grep(parts, function(x) { return(x) }).join(', ');
 		    				});
 	    				});
 		    		});
