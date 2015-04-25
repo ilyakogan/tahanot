@@ -2,27 +2,25 @@ define(["map", "stopCache", "eventServices/mapCenterChanged", "eventServices/map
 function(map, stopCache, mapCenterChanged, mapStopClicked, stopAdded, distance) {
 
     function searchForStops() {
-        stopCache.addStopsAround(map.getCenter().lat(), map.getCenter().lng());
+        stopCache.addStopsAround(map.getCenter().lat, map.getCenter().lng);
     }
 
-    var image = {
-        url: 'images/bus_marker.png',
-        size: new google.maps.Size(33, 61),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(16, 63)
-    };
+    var icon = L.icon({
+        iconUrl: 'images/bus_marker.png',
+        iconSize: [33, 61],
+        iconAnchor: [16, 43],
+        shadowUrl: 'images/bus_marker_shadow.png',
+        shadowSize: [64, 61],
+        shadowAnchor: [16, 43]
+    });
 
     function createStopMarker(stop) {
-        var stopMarker = new google.maps.Marker({
-            map: map.googleMap,
-            title: stop.name,
-            icon: image,
-            position: new google.maps.LatLng(stop.location.latitude, stop.location.longitude)
-        });
+        var marker = L.marker([stop.location.latitude, stop.location.longitude], {icon: icon});
+        map.addMarkerToCluster(marker);
 
-        google.maps.event.addListener(stopMarker, 'click', function() {
+        marker.on('click', function(e) {
             mapStopClicked.broadcast(stop);
-        });
+        })
     }
 
     mapCenterChanged.listen(function() {

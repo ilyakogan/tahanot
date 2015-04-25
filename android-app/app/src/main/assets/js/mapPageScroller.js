@@ -6,7 +6,7 @@ function(map, mapStopClicked, addressEntered, mapCenterChanged) {
 	}
 
 	mapStopClicked.listen(function(stop) {
-		map.panTo(new google.maps.LatLng(stop.location.latitude, stop.location.longitude));
+		map.panTo(stop.location.latitude, stop.location.longitude);
 		setTimeout(function() {
 			scrollTo("#nearby-stops-section");
 		}, 700);
@@ -20,7 +20,7 @@ function(map, mapStopClicked, addressEntered, mapCenterChanged) {
 				    mapCenterChanged.broadcastNow();
 				});
 
-				map.panTo(new google.maps.LatLng(lat, lng));
+				map.panTo(lat, lng);
 			});
 	});
 
@@ -29,7 +29,7 @@ function(map, mapStopClicked, addressEntered, mapCenterChanged) {
 			scrollTo(
 				"#map-section",
 				function() {
-					map.panTo(new google.maps.LatLng(lat, lng));
+					map.panTo(lat, lng);
 				});
 		}
 	}

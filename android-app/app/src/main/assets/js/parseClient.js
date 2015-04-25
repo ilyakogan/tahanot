@@ -13,7 +13,7 @@ define(function() {
             var point = new Parse.GeoPoint(lat, lng);
             var query = new Parse.Query(Parse.Object.extend("stop"));
             query.near("location", point);
-            query.limit(10);
+            query.limit(100);
             return query.find().then(function(objs) {
                 return $.map(objs, extractStop);
             });

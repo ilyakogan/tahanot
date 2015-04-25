@@ -23,7 +23,7 @@ function(tahanotApp, map, stopCache, stopMonitoringCache, bridge, mapPageScrolle
 
 	    function refresh() {    		
     		$scope.stops = [];
-        	var regularStops = stopCache.getStopsAround(map.getCenter().lat(), map.getCenter().lng(), 5);
+        	var regularStops = stopCache.getStopsAround(map.getCenter().lat, map.getCenter().lng, 5);
     		
     		if (selectedStopCode) {
         		var selectedStop = stopCache.get(selectedStopCode)

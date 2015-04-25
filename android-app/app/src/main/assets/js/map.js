@@ -1,79 +1,40 @@
-define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/nativeAppCallbacks/onLocationChanged", 
+define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/nativeAppCallbacks/onLocationChanged", //"generateStopLocations", 
     "text!customControls/focusMapControl.html", "require-css/css!customControls/focusMapControl.css"], 
-    function(mapCenterChanged, stopAdded, onLocationChanged, focusMapControlTemplate, focusMapControlCss) {
+    function(mapCenterChanged, stopAdded, onLocationChanged, /*generateStopLocations,*/ focusMapControlTemplate, focusMapControlCss) {
 
     var map;
-    var mapMover;
+    var markerClusterGroup;
     var locationUpdatedOnce = false;
     var locationMarker;
 
     function initialize() {
         var lat = 32.08;
         var lng = 34.781;
-        var initialLocation = new google.maps.LatLng(lat, lng);
-        map = new google.maps.Map(document.getElementById('map-canvas'), {
-            center: initialLocation,
-            streetViewControl: false,
-            panControl: false,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.SMALL,
-                position: google.maps.ControlPosition.RIGHT_BOTTOM
-            },
-            mapTypeControlOptions: {
-                mapTypeIds: [
-                    google.maps.MapTypeId.ROADMAP,
-                    google.maps.MapTypeId.SATELLITE
-                ]
-            },
-            zoom: 17
-        });
+        
+        map = L.map('map-canvas');
+
+        map.setView([lat, lng], 17);
+
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var locateControl = L.control.locate({remainActive: true, locateOptions: { maxZoom: 17 }}).addTo(map);
+        locateControl.start();
+        map.on('dragstart', locateControl._stopFollowing, locateControl);
+
+        markerClusterGroup = L.markerClusterGroup({disableClusteringAtZoom: 16});
+        map.addLayer(markerClusterGroup);
 
         registerMapEvents();
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(pos) { 
-                if (pos && pos.coords) {
-                    updateLocation(pos.coords.latitude, pos.coords.longitude);
-                }
-            })
-        }
-
-        onLocationChanged.listen(updateLocation)
     }
 
-    function updateLocation(lat, lng) {
-        var location = new google.maps.LatLng(lat, lng);
-        if (!locationUpdatedOnce) {
-            locationUpdatedOnce = true;
-            map.setCenter(location);
-            mapCenterChanged.broadcastNow();
-        }
+    function addMarkerToCluster(marker) {
+        marker.addTo(markerClusterGroup);
+    }
 
-        if (!locationMarker) {
-            var circle = {
-                path: google.maps.SymbolPath.CIRCLE,
-                fillColor: 'blue',
-                fillOpacity: .6,
-                scale: 6,
-                strokeColor: 'black',
-                strokeWeight: 1
-            };
-
-            locationMarker = new google.maps.Marker({
-                position: location,
-                icon: circle,
-                map: map,
-            });
-
-            var controlDiv = $(focusMapControlTemplate);
-            controlDiv.click(function() {
-                map.panTo(locationMarker.position);
-            });
-            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlDiv[0]);
-        }
-        else {
-            locationMarker.setPosition(location);
-        }
+    function addMarker(marker) {
+        marker.addTo(map);
     }
 
     function getCenter() {
@@ -81,13 +42,13 @@ define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/
     }
 
     function registerMapEvents() {
-        google.maps.event.addListener(map, 'idle', function() {
+        map.on('moveend', function() {
             mapCenterChanged.broadcastDelayed(getCenter);
         });
     }
 
     function addIdleListenerOnce(callback) { 
-        google.maps.event.addListenerOnce(map, 'idle', function() {
+        map.once('moveend', function() {
             callback();
         }); 
     }
@@ -95,9 +56,10 @@ define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/
     initialize();
 
     return {
-        panTo: function(location) { map.panTo(location); },
+        panTo: function(lat, lng) { map.panTo([lat, lng]); },
         getCenter: getCenter,
         addIdleListenerOnce: addIdleListenerOnce,
-        googleMap: map
+        addMarkerToCluster: addMarkerToCluster,
+        addMarker: addMarker
     };
 })

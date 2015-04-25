@@ -2,7 +2,6 @@ package com.tahanot.ui;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import com.google.common.base.Optional;
@@ -39,7 +38,12 @@ public class WebViewHolder implements AndroidBridge.MapEventHandler, StopMonitor
         webView.clearCache(true);
         webView.clearHistory();
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebChromeClient(new WebChromeClient());
+        webView.getSettings().setAppCacheEnabled(true);
+        webView.getSettings().setDatabaseEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setGeolocationEnabled(true);
+        webView.getSettings().setGeolocationDatabasePath(activity.getFilesDir().getPath());
+        webView.setWebChromeClient(new GeoWebChromeClient());
         webView.setWebViewClient(new CustomWebViewClient(activity, isForWidget));
         webView.addJavascriptInterface(new AndroidBridge(activity, this, stopSelectionEventHandler, stopMonitoringQueueWorker), "AndroidBridge");
 
