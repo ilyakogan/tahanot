@@ -1,4 +1,4 @@
-package com.tahanot.ui;
+package com.tahanot.utils;
 
 import android.location.*;
 

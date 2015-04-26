@@ -3,46 +3,26 @@ package com.tahanot.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.location.Location;
 import android.net.MailTo;
 import android.net.Uri;
-import android.os.Handler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.crashlytics.android.Crashlytics;
 
 public class CustomWebViewClient extends WebViewClient {
-    private final LocationProxy locationProxy;
     private Context context;
     private boolean isForWidget;
 
     public CustomWebViewClient(Context context, boolean isForWidget) {
         this.context = context;
         this.isForWidget = isForWidget;
-        this.locationProxy = LocationProxy.get();
     }
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
 
         super.onPageStarted(view, url, favicon);
-
-        sendLocationToUi(view);
-
-        final Handler handler = new Handler();
-        Runnable runnable = new Runnable() {
-            private int timesLeft = 20;
-
-            @Override
-            public void run() {
-                if (timesLeft-- > 0) {
-                    sendLocationToUi(view);
-                    handler.postDelayed(this, 1000);
-                }
-            }
-        };
-        runnable.run();
 
         try {
             if (isForWidget) {
@@ -56,8 +36,6 @@ public class CustomWebViewClient extends WebViewClient {
     @Override
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
-
-        sendLocationToUi(view);
 
         try {
             if (isForWidget) {
@@ -91,17 +69,6 @@ public class CustomWebViewClient extends WebViewClient {
         } catch (Exception ex) {
             Crashlytics.logException(ex);
             return false;
-        }
-    }
-
-    private void sendLocationToUi(WebView view) {
-        try {
-            Location location = locationProxy.getLastLocation(true);
-            if (location != null) {
-                view.loadUrl("javascript:onLocationChanged(" + location.getLatitude() + ", " + location.getLongitude() + ")");
-            }
-        } catch (Exception e) {
-            Crashlytics.logException(e);
         }
     }
 

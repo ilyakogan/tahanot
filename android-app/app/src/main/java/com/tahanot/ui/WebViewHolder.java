@@ -18,17 +18,12 @@ public class WebViewHolder implements AndroidBridge.MapEventHandler, StopMonitor
     private boolean isForWidget;
     private ProgressDialog progressDialog;
     private StopMonitoringQueueWorker stopMonitoringQueueWorker;
-    private LocationProxy locationProxy;
-    private SimpleLocationListener locationListener;
 
     public WebViewHolder(WebView webView, Activity activity, Optional<AndroidBridge.StopSelectionEventHandler> stopSelectionEventHandler, boolean isForWidget) {
         this.webView = webView;
         this.activity = activity;
         this.stopSelectionEventHandler = stopSelectionEventHandler;
         this.isForWidget = isForWidget;
-        locationProxy = LocationProxy.get();
-        locationListener = loc ->
-                webView.loadUrl("javascript:onLocationChanged(" + loc.getLatitude() + ", " + loc.getLongitude() + ")");
     }
 
     public void start() {
@@ -47,8 +42,6 @@ public class WebViewHolder implements AndroidBridge.MapEventHandler, StopMonitor
         webView.setWebViewClient(new CustomWebViewClient(activity, isForWidget));
         webView.addJavascriptInterface(new AndroidBridge(activity, this, stopSelectionEventHandler, stopMonitoringQueueWorker), "AndroidBridge");
 
-        locationProxy.subscribeToUpdates(locationListener, true);
-
         progressDialog = ProgressDialog.show(activity, "", activity.getString(R.string.loading_map), true);
 
         stopMonitoringQueueWorker.startRepeatingTask();
@@ -60,10 +53,7 @@ public class WebViewHolder implements AndroidBridge.MapEventHandler, StopMonitor
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
-        if (locationProxy != null) {
-            locationProxy.unsubscribe(locationListener);
-        }
-    }
+   }
 
     private String getMapUrl() {
         return String.format("file:///android_asset/map.html");

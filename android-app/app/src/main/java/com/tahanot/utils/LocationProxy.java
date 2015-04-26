@@ -1,4 +1,4 @@
-package com.tahanot.ui;
+package com.tahanot.utils;
 
 import android.content.Context;
 import android.location.Location;
