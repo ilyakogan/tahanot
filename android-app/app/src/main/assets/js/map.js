@@ -29,7 +29,7 @@ define(["eventServices/mapCenterChanged", "eventServices/stopsAdded", "nativeApp
         locateControl.start();
         map.on('dragstart', locateControl._stopFollowing, locateControl);
 
-        markerClusterGroup = L.markerClusterGroup({disableClusteringAtZoom: 16, animateAddingMarkers: true});
+        markerClusterGroup = L.markerClusterGroup({ disableClusteringAtZoom: 16 });
         map.addLayer(markerClusterGroup);
 
         registerMapEvents();
