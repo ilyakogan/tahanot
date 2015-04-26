@@ -8,10 +8,10 @@ function(map, stopCache, mapCenterChanged, mapStopClicked, stopAdded, distance) 
     var icon = L.icon({
         iconUrl: 'images/bus_marker.png',
         iconSize: [33, 61],
-        iconAnchor: [16, 43],
+        iconAnchor: [16, 63],
         shadowUrl: 'images/bus_marker_shadow.png',
         shadowSize: [64, 61],
-        shadowAnchor: [16, 43]
+        shadowAnchor: [16, 63]
     });
 
     function createStopMarker(stop) {
