@@ -11,7 +11,7 @@ define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/
         var lat = 32.08;
         var lng = 34.781;
         
-        map = L.map('map-canvas');
+        map = L.map('map-canvas', {zoomControl: false});
 
         map.setView([lat, lng], 17);
 
@@ -19,7 +19,13 @@ define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        var locateControl = L.control.locate({remainActive: true, locateOptions: { maxZoom: 17 }}).addTo(map);
+        new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
+
+        var locateControl = L.control.locate({ 
+            position: 'bottomright', 
+            remainActive: true, 
+            locateOptions: { maxZoom: 17 } 
+        }).addTo(map);
         locateControl.start();
         map.on('dragstart', locateControl._stopFollowing, locateControl);
 
