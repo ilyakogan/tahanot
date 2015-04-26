@@ -7,7 +7,6 @@ requirejs.config({
 });
 
 require(["mapStops"]);
-require(["geolocationTracker"]);
 require(["searchBar"]);
 require(["mapPageScroller"]);
 require(["angular/nearbyStopsController"]);

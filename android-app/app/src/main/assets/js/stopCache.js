@@ -1,4 +1,4 @@
-define(["parseClient", "eventServices/stopAdded"], function(parseClient, stopAdded) {
+define(["parseClient", "eventServices/stopsAdded"], function(parseClient, stopsAdded) {
 	var stops = {};
     		
 	function exists(stop) {
@@ -27,12 +27,14 @@ define(["parseClient", "eventServices/stopAdded"], function(parseClient, stopAdd
 
     function addStopsAround(centerLat, centerLng) {
         parseClient.getNearbyStops(centerLat, centerLng).then(function(nearbyStops) {
+            var addedStops = [];
             nearbyStops.forEach(function(stop) {
                 if (!exists(stop)) {
                     stops[stop.code] = stop;
-                    stopAdded.broadcast(stop);
+                    addedStops.push(stop);
                 }
             });
+            stopsAdded.broadcast(addedStops);
         })
     }
 

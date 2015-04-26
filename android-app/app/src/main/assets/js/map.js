@@ -1,6 +1,6 @@
-define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/nativeAppCallbacks/onLocationChanged", //"generateStopLocations", 
+define(["eventServices/mapCenterChanged", "eventServices/stopsAdded", "nativeApp/nativeAppCallbacks/onLocationChanged", 
     "text!customControls/focusMapControl.html", "require-css/css!customControls/focusMapControl.css"], 
-    function(mapCenterChanged, stopAdded, onLocationChanged, /*generateStopLocations,*/ focusMapControlTemplate, focusMapControlCss) {
+    function(mapCenterChanged, stopsAdded, onLocationChanged, focusMapControlTemplate, focusMapControlCss) {
 
     var map;
     var markerClusterGroup;
@@ -29,7 +29,7 @@ define(["eventServices/mapCenterChanged", "eventServices/stopAdded", "nativeApp/
         locateControl.start();
         map.on('dragstart', locateControl._stopFollowing, locateControl);
 
-        markerClusterGroup = L.markerClusterGroup({disableClusteringAtZoom: 16});
+        markerClusterGroup = L.markerClusterGroup({disableClusteringAtZoom: 16, animateAddingMarkers: true});
         map.addLayer(markerClusterGroup);
 
         registerMapEvents();

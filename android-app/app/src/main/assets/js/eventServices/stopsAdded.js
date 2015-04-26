@@ -2,7 +2,7 @@ define(function() {
     var callbacks = $.Callbacks();
 
     return {
-        broadcast: function(stop) { callbacks.fire(stop); },
+        broadcast: function(stops) { callbacks.fire(stops); },
         listen: function(callback) { callbacks.add(callback); }
     };
 });

@@ -49,3 +49,7 @@ body {
     /* this solves weird alignment of long text on Android */
     direction: ltr
 }
+
+.bus-stop-marker.leaflet-marker-icon:active {
+    top: 5px;
+};
